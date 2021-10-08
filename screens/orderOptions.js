@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Keyboard, KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Button, Keyboard, KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Order from '../components/Order';
 import {globalStyles} from '../styles/global';
 
@@ -20,10 +20,19 @@ export default function OrderOptionsScreen() {
     }
     return (
         <View style={globalStyles.container}>
-
-            {/* Current Orders */}
             <View style={globalStyles.OrdersWrapper}>
-                <Text style={globalStyles.sectionTitle}>Current Orders</Text>
+                {/* My Orders */}
+                <View style={globalStyles.myOrders}>
+                    <Text style={globalStyles.sectionTitle}>My Orders</Text>
+                    <KeyboardAvoidingView 
+                        behavior={ Platform.OS === 'ios' ? 'padding' : 'height'}>
+                        <TouchableOpacity onPress={() => handleAddOrder()}>
+                            <View style={ globalStyles.addWrapper }>
+                                <TextInput style={globalStyles.addText} value={order} onChangeText={text=>setOrder(text)}>New Order</TextInput>
+                            </View>
+                        </TouchableOpacity>
+                    </KeyboardAvoidingView>
+                </View>
 
                 <View style={globalStyles.items}>
                 {/* This is where the orders will go */}
@@ -37,20 +46,17 @@ export default function OrderOptionsScreen() {
                     })
                 }
                 </View>
+
+                {/* Available Orders */}
+                <Text style={globalStyles.sectionTitle}>Available Orders</Text>
             </View>
         
-            {/* Write a Order */}
-            <KeyboardAvoidingView
-            behavior={ Platform.OS === 'ios' ? 'padding' : 'height'}
-            style={ globalStyles.writeOrderWrapper }>
-
-                <TextInput style={ globalStyles.input } placeholder={'Place an Order'} value={order} onChangeText={text=>setOrder(text)}/>
-                <TouchableOpacity onPress={() => handleAddOrder()}>
-                    <View style={ globalStyles.addWrapper }>
-                        <Text style={globalStyles.addText}>+</Text>
-                    </View>
+            {/* Choose an Order */}
+            <View style={ globalStyles.chooseOrderWrapper }>
+                <TouchableOpacity style={ globalStyles.input }>
+                    <Text style={globalStyles.chooseOrderText}>Choose an Order</Text>
                 </TouchableOpacity>
-            </KeyboardAvoidingView>
+            </View>
         </View>
     );
 }

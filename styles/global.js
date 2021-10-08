@@ -4,48 +4,54 @@ export const globalStyles = StyleSheet.create({
   container: {
     display: 'flex',
     flex: 1,
-    flexDirection: 'column-reverse',
-    backgroundColor: '#E8EAED',
+    flexDirection: 'column',
+    backgroundColor: '#E5E5E5',
   },
   OrdersWrapper: {
     flex: 1,
-    paddingVertical: 10,
-    paddingHorizontal: 20
+    paddingVertical: '15%',
+    paddingHorizontal: '5%',
   },
   sectionTitle: {
     fontSize: 24,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   items: {
-    marginTop: 30
+    marginTop: 30,
   },
-  writeOrderWrapper: {
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
+  chooseOrderWrapper: {
     alignItems: 'center',
-    paddingVertical: 70,
+    paddingVertical: '12%',
   },
   input: {
     paddingVertical: 15,
     paddingHorizontal: 15,
-    backgroundColor: '#FFF',
-    borderRadius: 60,
+    backgroundColor: '#800000',
+    borderRadius: 10,
     borderColor: '#C0C0C0',
     borderWidth: 1,
-    width: 250,
+    width: 226,
+    height: 47,
   },
   addWrapper: {
-    width: 60,
-    height: 60,
+    width: 100,
+    height: 37,
     backgroundColor: '#FFF',
-    borderRadius: 60,
     justifyContent: 'center',
     alignItems: 'center',
     borderColor: '#C0C0C0',
     borderWidth: 1,
   },
   addText: {
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
+  myOrders: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  },
+  chooseOrderText: {
+    textAlign: 'center',
+    color: 'white',
+  }
 });
