@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Button, Keyboard, KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Keyboard, KeyboardAvoidingView, Platform, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Order from '../components/Order';
 import {globalStyles} from '../styles/global';
 
