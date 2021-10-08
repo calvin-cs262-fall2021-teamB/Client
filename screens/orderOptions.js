@@ -28,7 +28,7 @@ export default function OrderOptionsScreen() {
                         behavior={ Platform.OS === 'ios' ? 'padding' : 'height'}>
                         <TouchableOpacity onPress={() => handleAddOrder()}>
                             <View style={ globalStyles.addWrapper }>
-                                <TextInput style={globalStyles.addText} value={order} onChangeText={text=>setOrder(text)}>New Order</TextInput>
+                                <TextInput style={globalStyles.addText} placeholder='New Order' value={order} onChangeText={text=>setOrder(text)}></TextInput>
                             </View>
                         </TouchableOpacity>
                     </KeyboardAvoidingView>
