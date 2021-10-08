@@ -36,6 +36,7 @@ export const globalStyles = StyleSheet.create({
   addWrapper: {
     width: 100,
     height: 37,
+    borderRadius: 10,
     backgroundColor: '#FFF',
     justifyContent: 'center',
     alignItems: 'center',
