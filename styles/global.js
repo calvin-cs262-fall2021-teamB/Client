@@ -80,7 +80,7 @@ export const globalStyles = StyleSheet.create({
     justifyContent: "flex-end",
   },
   login:{
-    marginTop: 40,
+    marginTop: 80,
     marginBottom: 5,
     // marginLeft: 20,
     fontSize: 35,

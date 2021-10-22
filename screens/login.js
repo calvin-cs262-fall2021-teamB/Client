@@ -26,14 +26,12 @@ export default function HomeScreen({ navigation }) {
                         <Text style={globalStyles.loginMessage}>
                             {'Please sign in with your Calvin email'}
                         </Text>
-                        <TextInput style={globalStyles.subLogin} placeholder='Username' />
-                        <TextInput style={globalStyles.subLogin} placeholder='Password' />
                         <View style={{margin:7}} />
                         <TouchableOpacity onPress={() => handleSubmitLogin()} style={globalStyles.buttonContainer}>
                             <View style={globalStyles.submitContainer}>
                                 <Text 
                                     style={globalStyles.text}> 
-                                    {'Submit'}
+                                    {'Sign in'}
                                 </Text>
                             </View>
                         </TouchableOpacity>
@@ -45,3 +43,16 @@ export default function HomeScreen({ navigation }) {
 );
 }
 
+//<View style={styles.container}>
+//       <Text>Get ready to login to Azure</Text>
+//       <View style={styles.button}>
+//         <Button
+//           onPress={() => navigation.navigate("SignIn")}
+//           title="Sign In"
+//           style={styles.title}
+//           color={buttonColour}
+//           accessibilityLabel="Learn more about this purple button"
+//         />
+//       </View>
+//       <StatusBar style="auto" />
+//     </View>
