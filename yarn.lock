@@ -1906,6 +1906,17 @@ atob@^2.1.2:
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
 
+auth4061@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/auth4061/-/auth4061-1.0.1.tgz#4ec6d2680028ea49229f9d9f6ccc449334a262a5"
+  integrity sha512-oM8e5GHohmmTHFiCEsOKqlY6ATt7cjYTLYqpRhVl2Z7pJKSaqE4M7RBN4CnTB1LGzvRTsqXOR4ev9rTszr3rrw==
+  dependencies:
+    buffer "^6.0.3"
+    react-native-get-random-values "^1.7.0"
+    react-native-webview "^11.13.0"
+    url "^0.11.0"
+    uuid "^8.3.2"
+
 babel-plugin-dynamic-import-node@^2.3.3:
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/babel-plugin-dynamic-import-node/-/babel-plugin-dynamic-import-node-2.3.3.tgz#84fda19c976ec5c6defef57f9427b3def66e17a3"
@@ -4965,15 +4976,6 @@ react-is@^17.0.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
 
-"react-native-azure-ad-2@file:..":
-  version "2.0.1"
-  dependencies:
-    buffer "^6.0.3"
-    react-native-get-random-values "^1.7.0"
-    react-native-webview "^11.13.0"
-    url "^0.11.0"
-    uuid "^8.3.2"
-
 react-native-clean-project@^3.6.7:
   version "3.6.7"
   resolved "https://registry.yarnpkg.com/react-native-clean-project/-/react-native-clean-project-3.6.7.tgz#6d22ad22fe3a1e6efdb040eb66f9bdfb2273ac2e"
@@ -5062,9 +5064,9 @@ react-native-web@^0.17.5:
     prop-types "^15.6.0"
 
 react-native-webview@^11.13.0:
-  version "11.13.1"
-  resolved "https://registry.yarnpkg.com/react-native-webview/-/react-native-webview-11.13.1.tgz#a4d4dfb995d002dc7b6c92d4ccaf3f5301adea12"
-  integrity sha512-6/XXN79Bd6Cby+ZRD7gEeENu0an+EsZjBnTQg5FPW9GIlf5NCC/XM0dLwOl88kXKCRKnZjar2qj0CbF1E1gTEA==
+  version "11.14.1"
+  resolved "https://registry.yarnpkg.com/react-native-webview/-/react-native-webview-11.14.1.tgz#9315df7d3c818583a51f4c19b27c737d9a8c54c8"
+  integrity sha512-EmJuj4pEtJfledDeKVhHmaeiAjnKRdswTgfS7IjoA1LhRakK2FQXuXjvjCEBwUkVTq08lDwuqukGSfteeOdCuQ==
   dependencies:
     escape-string-regexp "2.0.0"
     invariant "2.2.4"

@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {StyleSheet, Keyboard, KeyboardAvoidingView, Platform, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Order from '../components/Order';
 import {globalStyles} from '../styles/global';
-import { AzureInstance, AzureLoginView } from "react-native-azure-ad-2";
+import { AzureInstance, AzureLoginView } from "auth4061";
 import RCTNetworking from "react-native/Libraries/Network/RCTNetworking";
 import { Button, Alert } from "react-native";
 
