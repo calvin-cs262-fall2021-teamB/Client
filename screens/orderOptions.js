@@ -29,7 +29,7 @@ export default function OrderOptionsScreen({ navigation }) {
         client_secret: 'd7ad096d-2e7f-4ce2-adf6-9c6ebf750c43',
         redirect_uri: "http://localhost:3000/Login",
         scope:
-        "User.ReadBasic.All Mail.Read offline_access openid User.Read User.ReadWrite", //User.Read.All User.ReadWrite.All
+        "Mail.Read offline_access User.ReadBasic.All Mail.Read openid User.Read User.ReadWrite", //User.Read.All User.ReadWrite.All
     };
     const azureInstance = new AzureInstance(credentials);
 
