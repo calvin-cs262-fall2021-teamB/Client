@@ -129,8 +129,13 @@ export const globalStyles = StyleSheet.create({
     justifyContent: "flex-end",
   },
   dashWrapper: {
-    
-    alignItems: 'center',
-    paddingVertical: '12%'
+    flex: 1,
+    marginBottom: 10,
+    alignItems: 'center'
+  },
+
+  itemsTitleWrapper: {
+    paddingHorizontal: '10%',
+    paddingVertical: '10%'
   },
 });
