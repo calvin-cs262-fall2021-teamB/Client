@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {StyleSheet, Keyboard, KeyboardAvoidingView, Platform, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Order from '../components/Order';
-import {globalStyles} from '../styles/global';
 import { AzureInstance, AzureLoginView } from "auth4061";
 import RCTNetworking from "react-native/Libraries/Network/RCTNetworking";
 import { Button, Alert } from "react-native";
@@ -75,22 +74,22 @@ export default function OrderOptionsScreen({ navigation }) {
     const { userPrincipalName, givenName } = azureLoginObject;
 
     return (
-        <View style={globalStyles.container}>
-            <View style={globalStyles.OrdersWrapper}>
+        <View style={orderStyles.container}>
+            <View style={orderStyles.OrdersWrapper}>
                 {/* My Orders */}
-                <View style={globalStyles.myOrders}>
-                    <Text style={globalStyles.sectionTitle}>My Orders</Text>
+                <View style={orderStyles.myOrders}>
+                    <Text style={orderStyles.sectionTitle}>My Orders</Text>
                     <KeyboardAvoidingView 
                         behavior={ Platform.OS === 'ios' ? 'padding' : 'height'}>
                         <TouchableOpacity onPress={() => handleAddOrder()}>
-                            <View style={ globalStyles.addWrapper }>
-                                <TextInput style={globalStyles.addText} placeholder='New Order' value={order} onChangeText={text=>setOrder(text)}></TextInput>
+                            <View style={ orderStyles.addWrapper }>
+                                <TextInput style={orderStyles.addText} placeholder='New Order' value={order} onChangeText={text=>setOrder(text)}></TextInput>
                             </View>
                         </TouchableOpacity>
                     </KeyboardAvoidingView>
                 </View>
 
-                <View style={globalStyles.items}>
+                <View style={orderStyles.items}>
                 {/* This is where the orders will go */}
                 {
                     orderItems.map((item, index) => {
@@ -104,25 +103,25 @@ export default function OrderOptionsScreen({ navigation }) {
                 </View>
 
                 {/* Available Orders */}
-                <Text style={globalStyles.sectionTitle}>Available Orders</Text>
+                <Text style={orderStyles.sectionTitle}>Available Orders</Text>
             </View>
         
             {/* Choose an Order */}
-            <View style={ globalStyles.chooseOrderWrapper }>
-                <TouchableOpacity style={ globalStyles.input }>
-                    <Text style={globalStyles.chooseOrderText}>Choose an Order</Text>
+            <View style={ orderStyles.chooseOrderWrapper }>
+                <TouchableOpacity style={ orderStyles.input }>
+                    <Text style={orderStyles.chooseOrderText}>Choose an Order</Text>
                 </TouchableOpacity>
             </View>
-            <View style={styles.container}>
-       <Text style={styles.text}>Welcome {givenName}</Text>
-       <Text style={styles.text}>
+            <View style={orderStyles.mindyContainer}>
+       <Text style={orderStyles.mindyText}>Welcome {givenName}</Text>
+       <Text style={orderStyles.mindyText}>
          You logged into Azure with {userPrincipalName}
        </Text>
-       <View style={styles.button}>
+       <View style={orderStyles.mindyButton}>
          <Button
           onPress={signOut}
           title="Sign Out"
-          style={styles.title}
+          style={orderStyles.mindyTitle}
           accessibilityLabel="Sign Out of Azure"
         />
       </View>
@@ -203,24 +202,78 @@ export default function OrderOptionsScreen({ navigation }) {
 //   );
 // };
 
-const styles = StyleSheet.create({
-  container: {
+const orderStyles = StyleSheet.create({
+  mindyContainer: {
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
   },
-  button: {
+  mindyButton: {
     backgroundColor: "#007AFF",
     padding: 4,
   },
-  title: {
+  mindyTitle: {
     textAlign: "center",
     marginVertical: 8,
   },
-  text: {
+  mindyText: {
     textAlign: "center",
     color: "#333333",
     marginBottom: 5,
+  },
+  container: {
+    display: 'flex',
+    flex: 1,
+    flexDirection: 'column',
+    backgroundColor: '#E5E5E5',
+  },
+  OrdersWrapper: {
+    flex: 1,
+    paddingVertical: '15%',
+    paddingHorizontal: '5%',
+  },
+  sectionTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+  items: {
+    marginTop: 30,
+  },
+  chooseOrderWrapper: {
+    alignItems: 'center',
+    paddingVertical: '12%',
+  },
+  input: {
+    paddingVertical: 15,
+    paddingHorizontal: 15,
+    backgroundColor: '#800000',
+    borderRadius: 10,
+    borderColor: '#C0C0C0',
+    borderWidth: 1,
+    width: 226,
+    height: 47,
+  },
+  addWrapper: {
+    width: 100,
+    height: 37,
+    borderRadius: 10,
+    backgroundColor: '#FFF',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderColor: '#C0C0C0',
+    borderWidth: 1,
+  },
+  addText: {
+    fontWeight: 'bold',
+  },
+  myOrders: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  },
+  chooseOrderText: {
+    textAlign: 'center',
+    color: 'white',
   },
 });

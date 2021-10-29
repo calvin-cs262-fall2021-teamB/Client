@@ -26,6 +26,7 @@ export default function HomeScreen({ navigation }) {
                             {'Please sign in with your Calvin email'}
                         </Text>
                         <View style={{margin:7}} />
+                        {/* <TouchableOpacity onPress={() => handleSubmitLogin()} style={loginStyles.buttonContainer}> */}
                         <TouchableOpacity onPress={() => handleSubmitLogin()} style={loginStyles.buttonContainer}>
                             <View style={loginStyles.submitContainer}>
                                 <Text 

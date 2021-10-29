@@ -18,7 +18,7 @@ function App() {
         }} 
         >
       <Stack.Screen
-        name="Welcome!"
+        name="Login"
         component={HomeScreen}
         options={({ navigation }) => ({
           headerTitle: () => <Header navigation={navigation} />
