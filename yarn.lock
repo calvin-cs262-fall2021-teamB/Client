@@ -1906,10 +1906,10 @@ atob@^2.1.2:
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
 
-auth4061@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/auth4061/-/auth4061-1.0.1.tgz#4ec6d2680028ea49229f9d9f6ccc449334a262a5"
-  integrity sha512-oM8e5GHohmmTHFiCEsOKqlY6ATt7cjYTLYqpRhVl2Z7pJKSaqE4M7RBN4CnTB1LGzvRTsqXOR4ev9rTszr3rrw==
+auth4061@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/auth4061/-/auth4061-1.0.2.tgz#abb3f334c786b0a0e04a32eeaafdcf9a5c3494d5"
+  integrity sha512-abwzfLHzD5d38jwTnO1kHkta93gJWVqm2zKJN6xAO4NU9pXXKnglTXxSbPVYrKYZReh3g/rxAFbnrfFZ5vKV1g==
   dependencies:
     buffer "^6.0.3"
     react-native-get-random-values "^1.7.0"

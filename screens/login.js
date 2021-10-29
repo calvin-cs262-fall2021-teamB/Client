@@ -44,11 +44,13 @@ export default function HomeScreen({ navigation }) {
 
 const loginStyles = StyleSheet.create({
     largeLogo:{
-        height: '32%',
-        width: '62%', 
+        height: '40%',
+        width: '77%', 
         alignSelf: 'center', 
+        marginTop: '25%',
         borderRadius: 200,
-        marginTop: '10%'
+        borderWidth: 3,
+        borderColor: '#800000'
     },
     loginWrapper:{
         justifyContent: "flex-end",
@@ -57,7 +59,7 @@ const loginStyles = StyleSheet.create({
         justifyContent: "flex-end",
     },
     login:{
-        marginTop: '15%',
+        marginTop: '20%',
         marginBottom: '3%',
         fontSize: 35,
         color: '#333',

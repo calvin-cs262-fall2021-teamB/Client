@@ -5,7 +5,6 @@ export const globalStyles = StyleSheet.create({
     display: 'flex',
     flex: 1,
     flexDirection: 'column',
-    //backgroundColor: '#B0ADAD',
     backgroundColor: '#E5E5E5',
   },
   OrdersWrapper: {
@@ -56,15 +55,4 @@ export const globalStyles = StyleSheet.create({
     textAlign: 'center',
     color: 'white',
   },
-  //header styles
-  loginContainer:{
-    flex: 1,
-    padding: 2,
-  },
-  tinyLogo:{
-    width: 135,
-    height: 65
-  },
-  //login styles
-  
 });

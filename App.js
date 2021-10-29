@@ -1,53 +1,39 @@
-import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React from "react";
 import { CLIENT_SECRET_KEY } from "@env";
-import { StyleSheet, Text, View, Button, Alert } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { AzureInstance, AzureLoginView } from "auth4061"
 import RCTNetworking from "react-native/Libraries/Network/RCTNetworking";
 import HomeScreen from "./screens/login";
 import OrderOptionsScreen from "./screens/orderOptions";
-import { globalStyles } from './styles/global';
 import  Header  from './shared/header';
 const Stack = createNativeStackNavigator();
-
-const { Navigator, Screen } = createNativeStackNavigator();
-const buttonColour = Platform.OS === "ios" ? "#fff" : "#007AFF";
 
 function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login"
         screenOptions={{
-          headerTitleAlign: 'center'
+          headerTitleAlign: 'center',
         }} 
         >
       <Stack.Screen
-        name="Login"
+        name="Welcome!"
         component={HomeScreen}
         options={({ navigation }) => ({
-          // headerStyle: {
-          //   backgroundColor: '#C7C7C7'
-          // } ,
-          headerTitle: props => <Header {...props} />
+          headerTitle: () => <Header navigation={navigation} />
         })}
       />
         <Stack.Screen 
           name="OrderOptions"
           component={OrderOptionsScreen}
           options={({ navigation }) => ({
-            // headerStyle: {
-            //   backgroundColor: '#C7C7C7'
-            // } 
           })} />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
 export default App;
-
-
 
 // const HomeScreen = ({ navigation }) => {
 //   return (
