@@ -2,9 +2,8 @@ import React, {useState} from 'react';
 import { Keyboard, KeyboardAvoidingView, Platform, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Order from '../components/Order';
 import {globalStyles} from '../styles/global';
-import { NavigationContainer } from '@react-navigation/native';
 
-export default function OrderOptionsScreen({navigation}) {
+export default function OrderOptionsScreen() {
     const [order, setOrder] = useState();
     const [orderItems, setOrderItems] = useState([]);
 
@@ -18,10 +17,6 @@ export default function OrderOptionsScreen({navigation}) {
         let itemsCopy = [...orderItems];
         itemsCopy.splice(index, 1);
         setOrderItems(itemsCopy);
-    }
-
-    const handleOrderChoice = () => {
-        navigation.navigate('OrderMenus')
     }
     return (
         <View style={globalStyles.container}>
@@ -60,12 +55,6 @@ export default function OrderOptionsScreen({navigation}) {
             <View style={ globalStyles.chooseOrderWrapper }>
                 <TouchableOpacity style={ globalStyles.input }>
                     <Text style={globalStyles.chooseOrderText}>Choose an Order</Text>
-                </TouchableOpacity>
-            </View>
-            {/* created for now, delete afterwards */}
-            <View style={ globalStyles.chooseOrderWrapper2 }>
-                <TouchableOpacity onPress={() => handleOrderChoice()} style={ globalStyles.input }>
-                    <Text style={globalStyles.chooseOrderText}>Create an Order</Text>
                 </TouchableOpacity>
             </View>
         </View>
