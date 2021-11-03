@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, TouchableWithoutFeedback,Keyboard,View, SafeAreaView, KeyboardAvoidingView, ScrollView, TextInput, Button, Image, Text, TouchableOpacity, FlatList } from 'react-native';
 import { globalStyles } from '../styles/global';
-
+//import {} from //
 
 export default function HomeScreen({ navigation }) {
     const handleSubmitLogin = () => {
@@ -9,11 +9,12 @@ export default function HomeScreen({ navigation }) {
     }
     return (
         <KeyboardAvoidingView
-                behavior={Platform.OS === "ios" ? "padding" : null}
+                //behavior={Platform.OS === "ios" ? "padding" : null}
                 style={globalStyles.safeContainer}
             >   
             <SafeAreaView style={globalStyles.safeContainer}>
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+
                     <View style={globalStyles.inner}>
                         <Image
                             style={globalStyles.largeLogo}

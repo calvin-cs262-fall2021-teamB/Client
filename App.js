@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from "./screens/login";
 import OrderOptionsScreen from "./screens/orderOptions";
+import MenuScreen from './screens/menu1';
 import { globalStyles } from './styles/global';
 import  Header  from './shared/header';
 const Stack = createNativeStackNavigator();
@@ -26,14 +27,23 @@ function App() {
           headerTitle: props => <Header {...props} />
         })}
       />
-        <Stack.Screen 
-          name="OrderOptions"
-          component={OrderOptionsScreen}
-          options={({ navigation }) => ({
+      <Stack.Screen 
+        name="OrderOptions"
+        component={OrderOptionsScreen}
+        options={({ navigation }) => ({
             // headerStyle: {
             //   backgroundColor: '#C7C7C7'
             // } 
-          })} />
+        })} />
+      <Stack.Screen 
+        name="OrderMenus"
+        component={MenuScreen}
+        options={({ navigation }) => ({
+            // headerStyle: {
+            //   backgroundColor: '#C7C7C7'
+            // } 
+        })} />          
+          
       </Stack.Navigator>
     </NavigationContainer>
   );
