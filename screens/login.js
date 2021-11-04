@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import { StyleSheet, TouchableWithoutFeedback,Keyboard,View, SafeAreaView, KeyboardAvoidingView, ScrollView, TextInput, Button, Image, Text, TouchableOpacity, FlatList } from 'react-native';
-import { globalStyles } from '../styles/global';
+import React from 'react';
+import { StyleSheet, TouchableWithoutFeedback,Keyboard,View, SafeAreaView, KeyboardAvoidingView, Image, Text, TouchableOpacity } from 'react-native';
 
 
 export default function HomeScreen({ navigation }) {
@@ -10,34 +9,33 @@ export default function HomeScreen({ navigation }) {
     return (
         <KeyboardAvoidingView
                 behavior={Platform.OS === "ios" ? "padding" : null}
-                style={globalStyles.safeContainer}
+                style={loginStyles.safeContainer}
             >   
-            <SafeAreaView style={globalStyles.safeContainer}>
+            <SafeAreaView style={loginStyles.safeContainer}>
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                    <View style={globalStyles.inner}>
+                    <View style={loginStyles.inner}>
                         <Image
-                            style={globalStyles.largeLogo}
+                            style={loginStyles.largeLogo}
                             source={require('../images/ylw_logo.png')}
                         /> 
                          <Text 
-                            style={globalStyles.login}>
+                            style={loginStyles.login}>
                             {'Login'}
                         </Text>
-                        <Text style={globalStyles.loginMessage}>
+                        <Text style={loginStyles.loginMessage}>
                             {'Please sign in with your Calvin email'}
                         </Text>
-                        <TextInput style={globalStyles.subLogin} placeholder='Username' />
-                        <TextInput style={globalStyles.subLogin} placeholder='Password' />
                         <View style={{margin:7}} />
-                        <TouchableOpacity onPress={() => handleSubmitLogin()} style={globalStyles.buttonContainer}>
-                            <View style={globalStyles.submitContainer}>
+                        {/* <TouchableOpacity onPress={() => handleSubmitLogin()} style={loginStyles.buttonContainer}> */}
+                        <TouchableOpacity onPress={() => handleSubmitLogin()} style={loginStyles.buttonContainer}>
+                            <View style={loginStyles.submitContainer}>
                                 <Text 
-                                    style={globalStyles.text}> 
-                                    {'Submit'}
+                                    style={loginStyles.text}> 
+                                    {'Sign in'}
                                 </Text>
                             </View>
                         </TouchableOpacity>
-                        <View style={globalStyles.safeContainer} />
+                        <View style={loginStyles.safeContainer} />
                     </View>
                 </TouchableWithoutFeedback>
             </SafeAreaView>
@@ -45,3 +43,77 @@ export default function HomeScreen({ navigation }) {
 );
 }
 
+const loginStyles = StyleSheet.create({
+    largeLogo:{
+        height: '40%',
+        width: '77%', 
+        alignSelf: 'center', 
+        marginTop: '25%',
+        borderRadius: 200,
+        borderWidth: 3,
+        borderColor: '#800000'
+    },
+    loginWrapper:{
+        justifyContent: "flex-end",
+    },
+    keyboardContainer:{
+        justifyContent: "flex-end",
+    },
+    login:{
+        marginTop: '20%',
+        marginBottom: '3%',
+        fontSize: 35,
+        color: '#333',
+    },
+    subLogin:{
+        marginLeft: 10,
+        marginBottom: 10,
+        fontSize: 18,
+        color: '#333',
+    },
+    loginMessage:{
+        marginLeft: 10,
+        marginBottom: 15,
+        fontSize: 18,
+        color: '#333',
+    },  
+    text:{
+        fontSize: 18,
+        alignSelf: 'center',
+        fontWeight: 'bold',
+        color: 'white',
+    },
+    buttonContainer:{
+        elevation: 8,
+        backgroundColor: "#800000",
+        borderRadius: 10,
+    },
+    submitContainer:{
+        flex: 0,
+        padding: 10,
+        marginTop: '3%',
+        marginBottom: '3%', 
+        justifyContent: 'center'
+    },
+    safeContainer: {
+        flex: 1,
+    },
+    inner: {
+        padding: 10,
+        flex: 1,
+        justifyContent: "flex-end",
+    },
+});
+//<View style={styles.container}>
+//       <Text>Get ready to login to Azure</Text>
+//       <View style={styles.button}>
+//         <Button
+//           onPress={() => navigation.navigate("SignIn")}
+//           title="Sign In"
+//           style={styles.title}
+//           color={buttonColour}
+//           accessibilityLabel="Learn more about this purple button"
+//         />
+//       </View>
+//       <StatusBar style="auto" />
+//     </View>

@@ -1,18 +1,21 @@
 import React from 'react';
-import {  Image, View, Text } from 'react-native';
-
-import { globalStyles } from '../styles/global';
-
+import { StyleSheet, View, Image} from 'react-native';
 
 export default function Header({ navigation }) {
     return (
         <View>
-            <View style={globalStyles.loginContainer}>
-                <Image
-                    style={globalStyles.tinyLogo}
-                    source={require('../images/calvin-removebg-preview.png')}
-                />
-            </View>
+            <Image
+                style={headerStyles.headerImage}
+                source={require('../images/calvin-removebg-preview.png')} />
         </View>
     );
 };
+
+const headerStyles = StyleSheet.create({
+    headerImage: {
+        height: 60,
+        width: 140,
+        bottom: '15%',
+        left: '7%'
+    },
+});
