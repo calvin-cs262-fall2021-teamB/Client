@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from "./screens/login";
 import OrderOptionsScreen from "./screens/orderOptions";
+import OrderDetailsScreen from "./screens/orderDetails";
 import { globalStyles } from './styles/global';
 import  Header  from './shared/header';
 const Stack = createNativeStackNavigator();
@@ -29,6 +30,15 @@ function App() {
         <Stack.Screen 
           name="OrderOptions"
           component={OrderOptionsScreen}
+          options={({ navigation }) => ({
+            // headerStyle: {
+            //   backgroundColor: '#C7C7C7'
+            // } 
+          })} />
+
+      <Stack.Screen 
+          name="OrderDetails"
+          component={OrderDetailsScreen}
           options={({ navigation }) => ({
             // headerStyle: {
             //   backgroundColor: '#C7C7C7'

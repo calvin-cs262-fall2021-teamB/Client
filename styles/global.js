@@ -128,4 +128,14 @@ export const globalStyles = StyleSheet.create({
     flex: 1,
     justifyContent: "flex-end",
   },
+  dashWrapper: {
+    flex: 1,
+    marginBottom: 10,
+    alignItems: 'center'
+  },
+
+  itemsTitleWrapper: {
+    paddingHorizontal: '10%',
+    paddingVertical: '10%'
+  },
 });

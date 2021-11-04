@@ -1,9 +1,10 @@
+import { NavigationContainer } from '@react-navigation/native';
 import React, {useState} from 'react';
 import { Keyboard, KeyboardAvoidingView, Platform, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Order from '../components/Order';
 import {globalStyles} from '../styles/global';
 
-export default function OrderOptionsScreen() {
+export default function OrderOptionsScreen({ navigation }) {
     const [order, setOrder] = useState();
     const [orderItems, setOrderItems] = useState([]);
 
@@ -11,6 +12,9 @@ export default function OrderOptionsScreen() {
         Keyboard.dismiss();
         setOrderItems([...orderItems, order]);
         setOrder(null);
+    }
+    const handleOrderChoice = () => {
+        navigation.navigate('OrderDetails')
     }
 
     const completeOrder = (index) => {
@@ -53,7 +57,7 @@ export default function OrderOptionsScreen() {
         
             {/* Choose an Order */}
             <View style={ globalStyles.chooseOrderWrapper }>
-                <TouchableOpacity style={ globalStyles.input }>
+                <TouchableOpacity onPress={() => handleOrderChoice()} style={ globalStyles.input }>
                     <Text style={globalStyles.chooseOrderText}>Choose an Order</Text>
                 </TouchableOpacity>
             </View>
