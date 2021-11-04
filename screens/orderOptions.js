@@ -21,45 +21,56 @@ export default function OrderOptionsScreen({ navigation }) {
         setOrderItems(itemsCopy);
     }
 
-    // const [loginSuccess, setLoginSuccess] = useState(false);
-    // const [azureLoginObject, setAzureLoginObject] = useState({});
-    // const credentials = {
-    //     client_id: "9fec5959-1f33-4948-9675-e5ec4e696799",
-    //     client_secret: 'd7ad096d-2e7f-4ce2-adf6-9c6ebf750c43',
-    //     redirect_uri: "http://localhost:3000/Login",
-    //     scope:
-    //     "Mail.Read offline_access User.ReadBasic.All Mail.Read openid User.Read User.ReadWrite", //User.Read.All User.ReadWrite.All
-    // };
-    // const azureInstance = new AzureInstance(credentials);
+    const [loginSuccess, setLoginSuccess] = useState(false);
+    const [azureLoginObject, setAzureLoginObject] = useState({});
+    const credentials = {
+        client_id: "9fec5959-1f33-4948-9675-e5ec4e696799",
+        client_secret: 'd7ad096d-2e7f-4ce2-adf6-9c6ebf750c43',
+        redirect_uri: "http://localhost:3000/Login",
+        scope: 
+        "User.Read email offline_access profile openid", //User.Read.All User.ReadWrite.All
+        prompt: 'consent',
+    };
+    const azureInstance = new AzureInstance(credentials);
 
-    // const onLoginSuccess = async () => {
-    //     try {
-    //     const result = await azureInstance.getUserInfo();
-    //     setLoginSuccess(true);
-    //     setAzureLoginObject(result);
-    //     } catch (err) {
-    //     // eslint-disable-next-line no-console
-    //     console.log("error getting user info");
-    //     console.error(err);
-    //     }
-    // };
+    const onLoginSuccess = async () => {
+        try {
+        const result = await azureInstance.getUserInfo();
+        setLoginSuccess(true);
+        setAzureLoginObject(result);
+        } catch (err) {
+        // eslint-disable-next-line no-console
+        console.log("error getting user info");
+        console.error(err);
+        }
+    };
 
-    // const signOut = () =>
-    //     Alert.alert("Sign Out", "Are you sure you want to sign out?", [
-    //     {
-    //         text: "Cancel",
-    //         onPress: () => console.log("Cancel Pressed"),
-    //         style: "cancel",
-    //     },
-    //     {
-    //         text: "OK",
-    //         onPress: () => {
-    //         RCTNetworking.clearCookies(() => {});
-    //         setLoginSuccess(false);
-    //         navigation.navigate("Login");
-    //         },
-    //     },
-    //     ]);
+    const signOut = () =>
+        Alert.alert("Sign Out", "Are you sure you want to sign out?", [
+        {
+            text: "Cancel",
+            onPress: () => console.log("Cancel Pressed"),
+            style: "cancel",
+        },
+        {
+            text: "OK",
+            onPress: () => {
+            RCTNetworking.clearCookies(() => {});
+            setLoginSuccess(false);
+            navigation.navigate("Login");
+            },
+        },
+        ]);
+
+    if (!loginSuccess) {
+        return (
+        <AzureLoginView
+            azureInstance={azureInstance}
+            loadingMessage="Requesting access token again"
+            onSuccess={onLoginSuccess}
+        />
+        );
+    }
 
     // if (!loginSuccess) {
     //     return (
