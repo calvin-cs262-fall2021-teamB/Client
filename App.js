@@ -7,6 +7,8 @@ import RCTNetworking from "react-native/Libraries/Network/RCTNetworking";
 import HomeScreen from "./screens/login";
 import OrderOptionsScreen from "./screens/orderOptions";
 import  Header  from './shared/header';
+import MenuScreen from "./screens/menu";
+import OrderDetailsScreen from "./screens/orderDetails";
 const Stack = createNativeStackNavigator();
 
 function App() {
@@ -27,6 +29,16 @@ function App() {
         <Stack.Screen 
           name="OrderOptions"
           component={OrderOptionsScreen}
+          options={({ navigation }) => ({
+          })} />
+        <Stack.Screen 
+          name="Menu"
+          component={MenuScreen}
+          options={({ navigation }) => ({
+          })} />
+        <Stack.Screen 
+          name="OrderDetails"
+          component={OrderDetailsScreen}
           options={({ navigation }) => ({
           })} />
       </Stack.Navigator>

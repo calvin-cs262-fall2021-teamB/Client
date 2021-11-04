@@ -4,6 +4,7 @@ import Order from '../components/Order';
 import { AzureInstance, AzureLoginView } from "auth4061";
 import RCTNetworking from "react-native/Libraries/Network/RCTNetworking";
 import { Button, Alert } from "react-native";
+import { globalStyles } from '../styles/global';
 
 export default function OrderOptionsScreen({ navigation }) {
     const [order, setOrder] = useState();
@@ -19,6 +20,10 @@ export default function OrderOptionsScreen({ navigation }) {
         let itemsCopy = [...orderItems];
         itemsCopy.splice(index, 1);
         setOrderItems(itemsCopy);
+    }
+
+    const handleCreateOrder = () => {
+        navigation.navigate('Menu')
     }
 
     const [loginSuccess, setLoginSuccess] = useState(false);
@@ -72,35 +77,25 @@ export default function OrderOptionsScreen({ navigation }) {
         );
     }
 
-    // if (!loginSuccess) {
-    //     return (
-    //     <AzureLoginView
-    //         azureInstance={azureInstance}
-    //         loadingMessage="Requesting access token again"
-    //         onSuccess={onLoginSuccess}
-    //     />
-    //     );
-    // }
-
-    // const { userPrincipalName, givenName } = azureLoginObject;
+    const { userPrincipalName, givenName } = azureLoginObject;
 
     return (
-        <View style={orderStyles.container}>
-            <View style={orderStyles.OrdersWrapper}>
+        <View style={globalStyles.container}>
+            <View style={styles.OrdersWrapper}>
                 {/* My Orders */}
-                <View style={orderStyles.myOrders}>
-                    <Text style={orderStyles.sectionTitle}>My Orders</Text>
+                <View style={globalStyles.myOrders}>
+                    <Text style={globalStyles.sectionTitle}>My Orders</Text>
                     <KeyboardAvoidingView 
                         behavior={ Platform.OS === 'ios' ? 'padding' : 'height'}>
                         <TouchableOpacity onPress={() => handleAddOrder()}>
-                            <View style={ orderStyles.addWrapper }>
-                                <TextInput style={orderStyles.addText} placeholder='New Order' value={order} onChangeText={text=>setOrder(text)}></TextInput>
+                            <View style={ styles.addWrapper }>
+                                <TextInput style={styles.addText} placeholder='New Order' value={order} onChangeText={text=>setOrder(text)}></TextInput>
                             </View>
                         </TouchableOpacity>
                     </KeyboardAvoidingView>
                 </View>
 
-                <View style={orderStyles.items}>
+                <View style={globalStyles.items}>
                 {/* This is where the orders will go */}
                 {
                     orderItems.map((item, index) => {
@@ -114,26 +109,26 @@ export default function OrderOptionsScreen({ navigation }) {
                 </View>
 
                 {/* Available Orders */}
-                <Text style={orderStyles.sectionTitle}>Available Orders</Text>
+                <Text style={globalStyles.sectionTitle}>Available Orders</Text>
             </View>
         
             {/* Choose an Order */}
-            <View style={ orderStyles.chooseOrderWrapper }>
-                <TouchableOpacity style={ orderStyles.input }>
-                    <Text style={orderStyles.chooseOrderText}>Choose an Order</Text>
+            <View style={ styles.chooseOrderWrapper }>
+                <TouchableOpacity style={ globalStyles.input }>
+                    <Text style={globalStyles.chooseOrderText}>Choose an Order</Text>
                 </TouchableOpacity>
             </View>
 
-            <View style={orderStyles.mindyContainer}>
-                <Text style={orderStyles.mindyText}>Welcome {givenName}</Text>
-                <Text style={orderStyles.mindyText}>
+            <View style={styles.mindyContainer}>
+                <Text style={styles.mindyText}>Welcome {givenName}</Text>
+                <Text style={styles.mindyText}>
                     You logged into Azure with {userPrincipalName}
                 </Text>
-                <View style={orderStyles.mindyButton}>
+                <View style={styles.mindyButton}>
                     <Button
                     onPress={signOut}
                     title="Sign Out"
-                    style={orderStyles.mindyTitle}
+                    style={styles.mindyTitle}
                     accessibilityLabel="Sign Out of Azure"
                     />
                 </View>
@@ -214,7 +209,7 @@ export default function OrderOptionsScreen({ navigation }) {
 //   );
 // };
 
-const orderStyles = StyleSheet.create({
+const styles = StyleSheet.create({
   mindyContainer: {
     flex: 1,
     backgroundColor: "#fff",
@@ -234,37 +229,14 @@ const orderStyles = StyleSheet.create({
     color: "#333333",
     marginBottom: 5,
   },
-  container: {
-    display: 'flex',
-    flex: 1,
-    flexDirection: 'column',
-    backgroundColor: '#E5E5E5',
-  },
   OrdersWrapper: {
     flex: 1,
     paddingVertical: '15%',
     paddingHorizontal: '5%',
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-  },
-  items: {
-    marginTop: 30,
-  },
   chooseOrderWrapper: {
     alignItems: 'center',
     paddingVertical: '12%',
-  },
-  input: {
-    paddingVertical: 15,
-    paddingHorizontal: 15,
-    backgroundColor: '#800000',
-    borderRadius: 10,
-    borderColor: '#C0C0C0',
-    borderWidth: 1,
-    width: 226,
-    height: 47,
   },
   addWrapper: {
     width: 100,
@@ -278,14 +250,5 @@ const orderStyles = StyleSheet.create({
   },
   addText: {
     fontWeight: 'bold',
-  },
-  myOrders: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between'
-  },
-  chooseOrderText: {
-    textAlign: 'center',
-    color: 'white',
   },
 });
