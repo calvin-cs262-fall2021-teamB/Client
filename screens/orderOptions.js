@@ -28,8 +28,9 @@ export default function OrderOptionsScreen({ navigation }) {
         client_id: "9fec5959-1f33-4948-9675-e5ec4e696799",
         client_secret: 'd7ad096d-2e7f-4ce2-adf6-9c6ebf750c43',
         redirect_uri: "http://localhost:3000/Login",
-        scope:
-        "Mail.Read offline_access User.ReadBasic.All Mail.Read openid User.Read User.ReadWrite", //User.Read.All User.ReadWrite.All
+        scope: 
+        "User.Read email offline_access profile openid", //User.Read.All User.ReadWrite.All
+        prompt: 'consent',
     };
     const azureInstance = new AzureInstance(credentials);
 
