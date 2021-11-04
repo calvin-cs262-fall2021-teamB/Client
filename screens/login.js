@@ -1,8 +1,13 @@
 import React from 'react';
 import { StyleSheet, TouchableWithoutFeedback,Keyboard,View, SafeAreaView, KeyboardAvoidingView, Image, Text, TouchableOpacity } from 'react-native';
-
+import { useFonts, PoiretOne_400Regular  } from '@expo-google-fonts/poiret-one';
 
 export default function HomeScreen({ navigation }) {
+
+    let [fontsLoaded] = useFonts({
+        PoiretOne_400Regular ,
+      });
+
     const handleSubmitLogin = () => {
         navigation.navigate('OrderOptions')
     }
@@ -14,18 +19,14 @@ export default function HomeScreen({ navigation }) {
             <SafeAreaView style={loginStyles.safeContainer}>
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                     <View style={loginStyles.inner}>
+                        <Text style ={loginStyles.titleText}>
+                        {'KNIGHT DASH'}
+                        </Text>
                         <Image
                             style={loginStyles.largeLogo}
-                            source={require('../images/ylw_logo.png')}
+                            source={require('../images/design1.png')}
                         /> 
-                         <Text 
-                            style={loginStyles.login}>
-                            {'Login'}
-                        </Text>
-                        <Text style={loginStyles.loginMessage}>
-                            {'Please sign in with your Calvin email'}
-                        </Text>
-                        <View style={{margin:7}} />
+                        <View style={{margin:3}} />
                         {/* <TouchableOpacity onPress={() => handleSubmitLogin()} style={loginStyles.buttonContainer}> */}
                         <TouchableOpacity onPress={() => handleSubmitLogin()} style={loginStyles.buttonContainer}>
                             <View style={loginStyles.submitContainer}>
@@ -35,6 +36,9 @@ export default function HomeScreen({ navigation }) {
                                 </Text>
                             </View>
                         </TouchableOpacity>
+                        <Image style={loginStyles.CalvinLogo}
+                               source={require('../images/calvin-removebg-preview.png')}
+                        />
                         <View style={loginStyles.safeContainer} />
                     </View>
                 </TouchableWithoutFeedback>
@@ -45,25 +49,24 @@ export default function HomeScreen({ navigation }) {
 
 const loginStyles = StyleSheet.create({
     largeLogo:{
-        height: '40%',
-        width: '77%', 
+        height: 400,
+        width: 373, 
         alignSelf: 'center', 
-        marginTop: '25%',
-        borderRadius: 200,
-        borderWidth: 3,
-        borderColor: '#800000'
+        marginLeft: 15,
+        marginTop: 70,
+    },
+    CalvinLogo:{
+        height: 72,
+        width: 179,
+        marginTop: 3,
+        marginBottom: 20,
+        alignSelf: 'center', 
     },
     loginWrapper:{
         justifyContent: "flex-end",
     },
     keyboardContainer:{
         justifyContent: "flex-end",
-    },
-    login:{
-        marginTop: '20%',
-        marginBottom: '3%',
-        fontSize: 35,
-        color: '#333',
     },
     subLogin:{
         marginLeft: 10,
@@ -83,16 +86,27 @@ const loginStyles = StyleSheet.create({
         fontWeight: 'bold',
         color: 'white',
     },
+    titleText:{
+        marginTop: '20%',
+        fontSize: 42, 
+        alignSelf: 'center',
+        color: '#800000',
+        fontFamily: 'PoiretOne_400Regular',
+
+
+        
+    },
     buttonContainer:{
-        elevation: 8,
+        height: 39,
+        width: 116,
+        alignSelf: 'center',
+        marginTop: 40,
         backgroundColor: "#800000",
         borderRadius: 10,
     },
     submitContainer:{
         flex: 0,
-        padding: 10,
-        marginTop: '3%',
-        marginBottom: '3%', 
+        padding: 5,
         justifyContent: 'center'
     },
     safeContainer: {
@@ -102,6 +116,8 @@ const loginStyles = StyleSheet.create({
         padding: 10,
         flex: 1,
         justifyContent: "flex-end",
+        backgroundColor: "#f2cd00"
+        
     },
 });
 //<View style={styles.container}>
