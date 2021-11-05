@@ -22,7 +22,7 @@ export const globalStyles = StyleSheet.create({
     borderColor: '#C0C0C0',
     borderWidth: 1,
     width: 226,
-    height: 47,
+    height: 50,
   },
   orderLists: {
     flexDirection: 'row',
