@@ -1,16 +1,16 @@
 import React from 'react';
-import { Image, Text, TouchableOpacity, View, StyleSheet } from 'react-native';
+import { Image, Text, TouchableOpacity, View, StyleSheet, ScrollView } from 'react-native';
 import {globalStyles} from '../styles/global';
 
 export default function MenuScreen({ navigation }) {
     const handleOrderDetails = () => {
-        navigation.navigate('OrderDetails')
+        navigation.navigate('Cart')
     }
 
     return (
         <View style={globalStyles.container}>
 
-            <View style={styles.addWrapper2}>
+            <ScrollView style={styles.addWrapper2}>
             {/*contents*/}
                 {/*content1*/}
                 <TouchableOpacity style= {styles.contentWrapper}>   
@@ -106,7 +106,7 @@ export default function MenuScreen({ navigation }) {
                     <Text style = {styles.NumberText}>1</Text>
                 </TouchableOpacity>
             
-            </View>
+            </ScrollView>
 
             {/*Bottom Box*/}
             <View style={styles.bottomWrapper}>

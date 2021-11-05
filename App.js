@@ -8,7 +8,7 @@ import HomeScreen from "./screens/login";
 import OrderOptionsScreen from "./screens/orderOptions";
 import  Header  from './shared/header';
 import MenuScreen from "./screens/menu";
-import OrderDetailsScreen from "./screens/orderDetails";
+import CartScreen from "./screens/cart";
 const Stack = createNativeStackNavigator();
 
 function App() {
@@ -37,8 +37,8 @@ function App() {
           options={({ navigation }) => ({
           })} />
         <Stack.Screen 
-          name="OrderDetails"
-          component={OrderDetailsScreen}
+          name="Cart"
+          component={CartScreen}
           options={({ navigation }) => ({
           })} />
       </Stack.Navigator>

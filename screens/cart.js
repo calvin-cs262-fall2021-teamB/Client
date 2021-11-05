@@ -2,7 +2,7 @@ import React from 'react';
 import {TouchableOpacity, View, StyleSheet, Text } from 'react-native';
 import {globalStyles} from '../styles/global';
 
-export default function OrderDetailsScreen() {
+export default function CartScreen() {
 
     return (
         <View style={globalStyles.container}>
@@ -18,7 +18,7 @@ export default function OrderDetailsScreen() {
             {/*Deliver Button */}
             <View style={ styles.dashWrapper }>
                 <TouchableOpacity style={ globalStyles.input }>
-                    <Text style={styles.detailsText}>Dash</Text>
+                    <Text style={styles.detailsText}>PlaceOrder</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -29,14 +29,19 @@ export const styles = StyleSheet.create({
   dashWrapper: {
     flex: 1,
     marginBottom: 10,
-    alignItems: 'center'
+    alignItems: 'center',
   },
 
   itemsTitleWrapper: {
     paddingHorizontal: '10%',
-    paddingVertical: '10%'
+    paddingVertical: '10%',
+    justifyContent: 'center',
   },
   detailsText: {
-      color: 'white',
+    textAlign: 'center',
+    justifyContent: 'center',
+    color: '#FFD700',
+    fontSize: 17,
+    fontWeight: 'bold'
   },
 });
