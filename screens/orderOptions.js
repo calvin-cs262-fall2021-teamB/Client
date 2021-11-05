@@ -95,9 +95,9 @@ export default function OrderOptionsScreen({ navigation }) {
                 <FlatList
                 style={styles.availableOrderList}
                 data={orderData.orders}
-                keyExtractor={({ id }, index) => id}
+                keyExtractor={({ orderNumber }, index) => orderNumber}
                 renderItem={({ item }) => (
-                        <Text style={styles.availableOrder}>Order {item.orderNumber}</Text>
+                        <Text style={styles.availableOrder}>Order {item.orderNumber}, {item.destination}</Text>
                     )}
                 />
             </View>
