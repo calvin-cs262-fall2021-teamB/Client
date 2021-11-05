@@ -22,10 +22,10 @@ export default function MenuScreen({ navigation }) {
                             /> 
 
                         <View style={styles.menuContent}>
-                        <View style={{flexDirection:'column'}}>
-                            <Text style={styles.contentTextTitle}>Pepsi</Text>
-                            <Text style={styles.contentTextTitle2}> 1.75$ </Text>
-                        </View>   
+                            <View style={{flexDirection:'column'}}>
+                                <Text style={styles.contentTextTitle}>Pepsi</Text>
+                                <Text style={styles.contentTextTitle2}> $1.75 </Text>
+                            </View>   
                         </View>
                     </View>
                 </TouchableOpacity>
@@ -40,10 +40,10 @@ export default function MenuScreen({ navigation }) {
                             /> 
 
                         <View style={styles.menuContent}>
-                        <View style={{flexDirection:'column'}}>
-                            <Text style={styles.contentTextTitle}>Cherry Pepsi</Text>
-                            <Text style={styles.contentTextTitle2}> 1.75$ </Text>
-                        </View>   
+                            <View style={{flexDirection:'column'}}>
+                                <Text style={styles.contentTextTitle}>Cherry Pepsi</Text>
+                                <Text style={styles.contentTextTitle2}> $1.75 </Text>
+                            </View>   
                         </View>
                     </View>
                 </TouchableOpacity>  
@@ -58,10 +58,10 @@ export default function MenuScreen({ navigation }) {
                             /> 
 
                         <View style={styles.menuContent}>
-                        <View style={{flexDirection:'column'}}>
-                            <Text style={styles.contentTextTitle}>Diet Pepsi</Text>
-                            <Text style={styles.contentTextTitle2}> 1.75$ </Text>
-                        </View>   
+                            <View style={{flexDirection:'column'}}>
+                                <Text style={styles.contentTextTitle}>Diet Pepsi</Text>
+                                <Text style={styles.contentTextTitle2}> $1.75 </Text>
+                            </View>   
                         </View>
                     </View>
                 </TouchableOpacity>
@@ -76,10 +76,10 @@ export default function MenuScreen({ navigation }) {
                             /> 
 
                         <View style={styles.menuContent}>
-                        <View style={{flexDirection:'column'}}>
-                            <Text style={styles.contentTextTitle}>Zero Pepsi</Text>
-                            <Text style={styles.contentTextTitle2}> 1.75$ </Text>
-                        </View>   
+                            <View style={{flexDirection:'column'}}>
+                                <Text style={styles.contentTextTitle}>Zero Pepsi</Text>
+                                <Text style={styles.contentTextTitle2}> $1.75 </Text>
+                            </View>   
                         </View>
                     </View>
                 </TouchableOpacity>
@@ -93,10 +93,10 @@ export default function MenuScreen({ navigation }) {
                             /> 
 
                         <View style={styles.menuContent}>
-                        <View style={{flexDirection:'column'}}>
-                            <Text style={styles.contentTextTitle}>Diet Cherry Pepsi</Text>
-                            <Text style={styles.contentTextTitle2}> 1.75$ </Text>
-                        </View>   
+                            <View style={{flexDirection:'column'}}>
+                                <Text style={styles.contentTextTitle}>Diet Cherry Pepsi</Text>
+                                <Text style={styles.contentTextTitle2}> $1.75 </Text>
+                            </View>   
                         </View>
                     </View>
                 </TouchableOpacity >  
@@ -133,45 +133,28 @@ export default function MenuScreen({ navigation }) {
 }
 
 export const styles = StyleSheet.create({
-    chooseOrderWrapper2: {
-        alignItems: 'center',
-        paddingVertical: '1%',
-  },
-
-  input2: {
-    paddingVertical: 5,
-    paddingHorizontal: 15,
-    backgroundColor: '#800000',
-    borderRadius: 10,
-    borderColor: '#C0C0C0',
-    borderWidth: 1,
-    width: 226,
-    height: 47,
-  },
-
   addWrapper2: {
     marginTop: '5%',
     alignSelf:"center",
-    width:350,
-    height:610,
+    width: '85%',
     backgroundColor: '#C4C4C4',
     borderRadius: 10,
   },
 
   contentWrapper:{
-    marginLeft: 5,
-    marginTop: 5,
-    height:110,
-    width: 340,
+    marginLeft: '1.5%',
+    marginTop: '1.5%',
+    height: '33.5%',
+    width: '97%',
     borderRadius: 10,
-    backgroundColor: '#FFFFFF'
+    backgroundColor: '#FFFFFF',
 
   },
   imageContent: {
-    marginLeft: 5,
-    marginTop: 5,
-    height: 100,
-    width: 160,
+    marginLeft: '1.5%',
+    marginTop: '1%',
+    height: '190%',
+    width: '30%',
     borderRadius: 10,
     backgroundColor: '#FFFFFF',
     shadowColor: "#000000",
@@ -179,19 +162,19 @@ export const styles = StyleSheet.create({
   },
   
   bottomWrapper: {
-    marginTop: '5%',
+    marginTop: '28%',
     alignSelf:"center",
-    width:350,
-    height:50,
+    width: '85%',
+    height: '7%',
     backgroundColor: '#C4C4C4',
-    borderRadius: 25
+    borderRadius: 25,
+    bottom: '7%'
   },
 
   menuContent: {
-    marginLeft: 10,
-    marginTop: 5,
-    height: 100,
-    width: 160,
+    marginLeft: '5%',
+    marginTop: '1%',
+    height: '100%',
     borderRadius: 10,
     backgroundColor: '#FFFFFF',
     shadowColor: "#000000",
