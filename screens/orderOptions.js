@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import {StyleSheet, Keyboard, KeyboardAvoidingView, Platform, Text, TouchableOpacity, View } from 'react-native';
+import {StyleSheet, Keyboard, KeyboardAvoidingView, FlatList, Text, TouchableOpacity, View, ActivityIndicator } from 'react-native';
 import { AzureInstance, AzureLoginView } from "auth4061";
 import RCTNetworking from "react-native/Libraries/Network/RCTNetworking";
-import { Button, Alert } from "react-native";
+import { Alert } from "react-native";
 import { globalStyles } from '../styles/global';
 
 export default function OrderOptionsScreen({ navigation }) {
@@ -14,6 +14,7 @@ export default function OrderOptionsScreen({ navigation }) {
         navigation.navigate('All Orders')
     }
 
+    const orderData = require('../test-data/mock-data.json');
 
     const [loginSuccess, setLoginSuccess] = useState(false);
     const [azureLoginObject, setAzureLoginObject] = useState({});
@@ -68,6 +69,7 @@ export default function OrderOptionsScreen({ navigation }) {
 
     const { userPrincipalName, givenName } = azureLoginObject;
 
+
     return (
         <View style={globalStyles.container}>
             <View style={styles.OrdersWrapper}>
@@ -79,6 +81,7 @@ export default function OrderOptionsScreen({ navigation }) {
                         <Text style={styles.createOrderPlus}>+</Text>
                     </TouchableOpacity>
                 </View>
+                
 
                 {/* Available Orders */}
                 <View style={globalStyles.orderLists}>
@@ -89,6 +92,14 @@ export default function OrderOptionsScreen({ navigation }) {
                             </TouchableOpacity>
                         </View>
                 </View>
+                <FlatList
+                style={styles.availableOrderList}
+                data={orderData.orders}
+                keyExtractor={({ id }, index) => id}
+                renderItem={({ item }) => (
+                        <Text style={styles.availableOrder}>Order {item.orderNumber}</Text>
+                    )}
+                />
             </View>
 
             {/* Sign Out */}
@@ -174,4 +185,14 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFD700',
         borderColor: '#800000'
   },
+  availableOrder: {
+      fontSize: 20,
+      fontWeight: 'bold',
+      paddingBottom: '5%',
+      marginLeft: '5%',
+      color: '#800000'
+  },
+  availableOrderList: {
+      top: '-7%'
+  }
 });
