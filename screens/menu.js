@@ -3,6 +3,10 @@ import { Image, Text, TouchableOpacity, View, StyleSheet } from 'react-native';
 import {globalStyles} from '../styles/global';
 
 export default function MenuScreen({ navigation }) {
+    const handleOrderDetails = () => {
+        navigation.navigate('OrderDetails')
+    }
+
     return (
         <View style={globalStyles.container}>
 
@@ -117,7 +121,7 @@ export default function MenuScreen({ navigation }) {
                                     source={require('../images/drink.png')}
                         />                     
                     </TouchableOpacity>
-                    <TouchableOpacity style = {styles.absIcon}>
+                    <TouchableOpacity style = {styles.absIcon} onPress={() => handleOrderDetails()}>
                         <Image
                                     source={require('../images/cart.png')}
                         />                     

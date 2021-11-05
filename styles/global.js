@@ -14,15 +14,6 @@ export const globalStyles = StyleSheet.create({
   items: {
     marginTop: 30,
   },
-  myOrders: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between'
-  },
-  chooseOrderText: {
-    textAlign: 'center',
-    color: 'white',
-  },
   input: {
     paddingVertical: 15,
     paddingHorizontal: 15,
@@ -32,5 +23,10 @@ export const globalStyles = StyleSheet.create({
     borderWidth: 1,
     width: 226,
     height: 47,
+  },
+  orderLists: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between'
   },
 });
