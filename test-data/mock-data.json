@@ -1,0 +1,80 @@
+{
+  "orders": [
+    {
+      "orderNumber": "1",
+      "customerName": "Jacob",
+      "destination": "KHVR",
+      "totalCost": "11.00",
+      "items": [
+        {
+          "food": "Burger",
+          "quantity": "1"
+        },
+        {
+          "food": "Fries",
+          "quantity": "2"
+        },
+        {
+          "drink": "Pepsi",
+          "quantity": "1"
+        }
+      ]
+    },
+    {
+      "orderNumber": "2",
+      "customerName": "Nate",
+      "destination": "RVD",
+      "totalCost": "9.00",
+      "items": [
+        {
+          "food": "Sandwich Wrap",
+          "quantity": "2"
+        },
+        {
+          "drink": "Diet Pepsi",
+          "quantity": "1"
+        }
+      ]
+    },
+    {
+      "orderNumber": "3",
+      "customerName": "Chris",
+      "destination": "KE",
+      "totalCost": "6.00",
+      "items": [
+        {
+          "drink": "Cherry Pepsi",
+          "quantity": "3"
+        }
+      ]
+    },
+    {
+      "orderNumber": "4",
+      "customerName": "Alex",
+      "destination": "SE",
+      "totalCost": "13.00",
+      "items": [
+        {
+          "food": "Sushi",
+          "quantity": "1"
+        },
+        {
+          "food": "Fries",
+          "quantity": "1"
+        }
+      ]
+    },
+    {
+      "orderNumber": "5",
+      "customerName": "Professor KVL",
+      "destination": "NH",
+      "totalCost": "8.00",
+      "items": [
+        {
+          "drink": "Zero Pepsi",
+          "quantity": "4"
+        }
+      ]
+    }
+  ]
+}
