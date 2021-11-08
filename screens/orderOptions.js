@@ -11,7 +11,7 @@ export default function OrderOptionsScreen({ navigation }) {
     }
 
     const handleViewOrders = () => {
-        navigation.navigate('All Orders')
+        navigation.navigate('AvailableOrders')
     }
 
     const orderData = require('../test-data/mock-data.json');
@@ -87,7 +87,7 @@ export default function OrderOptionsScreen({ navigation }) {
                 <View style={globalStyles.orderLists}>
                     <Text style={globalStyles.sectionTitle}>Available Orders</Text>
                         <View style={ styles.viewOrdersWrapper }>
-                            <TouchableOpacity style={ styles.viewOrdersButton }>
+                            <TouchableOpacity style={ styles.viewOrdersButton } onPress={() => handleViewOrders()}>
                                 <Text style={styles.viewOrdersText}>View All</Text>
                             </TouchableOpacity>
                         </View>

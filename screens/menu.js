@@ -144,7 +144,7 @@ export const styles = StyleSheet.create({
   contentWrapper:{
     marginLeft: '1.5%',
     marginTop: '1.5%',
-    height: '33.5%',
+    height: 125,
     width: '97%',
     borderRadius: 10,
     backgroundColor: '#FFFFFF',
@@ -162,13 +162,13 @@ export const styles = StyleSheet.create({
   },
   
   bottomWrapper: {
-    marginTop: '28%',
+    marginTop: '20%',
     alignSelf:"center",
     width: '85%',
     height: '7%',
     backgroundColor: '#C4C4C4',
     borderRadius: 25,
-    bottom: '7%'
+    bottom: '6%'
   },
 
   menuContent: {
