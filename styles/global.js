@@ -2,14 +2,14 @@ import { StyleSheet } from "react-native";
 
 export const globalStyles = StyleSheet.create({
   container: {
-    display: 'flex',
+    display: "flex",
     flex: 1,
-    flexDirection: 'column',
-    backgroundColor: '#E5E5E5',
+    flexDirection: "column",
+    backgroundColor: "#E5E5E5",
   },
   sectionTitle: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   items: {
     marginTop: 30,
@@ -17,16 +17,16 @@ export const globalStyles = StyleSheet.create({
   input: {
     paddingVertical: 15,
     paddingHorizontal: 15,
-    backgroundColor: '#800000',
+    backgroundColor: "#800000",
     borderRadius: 10,
-    borderColor: '#C0C0C0',
+    borderColor: "#C0C0C0",
     borderWidth: 1,
     width: 226,
     height: 50,
   },
   orderLists: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between'
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
 });
