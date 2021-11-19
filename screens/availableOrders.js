@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { globalStyles } from "../styles/global";
 
-export default function AvailableOrdersScreen() {
+export default function AvailableOrdersScreen( {navigation}) {
   const [isLoading, setLoading] = useState(true);
   const [orderData, setData] = useState([]);
 
@@ -35,16 +35,21 @@ export default function AvailableOrdersScreen() {
         <View style={styles.itemsTitleWrapper}>
           {/* List Contents of Order */}
           <View style={styles.orderLists}>
-            <Text style={globalStyles.sectionTitle}>Orders</Text>
+            <Text style={globalStyles.sectionTitle}>All Orders</Text>
           </View>
           <FlatList
             style={styles.availableOrderList}
             data={orderData}
             keyExtractor={({ id }, index) => id.toString()}
             renderItem={({ item }) => (
-              <Text style={styles.availableOrder}>
-                Order {item.id}, {item.userid}, {item.dininghallid}, {item.status}
-              </Text>
+              <TouchableOpacity>
+                <Text
+                  style={styles.availableOrder}
+                  onPress={() => navigation.navigate("Order Details", item)}
+                >
+                  Order {item.id}, {item.location}
+                </Text>
+              </TouchableOpacity>
             )}
           />
         </View>
@@ -53,7 +58,7 @@ export default function AvailableOrdersScreen() {
       <View style={styles.dashWrapper}>
         {isLoading ? <ActivityIndicator /> : (
           <TouchableOpacity style={styles.input}>
-            <Text style={styles.detailsText}>Choose Order</Text>
+            <Text style={styles.detailsText}>Deliver Order</Text>
           </TouchableOpacity>
         )}
       </View>

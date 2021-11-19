@@ -12,13 +12,13 @@ import {
 import { globalStyles } from "../styles/global";
 import { useSafeAreaFrame } from "react-native-safe-area-context";
 
-export default function MenuScreen({ navigation }) {
+export default function MenuScreen2({ navigation }) {
   const [isLoading, setLoading] = useState(true);
   const [orderData, setData] = useState([]);
 
   const getOrders = async () => {
     try {
-      const response = await fetch('https://still-crag-08186.herokuapp.com/drinks');
+      const response = await fetch('https://still-crag-08186.herokuapp.com/foods');
       const json = await response.json();
       setData(json);
     } catch (error) {
@@ -35,8 +35,9 @@ export default function MenuScreen({ navigation }) {
     navigation.navigate("Cart");
   };
   const handleDisplayChange = () => {
-    navigation.navigate("Food Menu");
+    navigation.navigate("Drink Menu");
   };
+
   return (
     <View style={globalStyles.container}>
       {isLoading ? <ActivityIndicator /> : (
@@ -47,7 +48,9 @@ export default function MenuScreen({ navigation }) {
           keyExtractor={({ id }, index) => id.toString()}
           renderItem={({ item }) => (
             <View style={globalStyles.container}>
-              <TouchableOpacity style={styles.contentWrapper}>
+              <TouchableOpacity 
+                style={styles.contentWrapper}
+                >
                 {/* will add item to 'cart' */}
                 <View style={{ flexDirection: "row" }}>
                   <Image
@@ -69,13 +72,13 @@ export default function MenuScreen({ navigation }) {
       {/*Bottom Box*/}
       <View style={styles.bottomWrapper}>
         <View style={{ flexDirection: "row" }}>
+          <TouchableOpacity style={styles.absIcon}>
+            <Image source={require("../images/eat.png")} />
+          </TouchableOpacity>
           <TouchableOpacity 
             style={styles.absIcon}
             onPress={() => handleDisplayChange()}
             >
-            <Image source={require("../images/eat.png")} />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.absIcon}>
             <Image source={require("../images/drink.png")} />
           </TouchableOpacity>
           <TouchableOpacity

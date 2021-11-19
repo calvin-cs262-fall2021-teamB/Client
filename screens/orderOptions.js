@@ -14,9 +14,11 @@ import RCTNetworking from "react-native/Libraries/Network/RCTNetworking";
 import { Alert } from "react-native";
 import { globalStyles } from "../styles/global";
 
-export default function OrderOptionsScreen({ navigation }) {
+export default function OrderOptionsScreen({ route, navigation }) {
     const [isLoading, setLoading] = useState(true);
     const [orderData, setData] = useState([]);
+    const [myOrderData, setMyData] = useState([]);
+    const [myIsLoading, setMyLoading] = useState(true);
 
     const getOrders = async () => {
         try {
@@ -29,18 +31,33 @@ export default function OrderOptionsScreen({ navigation }) {
             setLoading(false);
         }
     }
-
+    const getMyOrders = async () => {
+        try {
+            const response = await fetch('https://still-crag-08186.herokuapp.com/myOrders');
+            const json = await response.json();
+            setMyData(json);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setMyLoading(false);
+        }
+    }
     useEffect(() => {
         getOrders();
     }, []);
-
+    useEffect(() => {
+        getMyOrders();
+    }, []);
     const handleCreateOrder = () => {
-        navigation.navigate("Menu");
+        navigation.navigate("Food Menu");
     };
 
     const handleViewOrders = () => {
         navigation.navigate("AvailableOrders");
     };
+    // const handleOrderDetails = () => {
+    //     navigation.navigate("Order Details", route.params);
+    // };
 
     const [loginSuccess, setLoginSuccess] = useState(false);
     const [azureLoginObject, setAzureLoginObject] = useState({});
@@ -99,7 +116,7 @@ export default function OrderOptionsScreen({ navigation }) {
             <View style={styles.OrdersWrapper}>
                 {/* My Orders */}
                 <View style={globalStyles.orderLists}>
-                    <Text style={globalStyles.sectionTitle}>My Orders</Text>
+                    <Text style={globalStyles.sectionTitle}>My Active Orders</Text>
                     <TouchableOpacity
                         style={styles.createOrderIcon}
                         onPress={() => handleCreateOrder()}
@@ -107,7 +124,21 @@ export default function OrderOptionsScreen({ navigation }) {
                         <Text style={styles.createOrderPlus}>+</Text>
                     </TouchableOpacity>
                 </View>
-
+                <FlatList
+                    style={styles.myOrderList}
+                    data={myOrderData}
+                    keyExtractor={({ id }, index) => id.toString()}
+                    renderItem={({ item }) => (
+                        <TouchableOpacity>
+                            <Text
+                                style={styles.availableOrder}
+                                onPress={() => navigation.navigate("Order Details", item)}
+                            >
+                                Order {item.id}, {item.location}
+                            </Text>
+                        </TouchableOpacity>
+                    )}
+                />
                 {/* Available Orders */}
                 <View style={globalStyles.orderLists}>
                     <Text style={globalStyles.sectionTitle}>Available Orders</Text>
@@ -125,9 +156,14 @@ export default function OrderOptionsScreen({ navigation }) {
                     data={orderData}
                     keyExtractor={({ id }, index) => id.toString()}
                     renderItem={({ item }) => (
-                        <Text style={styles.availableOrder}>
-                            Order {item.id}, {item.userid}, {item.dininghallid}, {item.status}
-                        </Text>
+                        <TouchableOpacity>
+                            <Text
+                                style={styles.availableOrder}
+                                onPress={() => navigation.navigate("Order Details", item)}
+                            >
+                                Order {item.id}, {item.location}
+                            </Text>
+                        </TouchableOpacity>
                     )}
                 />
             </View>
@@ -224,4 +260,7 @@ const styles = StyleSheet.create({
     availableOrderList: {
         top: "-7%",
     },
+    myOrderList: {
+        top: "-4%",
+    }
 });
