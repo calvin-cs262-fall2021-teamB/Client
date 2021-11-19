@@ -27,8 +27,9 @@ export default function CartScreen() {
 export const styles = StyleSheet.create({
   dashWrapper: {
     flex: 1,
-    marginTop: "125%",
-    alignItems: "center",
+    marginTop: '125%',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
   itemsTitleWrapper: {
