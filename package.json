@@ -7,6 +7,7 @@
     "start": "expo start"
   },
   "dependencies": {
+    "@react-native-community/checkbox": "^0.5.9",
     "@react-navigation/native": "^6.0.4",
     "@react-navigation/native-stack": "^6.2.2",
     "auth4061": "^1.0.5",

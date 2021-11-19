@@ -8,15 +8,13 @@ import {
   TouchableOpacity,
   View,
   StyleSheet,
-  ScrollView,
   ActivityIndicator,
+  Alert,
 } from "react-native";
-import { globalStyles } from "../styles/global";
-import { useSafeAreaFrame } from "react-native-safe-area-context";
 
 export default function MenuScreen({ navigation }) {
   const [isLoading, setLoading] = useState(true);
-  const [checked, setChecked] = useState(true);
+  const [toggleCheckbox, setToggle] = useState(false);
   const [orderData, setData] = useState([]);
 
   const getOrders = async () => {
@@ -36,8 +34,34 @@ export default function MenuScreen({ navigation }) {
   useEffect(() => {
     getOrders();
   }, []);
+
   const handleOrderDetails = () => {
     navigation.navigate("Cart");
+  };
+
+  const onChangeValue = (itemSelected, index) => {
+    const newItemData = orderData.map((newItem) => {
+      if (item.id == itemSelected.id) {
+        return {
+          ...item,
+          selected: !item.selected,
+        };
+      }
+      return {
+        ...item,
+        selected: item.selected,
+      };
+    });
+    setData(newItemData);
+  };
+
+  const onShowItemSelected = () => {
+    const listSelected = orderData.filter((item) => item.selected == true);
+    let contentAlert = "popping up";
+    listSelected.forEach((item) => {
+      contentAlert = contentAlert;
+    });
+    Alert.alert(contentAlert);
   };
 
   return (
@@ -68,8 +92,10 @@ export default function MenuScreen({ navigation }) {
                       <Text style={styles.itemPrice}>{item.price}</Text>
                     </View>
                   </View>
-                  <View style={styles.checkbox}>
-                    <CheckBox right size={40} checked={checked} />
+                  <View style={styles.checkboxContainer}>
+                    <CheckBox
+                      checked={toggleCheckbox}
+                    />
                   </View>
                 </View>
               </TouchableOpacity>
@@ -88,7 +114,7 @@ export default function MenuScreen({ navigation }) {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.absIcon}
-            onPress={() => handleOrderDetails()}
+            onPress={() => onShowItemSelected()}
           >
             <Image source={require("../images/cart.png")} />
           </TouchableOpacity>
@@ -113,7 +139,7 @@ export const styles = StyleSheet.create({
     borderRadius: 15,
     backgroundColor: "#FFFFFF",
   },
-  checkbox: {
+  checkboxContainer: {
     flex: 0,
     width: "20%",
     height: "100%",
