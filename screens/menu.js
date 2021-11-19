@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { CheckBox } from "react-native-elements";
+import OrderCheckBox from "../components/OrderCheckBox";
 
 import {
   FlatList,
@@ -13,9 +13,8 @@ import {
 } from "react-native";
 
 export default function MenuScreen({ navigation }) {
-  const [isLoading, setLoading] = useState(true);
-  const [toggleCheckbox, setToggle] = useState(false);
   const [orderData, setData] = useState([]);
+  const [isLoading, setLoading] = useState(true);
 
   const getOrders = async () => {
     try {
@@ -39,22 +38,7 @@ export default function MenuScreen({ navigation }) {
     navigation.navigate("Cart");
   };
 
-  const onChangeValue = (itemSelected, index) => {
-    const newItemData = orderData.map((newItem) => {
-      if (item.id == itemSelected.id) {
-        return {
-          ...item,
-          selected: !item.selected,
-        };
-      }
-      return {
-        ...item,
-        selected: item.selected,
-      };
-    });
-    setData(newItemData);
-  };
-
+  const handleChooseItem = () => {};
   const onShowItemSelected = () => {
     const listSelected = orderData.filter((item) => item.selected == true);
     let contentAlert = "popping up";
@@ -93,9 +77,7 @@ export default function MenuScreen({ navigation }) {
                     </View>
                   </View>
                   <View style={styles.checkboxContainer}>
-                    <CheckBox
-                      checked={toggleCheckbox}
-                    />
+                    <OrderCheckBox />
                   </View>
                 </View>
               </TouchableOpacity>
@@ -114,7 +96,7 @@ export default function MenuScreen({ navigation }) {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.absIcon}
-            onPress={() => onShowItemSelected()}
+            onPress={() => handleOrderDetails()}
           >
             <Image source={require("../images/cart.png")} />
           </TouchableOpacity>
