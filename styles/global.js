@@ -15,6 +15,8 @@ export const globalStyles = StyleSheet.create({
     marginTop: 30,
   },
   input: {
+    justifyContent: 'center',
+    alignItems: 'center',
     paddingVertical: 15,
     paddingHorizontal: 15,
     backgroundColor: "#800000",

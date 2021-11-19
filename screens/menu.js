@@ -1,118 +1,69 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
+  FlatList,
   Image,
   Text,
   TouchableOpacity,
   View,
   StyleSheet,
   ScrollView,
+  ActivityIndicator,
 } from "react-native";
 import { globalStyles } from "../styles/global";
+import { useSafeAreaFrame } from "react-native-safe-area-context";
 
 export default function MenuScreen({ navigation }) {
+  const [isLoading, setLoading] = useState(true);
+  const [orderData, setData] = useState([]);
+
+  const getOrders = async () => {
+    try {
+      const response = await fetch('https://still-crag-08186.herokuapp.com/drinks');
+      const json = await response.json();
+      setData(json);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    getOrders();
+  }, []);
   const handleOrderDetails = () => {
     navigation.navigate("Cart");
   };
 
   return (
     <View style={globalStyles.container}>
-      <ScrollView style={styles.addWrapper2}>
-        {/*contents*/}
-        {/*content1*/}
-        <TouchableOpacity style={styles.contentWrapper}>
-          {/*will add item to 'cart'*/}
-          <View style={{ flexDirection: "row" }}>
-            <Image
-              style={styles.imageContent}
-              source={require("../images/pepsi.jpg")}
-            />
-
-            <View style={styles.menuContent}>
-              <View style={{ flexDirection: "column" }}>
-                <Text style={styles.contentTextTitle}>Pepsi</Text>
-                <Text style={styles.contentTextTitle2}> $1.75 </Text>
-              </View>
+      {isLoading ? <ActivityIndicator /> : (
+        <FlatList
+          flexDirection={"row"}
+          style={styles.availableOrderList}
+          data={orderData}
+          keyExtractor={({ id }, index) => id.toString()}
+          renderItem={({ item }) => (
+            <View style={globalStyles.container}>
+              <TouchableOpacity style={styles.contentWrapper}>
+                {/* will add item to 'cart' */}
+                <View style={{ flexDirection: "row" }}>
+                  <Image
+                    style={styles.imageContent}
+                    source={{ uri: item.image }}
+                  />
+                  <View style={styles.menuContent}>
+                    <View style={{ flexDirection: "column" }}>
+                      <Text style={styles.contentTextTitle}>{item.itemname} {item.description}</Text>
+                      <Text style={styles.contentTextTitle2}>{item.price}</Text>
+                    </View>
+                  </View>
+                </View>
+              </TouchableOpacity>
             </View>
-          </View>
-        </TouchableOpacity>
-
-        {/*content2*/}
-        <TouchableOpacity style={styles.contentWrapper}>
-          {/*will add item to 'cart'*/}
-          <View style={{ flexDirection: "row" }}>
-            <Image
-              style={styles.imageContent}
-              source={require("../images/Cherry.jpg")}
-            />
-
-            <View style={styles.menuContent}>
-              <View style={{ flexDirection: "column" }}>
-                <Text style={styles.contentTextTitle}>Cherry Pepsi</Text>
-                <Text style={styles.contentTextTitle2}> $1.75 </Text>
-              </View>
-            </View>
-          </View>
-        </TouchableOpacity>
-
-        {/*content3*/}
-        <TouchableOpacity style={styles.contentWrapper}>
-          {/*will add item to 'cart'*/}
-          <View style={{ flexDirection: "row" }}>
-            <Image
-              style={styles.imageContent}
-              source={require("../images/DietPepsi.png")}
-            />
-
-            <View style={styles.menuContent}>
-              <View style={{ flexDirection: "column" }}>
-                <Text style={styles.contentTextTitle}>Diet Pepsi</Text>
-                <Text style={styles.contentTextTitle2}> $1.75 </Text>
-              </View>
-            </View>
-          </View>
-        </TouchableOpacity>
-
-        {/*content4*/}
-        <TouchableOpacity style={styles.contentWrapper}>
-          {/*will add item to 'cart'*/}
-          <View style={{ flexDirection: "row" }}>
-            <Image
-              style={styles.imageContent}
-              source={require("../images/zero.png")}
-            />
-
-            <View style={styles.menuContent}>
-              <View style={{ flexDirection: "column" }}>
-                <Text style={styles.contentTextTitle}>Zero Pepsi</Text>
-                <Text style={styles.contentTextTitle2}> $1.75 </Text>
-              </View>
-            </View>
-          </View>
-        </TouchableOpacity>
-        {/*content5*/}
-        <TouchableOpacity style={styles.contentWrapper}>
-          {/*will add item to 'cart'*/}
-          <View style={{ flexDirection: "row" }}>
-            <Image
-              style={styles.imageContent}
-              source={require("../images/DietCherry.jpg")}
-            />
-
-            <View style={styles.menuContent}>
-              <View style={{ flexDirection: "column" }}>
-                <Text style={styles.contentTextTitle}>Diet Cherry Pepsi</Text>
-                <Text style={styles.contentTextTitle2}> $1.75 </Text>
-              </View>
-            </View>
-          </View>
-        </TouchableOpacity>
-
-        {/*This will add button to move next page*/}
-        <TouchableOpacity style={styles.numberButton}>
-          <Text style={styles.NumberText}>1</Text>
-        </TouchableOpacity>
-      </ScrollView>
-
+          )}
+        />
+      )}
       {/*Bottom Box*/}
       <View style={styles.bottomWrapper}>
         <View style={{ flexDirection: "row" }}>
@@ -133,7 +84,6 @@ export default function MenuScreen({ navigation }) {
     </View>
   );
 }
-
 export const styles = StyleSheet.create({
   addWrapper2: {
     marginTop: "5%",
@@ -165,7 +115,7 @@ export const styles = StyleSheet.create({
   bottomWrapper: {
     marginTop: "20%",
     alignSelf: "center",
-    width: "85%",
+    width: "90%",
     height: "7%",
     backgroundColor: "#C4C4C4",
     borderRadius: 25,
@@ -202,7 +152,7 @@ export const styles = StyleSheet.create({
   },
   absIcon: {
     marginTop: 1,
-    marginLeft: 58,
+    marginLeft: '16%',
     width: 35,
     height: 35,
     borderRadius: 35 / 2,
@@ -213,5 +163,13 @@ export const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 15,
     fontWeight: "bold",
+  },
+  availableOrderList: {
+    top: "1%",
+    marginTop: "3%",
+    alignSelf: "center",
+    width: "90%",
+    backgroundColor: "#C4C4C4",
+    borderRadius: 10,
   },
 });
