@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { CheckBox } from "react-native-elements";
+
 import {
   FlatList,
   Image,
@@ -14,11 +16,14 @@ import { useSafeAreaFrame } from "react-native-safe-area-context";
 
 export default function MenuScreen({ navigation }) {
   const [isLoading, setLoading] = useState(true);
+  const [checked, setChecked] = useState(true);
   const [orderData, setData] = useState([]);
 
   const getOrders = async () => {
     try {
-      const response = await fetch('https://still-crag-08186.herokuapp.com/drinks');
+      const response = await fetch(
+        "https://still-crag-08186.herokuapp.com/drinks"
+      );
       const json = await response.json();
       setData(json);
     } catch (error) {
@@ -26,7 +31,7 @@ export default function MenuScreen({ navigation }) {
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   useEffect(() => {
     getOrders();
@@ -36,27 +41,35 @@ export default function MenuScreen({ navigation }) {
   };
 
   return (
-    <View style={globalStyles.container}>
-      {isLoading ? <ActivityIndicator /> : (
+    <View style={styles.itemList}>
+      {isLoading ? (
+        <ActivityIndicator />
+      ) : (
         <FlatList
           flexDirection={"row"}
-          style={styles.availableOrderList}
           data={orderData}
           keyExtractor={({ id }, index) => id.toString()}
           renderItem={({ item }) => (
-            <View style={globalStyles.container}>
+            <View style={styles.singleItem}>
               <TouchableOpacity style={styles.contentWrapper}>
                 {/* will add item to 'cart' */}
                 <View style={{ flexDirection: "row" }}>
-                  <Image
-                    style={styles.imageContent}
-                    source={{ uri: item.image }}
-                  />
+                  <View style={styles.imageContainer}>
+                    <Image
+                      style={styles.imageContent}
+                      source={{ uri: item.image }}
+                    />
+                  </View>
                   <View style={styles.menuContent}>
                     <View style={{ flexDirection: "column" }}>
-                      <Text style={styles.contentTextTitle}>{item.itemname} {item.description}</Text>
-                      <Text style={styles.contentTextTitle2}>{item.price}</Text>
+                      <Text style={styles.itemName}>
+                        {item.itemname} {item.description}
+                      </Text>
+                      <Text style={styles.itemPrice}>{item.price}</Text>
                     </View>
+                  </View>
+                  <View style={styles.checkbox}>
+                    <CheckBox right size={40} checked={checked} />
                   </View>
                 </View>
               </TouchableOpacity>
@@ -94,24 +107,44 @@ export const styles = StyleSheet.create({
   },
 
   contentWrapper: {
-    marginLeft: "1.5%",
-    marginTop: "1.5%",
-    height: 125,
+    height: 120,
     width: "97%",
-    borderRadius: 10,
+    marginBottom: 7,
+    borderRadius: 15,
     backgroundColor: "#FFFFFF",
   },
-  imageContent: {
-    marginLeft: "1.5%",
-    marginTop: "1%",
-    height: "190%",
-    width: "30%",
-    borderRadius: 10,
-    backgroundColor: "#FFFFFF",
-    shadowColor: "#000000",
-    shadowRadius: 50,
+  checkbox: {
+    flex: 0,
+    width: "20%",
+    height: "100%",
+    justifyContent: "center",
+  },
+  singleItem: {
+    display: "flex",
+    flex: 1,
+    backgroundColor: "#E5E5E5",
+    alignItems: "center",
+  },
+  imageContainer: {
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 15,
   },
 
+  imageContent: {
+    height: "100%",
+    width: "100%",
+    borderRadius: 15,
+  },
+  itemList: {
+    display: "flex",
+    flex: 1,
+    flexDirection: "column",
+    backgroundColor: "#E5E5E5",
+    marginTop: 15,
+  },
   bottomWrapper: {
     marginTop: "20%",
     alignSelf: "center",
@@ -123,36 +156,27 @@ export const styles = StyleSheet.create({
   },
 
   menuContent: {
-    marginLeft: "5%",
-    marginTop: "1%",
+    flex: 0,
     height: "100%",
+    width: "50%",
     borderRadius: 10,
-    backgroundColor: "#FFFFFF",
     shadowColor: "#000000",
     shadowRadius: 50,
   },
 
-  contentTextTitle: {
+  itemName: {
     marginLeft: 5,
-    fontSize: 14,
+    fontSize: 17,
     fontWeight: "bold",
   },
-  contentTextTitle2: {
+  itemPrice: {
     marginTop: 10,
     marginLeft: 5,
     fontSize: 20,
   },
-  numberButton: {
-    marginTop: 5,
-    alignSelf: "center",
-    width: 25,
-    height: 25,
-    borderRadius: 25 / 2,
-    backgroundColor: "#9a9a9a",
-  },
   absIcon: {
     marginTop: 1,
-    marginLeft: '16%',
+    marginLeft: "16%",
     width: 35,
     height: 35,
     borderRadius: 35 / 2,
@@ -163,13 +187,5 @@ export const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 15,
     fontWeight: "bold",
-  },
-  availableOrderList: {
-    top: "1%",
-    marginTop: "3%",
-    alignSelf: "center",
-    width: "90%",
-    backgroundColor: "#C4C4C4",
-    borderRadius: 10,
   },
 });
