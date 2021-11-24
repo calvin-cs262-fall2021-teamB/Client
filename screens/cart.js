@@ -1,10 +1,35 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { TouchableOpacity, View, StyleSheet, Text } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { globalStyles } from "../styles/global";
 
 export default function CartScreen({ navigation, route }) {
-  const handlePlaceOrder = () => {};
+  const [itemID, setItemID] = useState('');
+  const [orderID, setOrderID] = useState('');
+
+  // const handleSetStates = () => {
+  //   setItemID(item.id),
+  //   setOrderID("1")
+  // }
+
+  const handlePlaceOrder = async () => {
+    try {
+      const response = await fetch('https://still-crag-08186.herokuapp.com/orderItem', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          orderId: 1,
+          foodDrinkItemID: 1,
+        })
+      });
+    }
+    catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -15,6 +40,8 @@ export default function CartScreen({ navigation, route }) {
           data={route.params}
           keyExtractor={({ id }, index) => id.toString()}
           renderItem={({ item }) => (
+            // useEffect(() => {setItemID(item.id)}),
+            // setOrderID("1"),
             <View>
               <Text style={styles.item}>{item.itemname}</Text>
             </View>
@@ -25,7 +52,7 @@ export default function CartScreen({ navigation, route }) {
       <View style={styles.dashWrapper}>
         <TouchableOpacity
           style={styles.placeOrder}
-          onPress={handlePlaceOrder()}
+          onPress={() => handlePlaceOrder()}
         >
           <Text style={styles.detailsText}>Place Order</Text>
         </TouchableOpacity>

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Switch } from "react-native";
-import OrderCheckBox from "../components/OrderCheckBox";
-import { CheckBox } from "react-native-elements";
+
 
 import {
   FlatList,
@@ -23,6 +22,7 @@ export default function MenuScreen({ navigation, route }) {
 
   const handleCart = () => {
     setItemData(foodData.concat(beverageData));
+    // setTimeout(() => {Alert.alert('I am appearing...', 'After 5 seconds!');}, 3000);
     navigation.navigate("Cart", itemData);
   };
 
