@@ -4,6 +4,8 @@ import { FlatList } from "react-native-gesture-handler";
 import { globalStyles } from "../styles/global";
 
 export default function CartScreen({ navigation, route }) {
+  const handlePlaceOrder = () => {};
+
   return (
     <View style={globalStyles.container}>
       <View style={styles.itemsTitleWrapper}>
@@ -15,7 +17,7 @@ export default function CartScreen({ navigation, route }) {
             keyExtractor={({ id }, index) => id.toString()}
             renderItem={({ item }) => (
               <View>
-                <Text>{item.itemname}</Text>
+                <Text>{item.id}</Text>
               </View>
             )}
           />
@@ -23,8 +25,11 @@ export default function CartScreen({ navigation, route }) {
       </View>
       {/*Deliver Button */}
       <View style={styles.dashWrapper}>
-        <TouchableOpacity style={globalStyles.input}>
-          <Text style={styles.detailsText}>PlaceOrder</Text>
+        <TouchableOpacity
+          style={globalStyles.input}
+          onPress={handlePlaceOrder()}
+        >
+          <Text style={styles.detailsText}>Place Order</Text>
         </TouchableOpacity>
       </View>
     </View>
