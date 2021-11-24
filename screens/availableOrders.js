@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { globalStyles } from "../styles/global";
 
+
 export default function AvailableOrdersScreen({ navigation }) {
   const [isLoading, setLoading] = useState(true);
   const [orderData, setData] = useState([]);

@@ -10,6 +10,8 @@ import Header from "./shared/header";
 import MenuScreen from "./screens/menu";
 import CartScreen from "./screens/cart";
 import AvailableOrdersScreen from "./screens/availableOrders";
+import MenuScreen2 from "./screens/menu2";
+import OrderDetailsScreen from "./screens/orderDetails";
 const Stack = createNativeStackNavigator();
 
 function App() {
@@ -34,8 +36,13 @@ function App() {
           options={({ navigation }) => ({})}
         />
         <Stack.Screen
-          name="Menu"
+          name="Drink Menu"
           component={MenuScreen}
+          options={({ navigation }) => ({})}
+        />
+        <Stack.Screen
+          name="Food Menu"
+          component={MenuScreen2}
           options={({ navigation }) => ({})}
         />
         <Stack.Screen
@@ -46,6 +53,11 @@ function App() {
         <Stack.Screen
           name="AvailableOrders"
           component={AvailableOrdersScreen}
+          options={({ navigation }) => ({})}
+        />
+        <Stack.Screen
+          name="Order Details"
+          component={OrderDetailsScreen}
           options={({ navigation }) => ({})}
         />
       </Stack.Navigator>
