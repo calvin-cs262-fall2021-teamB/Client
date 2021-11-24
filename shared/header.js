@@ -16,6 +16,7 @@ const headerStyles = StyleSheet.create({
   headerImage: {
     height: 60,
     width: 140,
+    top: '2%',
     bottom: "15%",
     left: "7%",
   },
