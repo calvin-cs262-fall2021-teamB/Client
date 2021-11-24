@@ -1,23 +1,33 @@
 import React from "react";
 import { TouchableOpacity, View, StyleSheet, Text } from "react-native";
+import { FlatList } from "react-native-gesture-handler";
 import { globalStyles } from "../styles/global";
 
-export default function CartScreen() {
+export default function CartScreen({ navigation, route }) {
+  const handlePlaceOrder = () => {};
+
   return (
-    <View style={globalStyles.container}>
+    <View style={styles.container}>
       <View style={styles.itemsTitleWrapper}>
         {/*List Contents of Order */}
-        <View style={globalStyles.orderLists}>
-          <Text style={globalStyles.sectionTitle}>Items</Text>
-          <View style={globalStyles.items}>
-            <Text> {/*Data Goes Here */} </Text>
-          </View>
-        </View>
+        <Text style={styles.reviewTitle}>Review Order</Text>
+        <FlatList
+          data={route.params}
+          keyExtractor={({ id }, index) => id.toString()}
+          renderItem={({ item }) => (
+            <View>
+              <Text style={styles.item}>{item.itemname}</Text>
+            </View>
+          )}
+        />
       </View>
       {/*Deliver Button */}
       <View style={styles.dashWrapper}>
-        <TouchableOpacity style={globalStyles.input}>
-          <Text style={styles.detailsText}>PlaceOrder</Text>
+        <TouchableOpacity
+          style={styles.placeOrder}
+          onPress={handlePlaceOrder()}
+        >
+          <Text style={styles.detailsText}>Place Order</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -25,23 +35,49 @@ export default function CartScreen() {
 }
 
 export const styles = StyleSheet.create({
-  dashWrapper: {
+  container: {
+    display: "flex",
     flex: 1,
-    marginTop: '125%',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "column",
+    backgroundColor: "#E5E5E5",
+  },
+  dashWrapper: {
+    flex: 0,
+    alignItems: "center",
+    height: "25%",
   },
 
   itemsTitleWrapper: {
-    paddingHorizontal: "10%",
-    paddingVertical: "10%",
+    flex: 1,
+    paddingHorizontal: "5%",
+    paddingVertical: "5%",
     justifyContent: "center",
   },
   detailsText: {
     textAlign: "center",
     justifyContent: "center",
     color: "#FFD700",
-    fontSize: 17,
+    fontSize: 25,
     fontWeight: "bold",
+  },
+  item: {
+    fontSize: 20,
+    paddingBottom: 5,
+  },
+  reviewTitle: {
+    fontWeight: "bold",
+    fontSize: 35,
+    paddingBottom: 10,
+  },
+  placeOrder: {
+    backgroundColor: "#800000",
+    borderWidth: 2,
+    borderRadius: 15,
+    borderColor: "#000",
+    backgroundColor: "#800000",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "75%",
+    height: "30%",
   },
 });
