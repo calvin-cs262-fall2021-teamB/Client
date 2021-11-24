@@ -9,13 +9,15 @@ import {
 } from "react-native";
 import { globalStyles } from "../styles/global";
 
-export default function AvailableOrdersScreen() {
+export default function AvailableOrdersScreen({ navigation }) {
   const [isLoading, setLoading] = useState(true);
   const [orderData, setData] = useState([]);
 
   const getOrders = async () => {
     try {
-      const response = await fetch('https://still-crag-08186.herokuapp.com/orders');
+      const response = await fetch(
+        "https://still-crag-08186.herokuapp.com/orders"
+      );
       const json = await response.json();
       setData(json);
     } catch (error) {
@@ -23,7 +25,7 @@ export default function AvailableOrdersScreen() {
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   useEffect(() => {
     getOrders();
@@ -31,29 +33,38 @@ export default function AvailableOrdersScreen() {
 
   return (
     <View style={globalStyles.container}>
-      {isLoading ? <ActivityIndicator /> : (
+      {isLoading ? (
+        <ActivityIndicator />
+      ) : (
         <View style={styles.itemsTitleWrapper}>
           {/* List Contents of Order */}
           <View style={styles.orderLists}>
-            <Text style={globalStyles.sectionTitle}>Orders</Text>
+            <Text style={globalStyles.sectionTitle}>All Orders</Text>
           </View>
           <FlatList
             style={styles.availableOrderList}
             data={orderData}
             keyExtractor={({ id }, index) => id.toString()}
             renderItem={({ item }) => (
-              <Text style={styles.availableOrder}>
-                Order {item.id}, {item.userid}, {item.dininghallid}, {item.status}
-              </Text>
+              <TouchableOpacity>
+                <Text
+                  style={styles.availableOrder}
+                  onPress={() => navigation.navigate("Order Details", item)}
+                >
+                  Order {item.id}, {item.location}
+                </Text>
+              </TouchableOpacity>
             )}
           />
         </View>
       )}
       {/*Deliver Button */}
       <View style={styles.dashWrapper}>
-        {isLoading ? <ActivityIndicator /> : (
+        {isLoading ? (
+          <ActivityIndicator />
+        ) : (
           <TouchableOpacity style={styles.input}>
-            <Text style={styles.detailsText}>Choose Order</Text>
+            <Text style={styles.detailsText}>Deliver Order</Text>
           </TouchableOpacity>
         )}
       </View>
@@ -63,7 +74,7 @@ export default function AvailableOrdersScreen() {
 
 export const styles = StyleSheet.create({
   dashWrapper: {
-    flexDirection: 'row',
+    flexDirection: "row",
     flex: 1,
     marginBottom: "5%",
     alignItems: "center",
@@ -92,23 +103,23 @@ export const styles = StyleSheet.create({
     top: "1%",
   },
   input: {
-    justifyContent: 'center',
-    alignSelf: 'flex-end',
-    marginLeft: '15%',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignSelf: "flex-end",
+    marginLeft: "15%",
+    alignItems: "center",
     paddingVertical: 15,
     paddingHorizontal: 15,
     backgroundColor: "#800000",
     borderRadius: 10,
     borderColor: "#C0C0C0",
     borderWidth: 1,
-    width: '70%',
-    height: '15%',
+    width: "70%",
+    height: "15%",
   },
   orderLists: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingVertical: '3%'
-  }
+    paddingVertical: "3%",
+  },
 });
