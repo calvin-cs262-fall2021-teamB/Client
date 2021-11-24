@@ -15,7 +15,12 @@ import {
 } from "react-native";
 import BeverageMenu from "../components/beverageMenu";
 
-export default function MenuScreen({ navigation }) {
+export default function MenuScreen({ navigation, route }) {
+  const [itemData, setItemData] = useState([]);
+
+  const handleCart = () => {
+    navigation.navigate("Cart", itemData);
+  };
   // const [orderData, setData] = useState([]);
   // const [isLoading, setLoading] = useState(true);
   // const [checked, setChecked] = useState([]);
@@ -109,7 +114,14 @@ export default function MenuScreen({ navigation }) {
     //     </View>
     //   </View>
     // </View>
-    <BeverageMenu props />
+    <View style={styles.viewStyles}>
+      <TouchableOpacity onPress={() => handleCart()}>
+        <View>
+          <Text>Nav to cart</Text>
+        </View>
+      </TouchableOpacity>
+      <BeverageMenu setItemData={setItemData} />
+    </View>
   );
 }
 export const styles = StyleSheet.create({
@@ -119,6 +131,9 @@ export const styles = StyleSheet.create({
     width: "85%",
     backgroundColor: "#C4C4C4",
     borderRadius: 10,
+  },
+  viewStyles: {
+    flex: 1,
   },
 
   contentWrapper: {

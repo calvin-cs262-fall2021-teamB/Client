@@ -10,7 +10,7 @@ import {
   Modal,
 } from "react-native";
 
-export default function BeverageMenu({ navigation, props }) {
+export default function BeverageMenu({ navigation, setItemData }) {
   const [open, setOpen] = React.useState(false);
   const [orderData, setData] = React.useState([]);
   const [isLoading, setLoading] = useState(true);
@@ -32,6 +32,12 @@ export default function BeverageMenu({ navigation, props }) {
   useEffect(() => {
     getOrders();
   }, []);
+
+  const showArray = () => {
+    const orderArray = orderData.filter((item) => item.selected);
+    setItemData(orderArray);
+    console.log(orderArray);
+  };
 
   const openList = () => setOpen(true);
   const closeList = () => setOpen(false);
@@ -60,8 +66,14 @@ export default function BeverageMenu({ navigation, props }) {
             <Text>Select Items</Text>
           </View>
         </TouchableOpacity>
+        <TouchableOpacity onPress={showArray}>
+          <View>
+            <Text>Show Array</Text>
+          </View>
+        </TouchableOpacity>
         <View>
           <Text>Selected Items</Text>
+          {/* Displays Selected Items */}
           {orderData
             .filter((item) => item.selected)
             .map((item) => (
@@ -93,6 +105,12 @@ export default function BeverageMenu({ navigation, props }) {
     </SafeAreaView>
   );
 }
+
+// click plus
+// select food-drink items from modals
+//   - each item is either selected or not selected
+// review order button displays only selected items
+// button to create/place the order
 
 const ItemRenderer = ({
   index,

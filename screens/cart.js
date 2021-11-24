@@ -1,17 +1,24 @@
 import React from "react";
 import { TouchableOpacity, View, StyleSheet, Text } from "react-native";
+import { FlatList } from "react-native-gesture-handler";
 import { globalStyles } from "../styles/global";
 
-export default function CartScreen() {
+export default function CartScreen({ navigation, route }) {
   return (
     <View style={globalStyles.container}>
       <View style={styles.itemsTitleWrapper}>
         {/*List Contents of Order */}
         <View style={globalStyles.orderLists}>
           <Text style={globalStyles.sectionTitle}>Items</Text>
-          <View style={globalStyles.items}>
-            <Text> {/*Data Goes Here */} </Text>
-          </View>
+          <FlatList
+            data={route.params}
+            keyExtractor={({ id }, index) => id.toString()}
+            renderItem={({ item }) => (
+              <View>
+                <Text>{item.itemname}</Text>
+              </View>
+            )}
+          />
         </View>
       </View>
       {/*Deliver Button */}
@@ -27,9 +34,9 @@ export default function CartScreen() {
 export const styles = StyleSheet.create({
   dashWrapper: {
     flex: 1,
-    marginTop: '125%',
-    alignItems: 'center',
-    justifyContent: 'center',
+    marginTop: "125%",
+    alignItems: "center",
+    justifyContent: "center",
   },
 
   itemsTitleWrapper: {
