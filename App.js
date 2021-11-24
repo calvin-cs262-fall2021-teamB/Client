@@ -10,7 +10,6 @@ import Header from "./shared/header";
 import MenuScreen from "./screens/menu";
 import CartScreen from "./screens/cart";
 import AvailableOrdersScreen from "./screens/availableOrders";
-import MenuScreen2 from "./screens/menu2";
 import OrderDetailsScreen from "./screens/orderDetails";
 const Stack = createNativeStackNavigator();
 

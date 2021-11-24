@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Switch } from "react-native";
-import OrderCheckBox from "../components/OrderCheckBox";
-import { CheckBox } from "react-native-elements";
 
 import {
   FlatList,
