@@ -11,7 +11,7 @@ import {
   Image,
 } from "react-native";
 
-export default function BeverageMenu({ navigation, setBeverageData }) {
+export default function FoodMenu({ navigation, setFoodData }) {
   const [open, setOpen] = React.useState(false);
   const [orderData, setData] = React.useState([]);
   const [isLoading, setLoading] = useState(true);
@@ -19,7 +19,7 @@ export default function BeverageMenu({ navigation, setBeverageData }) {
   const getOrders = async () => {
     try {
       const response = await fetch(
-        "https://still-crag-08186.herokuapp.com/drinks"
+        "https://still-crag-08186.herokuapp.com/foods"
       );
       const json = await response.json();
       setData(json);
@@ -38,7 +38,7 @@ export default function BeverageMenu({ navigation, setBeverageData }) {
   const closeList = () => {
     setOpen(false);
     const orderArray = orderData.filter((item) => item.selected);
-    setBeverageData(orderArray);
+    setFoodData(orderArray);
     console.log(orderArray);
   };
   const onUpdateValue = (index, value) => {
@@ -64,18 +64,16 @@ export default function BeverageMenu({ navigation, setBeverageData }) {
       <View style={styles.bevMenu}>
         <TouchableOpacity onPress={openList}>
           <View style={styles.bevButton}>
-            <Text style={styles.buttonText}>Beverage Menu</Text>
+            <Text style={styles.buttonText}>Food Menu</Text>
           </View>
         </TouchableOpacity>
         <View>
-          <Text style={styles.selectedItems}>Selected Beverages</Text>
+          <Text style={styles.selectedItems}>Selected Foods</Text>
           {/* Displays Selected Items */}
           {orderData
             .filter((item) => item.selected)
             .map((item) => (
-              <Text style={styles.selectedBeverages} key={item.id}>
-                {item.itemname} - {item.description}
-              </Text>
+              <Text style={styles.selectedFood} key={item.id}>{item.itemname}</Text>
             ))}
         </View>
       </View>
@@ -118,7 +116,7 @@ const ItemRenderer = ({
 }) => (
   <View style={styles.modalItem}>
     <Text style={styles.modalTitle}>
-      {name} - {description}: {price}
+      {name}: {price}
     </Text>
     <Switch
       value={selected}
@@ -130,6 +128,7 @@ const ItemRenderer = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    height: "20%",
   },
 
   bevButton: {
@@ -140,7 +139,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#800000",
     justifyContent: "center",
     alignItems: "center",
-    width: "100%",
   },
 
   bevMenu: {
@@ -183,12 +181,12 @@ const styles = StyleSheet.create({
     color: "black",
     fontSize: 16,
   },
-  selectedBeverages: {
-    fontSize: 15,
+  selectedFood: {
+    fontSize: 15
   },
   selectedItems: {
     fontSize: 17,
     fontWeight: "bold",
-    paddingTop: "1%",
+    paddingTop: '1%'
   },
 });
