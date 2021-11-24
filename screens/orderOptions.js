@@ -73,10 +73,10 @@ export default function OrderOptionsScreen({ route, navigation }) {
     const onLoginSuccess = async () => {
         try {
             const result = await azureInstance.getUserInfo();
+            console.log(result);
             setLoginSuccess(true);
             setAzureLoginObject(result);
         } catch (err) {
-            // eslint-disable-next-line no-console
             console.log("error getting user info");
             console.error(err);
         }
@@ -108,7 +108,6 @@ export default function OrderOptionsScreen({ route, navigation }) {
             />
         );
     }
-
     const { userPrincipalName, givenName } = azureLoginObject;
 
     return (

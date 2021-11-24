@@ -12,6 +12,9 @@ import CartScreen from "./screens/cart";
 import AvailableOrdersScreen from "./screens/availableOrders";
 import MenuScreen2 from "./screens/menu2";
 import OrderDetailsScreen from "./screens/orderDetails";
+import { Button } from "react-native";
+import { HeaderBackButton } from 'react-navigation-stack';
+
 const Stack = createNativeStackNavigator();
 
 function App() {
@@ -38,7 +41,16 @@ function App() {
         <Stack.Screen
           name="Drink Menu"
           component={MenuScreen}
-          options={({ navigation }) => ({})}
+          options={({ navigation }) => ({
+            headerLeft: (props) => (
+              <HeaderBackButton
+                {...props}
+                onPress={() => {
+                  navigation.navigate('OrderOptions');
+                }}
+              />
+            ),
+          })}
         />
         <Stack.Screen
           name="Food Menu"
