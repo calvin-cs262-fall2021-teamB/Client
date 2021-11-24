@@ -36,13 +36,8 @@ function App() {
           options={({ navigation }) => ({})}
         />
         <Stack.Screen
-          name="Drink Menu"
+          name="Menu"
           component={MenuScreen}
-          options={({ navigation }) => ({})}
-        />
-        <Stack.Screen
-          name="Food Menu"
-          component={MenuScreen2}
           options={({ navigation }) => ({})}
         />
         <Stack.Screen
