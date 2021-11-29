@@ -3,7 +3,7 @@ import { CLIENT_SECRET_KEY } from "@env";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { AzureInstance, AzureLoginView } from "auth4061";
-import RCTNetworking from "react-native/Libraries/Network/RCTNetworking";
+  import RCTNetworking from "react-native/Libraries/Network/RCTNetworking";
 import HomeScreen from "./screens/login";
 import OrderOptionsScreen from "./screens/orderOptions";
 import Header from "./shared/header";
@@ -11,8 +11,15 @@ import MenuScreen from "./screens/menu";
 import CartScreen from "./screens/cart";
 import AvailableOrdersScreen from "./screens/availableOrders";
 import OrderDetailsScreen from "./screens/orderDetails";
+import ChrisOrderScreen from "./screens/orderfood";
+import ChrisOrderScreen2 from "./screens/orderdrink";
+import Tabs from "./shared/bottomHeader";
 const Stack = createNativeStackNavigator();
+function Home(){
+  return(  <Tabs/>
+    )
 
+}
 function App() {
   return (
     <NavigationContainer>
@@ -54,8 +61,21 @@ function App() {
           component={OrderDetailsScreen}
           options={({ navigation }) => ({})}
         />
+          <Stack.Screen
+          name="Food Screen"
+          component={Home}
+          options={{headerShown: false}}
+        />
+          <Stack.Screen
+          name="Drink Screen"
+          component={ChrisOrderScreen2}
+          options={{headerShown: false}}
+        />
       </Stack.Navigator>
+
+
     </NavigationContainer>
+    
   );
 }
 export default App;

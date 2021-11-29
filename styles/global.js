@@ -5,7 +5,7 @@ export const globalStyles = StyleSheet.create({
     display: "flex",
     flex: 1,
     flexDirection: "column",
-    backgroundColor: "#E5E5E5",
+    backgroundColor: "#f2cd00",
   },
   sectionTitle: {
     fontSize: 24,

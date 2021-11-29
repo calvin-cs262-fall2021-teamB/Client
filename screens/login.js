@@ -13,7 +13,7 @@ import {
 
 export default function HomeScreen({ navigation }) {
   const handleSubmitLogin = () => {
-    navigation.navigate("OrderOptions");
+    navigation.navigate("Food Screen");
   };
   return (
     <KeyboardAvoidingView
