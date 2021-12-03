@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { TouchableOpacity, View, StyleSheet, Text } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { globalStyles } from "../styles/global";
@@ -7,28 +7,25 @@ export default function CartScreen({ navigation, route }) {
   const [itemID, setItemID] = useState('');
   const [orderID, setOrderID] = useState('');
 
-  // const handleSetStates = () => {
-  //   setItemID(item.id),
-  //   setOrderID("1")
-  // }
-
   const handlePlaceOrder = async () => {
-    try {
-      const response = await fetch('https://still-crag-08186.herokuapp.com/orderItem', {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          orderId: 1,
-          foodDrinkItemID: 1,
-        })
-      });
-    }
-    catch (error) {
-      console.error(error);
-    }
+    await Promise.all(route.params.map(async (item) => {
+      try {
+        const response = await fetch('https://still-crag-08186.herokuapp.com/orderItem', {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            orderID: 1,
+            foodDrinkItemID: item.id,
+          })
+        });
+      }
+      catch (error) {
+        console.error(error);
+      }
+    }))
   };
 
   return (
@@ -40,10 +37,8 @@ export default function CartScreen({ navigation, route }) {
           data={route.params}
           keyExtractor={({ id }, index) => id.toString()}
           renderItem={({ item }) => (
-            // useEffect(() => {setItemID(item.id)}),
-            // setOrderID("1"),
             <View>
-              <Text style={styles.item}>{item.itemname}</Text>
+              <Text style={styles.item}>{item.itemname} {item.id}</Text>
             </View>
           )}
         />
