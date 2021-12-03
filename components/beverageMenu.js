@@ -39,7 +39,6 @@ export default function BeverageMenu({ navigation, setBeverageData }) {
     setOpen(false);
     const orderArray = orderData.filter((item) => item.selected);
     setBeverageData(orderArray);
-    console.log(orderArray);
   };
   const onUpdateValue = (index, value) => {
     orderData[index].selected = value;

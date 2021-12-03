@@ -39,7 +39,6 @@ export default function FoodMenu({ navigation, setFoodData }) {
     setOpen(false);
     const orderArray = orderData.filter((item) => item.selected);
     setFoodData(orderArray);
-    console.log(orderArray);
   };
   const onUpdateValue = (index, value) => {
     orderData[index].selected = value;

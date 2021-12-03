@@ -1,10 +1,32 @@
-import React from "react";
-import { TouchableOpacity, View, StyleSheet, Text } from "react-native";
+import React, { useState, useEffect } from "react";
+import { TouchableOpacity, View, StyleSheet, Text, Alert } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { globalStyles } from "../styles/global";
 
 export default function CartScreen({ navigation, route }) {
-  const handlePlaceOrder = () => {};
+
+  const orderPriceTotal = route.params.reduce((totalPrice, item) => totalPrice + parseFloat(item.price.replace('$', '')), 0);
+
+  const handlePlaceOrder = async () => {
+    await Promise.all(route.params.map(async (item) => {
+      try {
+        const response = await fetch('https://still-crag-08186.herokuapp.com/orderItem', {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            orderID: 1,
+            foodDrinkItemID: item.id,
+          })
+        });
+      }
+      catch (error) {
+        console.error(error);
+      }
+    }))
+  };
 
   return (
     <View style={styles.container}>
@@ -16,16 +38,34 @@ export default function CartScreen({ navigation, route }) {
           keyExtractor={({ id }, index) => id.toString()}
           renderItem={({ item }) => (
             <View>
-              <Text style={styles.item}>{item.itemname}</Text>
+              <Text style={styles.item}>{item.itemname} {item.id}</Text>
             </View>
           )}
         />
+      </View>
+      <View>
+        <Text>
+          Total Price: ${parseFloat(orderPriceTotal).toFixed(2)}
+        </Text>
       </View>
       {/*Deliver Button */}
       <View style={styles.dashWrapper}>
         <TouchableOpacity
           style={styles.placeOrder}
-          onPress={handlePlaceOrder()}
+          onPress={() => {
+            handlePlaceOrder();
+            Alert.alert(
+              "Congratulations!",
+              "Thanks for placing your order.",
+              [
+                {
+                  text: "OK",
+                  onPress: () => { navigation.navigate('OrderOptions'); }
+                }
+              ]
+            );
+          }
+          }
         >
           <Text style={styles.detailsText}>Place Order</Text>
         </TouchableOpacity>
