@@ -45,7 +45,7 @@ export default function CartScreen({ navigation, route }) {
       </View>
       <View>
         <Text>
-          Total Price: ${orderPriceTotal}
+          Total Price: ${parseFloat(orderPriceTotal).toFixed(2)}
         </Text>
       </View>
       {/*Deliver Button */}

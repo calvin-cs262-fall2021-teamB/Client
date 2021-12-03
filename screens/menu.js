@@ -18,12 +18,11 @@ import FoodMenu from "../components/foodMenu";
 export default function MenuScreen({ navigation, route }) {
   const [foodData, setFoodData] = useState([]);
   const [beverageData, setBeverageData] = useState([]);
-  const [itemData, setItemData] = useState([]);
 
   const handleCart = () => {
-    setItemData(foodData.concat(beverageData));
-    navigation.navigate("Cart", itemData);
+    navigation.navigate("Cart", foodData.concat(beverageData))
   };
+
 
   return (
     <View style={styles.viewStyles}>
