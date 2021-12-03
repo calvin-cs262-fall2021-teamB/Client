@@ -21,6 +21,12 @@ export default function OrderDetailsScreen({ route, navigation }) {
         <Text style={styles.title}>Location: {route.params.location}</Text>
         <Text style={styles.title}>Order Status: {route.params.status}</Text>
       </View>
+      {/*Deliver Button */}
+      <View style={styles.dashWrapper}>
+        <TouchableOpacity style={styles.input}>
+          <Text style={styles.detailsText}>Deliver Order</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   )
 }
@@ -123,5 +129,32 @@ export const styles = StyleSheet.create({
     width: "90%",
     backgroundColor: "#C4C4C4",
     borderRadius: 10,
+  },
+  dashWrapper: {
+    flexDirection: "row",
+    flex: 1,
+    marginBottom: "5%",
+    alignItems: "center",
+  },
+  detailsText: {
+    textAlign: "center",
+    justifyContent: "center",
+    color: "#FFD700",
+    fontSize: 17,
+    fontWeight: "bold",
+  },
+  input: {
+    justifyContent: "center",
+    alignSelf: "flex-end",
+    marginLeft: "15%",
+    alignItems: "center",
+    paddingVertical: 15,
+    paddingHorizontal: 15,
+    backgroundColor: "#800000",
+    borderRadius: 10,
+    borderColor: "#C0C0C0",
+    borderWidth: 1,
+    width: "70%",
+    height: "15%",
   },
 });

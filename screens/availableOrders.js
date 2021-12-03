@@ -59,16 +59,6 @@ export default function AvailableOrdersScreen({ navigation }) {
           />
         </View>
       )}
-      {/*Deliver Button */}
-      <View style={styles.dashWrapper}>
-        {isLoading ? (
-          <ActivityIndicator />
-        ) : (
-          <TouchableOpacity style={styles.input}>
-            <Text style={styles.detailsText}>Deliver Order</Text>
-          </TouchableOpacity>
-        )}
-      </View>
     </View>
   );
 }

@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Switch } from "react-native";
-
-
 import {
   FlatList,
   Image,
