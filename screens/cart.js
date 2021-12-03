@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { TouchableOpacity, View, StyleSheet, Text } from "react-native";
+import { TouchableOpacity, View, StyleSheet, Text, Alert } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { globalStyles } from "../styles/global";
 
 export default function CartScreen({ navigation, route }) {
-  const [itemID, setItemID] = useState('');
-  const [orderID, setOrderID] = useState('');
+
+  const orderPriceTotal = route.params.reduce((totalPrice, item) => totalPrice + parseFloat(item.price.replace('$', '')), 0);
 
   const handlePlaceOrder = async () => {
     await Promise.all(route.params.map(async (item) => {
@@ -43,11 +43,29 @@ export default function CartScreen({ navigation, route }) {
           )}
         />
       </View>
+      <View>
+        <Text>
+          Total Price: ${orderPriceTotal}
+        </Text>
+      </View>
       {/*Deliver Button */}
       <View style={styles.dashWrapper}>
         <TouchableOpacity
           style={styles.placeOrder}
-          onPress={() => handlePlaceOrder()}
+          onPress={() => {
+            handlePlaceOrder();
+            Alert.alert(
+              "Congratulations!",
+              "Thanks for placing your order.",
+              [
+                {
+                  text: "OK",
+                  onPress: () => { navigation.navigate('OrderOptions'); }
+                }
+              ]
+            );
+          }
+          }
         >
           <Text style={styles.detailsText}>Place Order</Text>
         </TouchableOpacity>

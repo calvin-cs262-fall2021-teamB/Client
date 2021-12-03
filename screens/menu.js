@@ -22,7 +22,6 @@ export default function MenuScreen({ navigation, route }) {
 
   const handleCart = () => {
     setItemData(foodData.concat(beverageData));
-    // setTimeout(() => {Alert.alert('I am appearing...', 'After 5 seconds!');}, 3000);
     navigation.navigate("Cart", itemData);
   };
 
