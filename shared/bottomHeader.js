@@ -16,7 +16,9 @@ const Tabs = () => {
             tabBarStyle: {
                 position: "absolute",
                 backgroundColor: "#ffffff",
-                shadowColor: '#ffffff'
+                shadowColor: '#ffffff',
+                elevation: 0,
+                borderTopWidth: 0
             },
 
         }}
@@ -79,6 +81,7 @@ const Tabs = () => {
                         )  
                     }}                   
                     />
+                
     </Tab.Navigator>
     );
 

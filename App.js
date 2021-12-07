@@ -12,7 +12,6 @@ import CartScreen from "./screens/cart";
 import AvailableOrdersScreen from "./screens/availableOrders";
 import OrderDetailsScreen from "./screens/orderDetails";
 import ChrisOrderScreen from "./screens/orderfood";
-import ChrisOrderScreen2 from "./screens/orderdrink";
 import Tabs from "./shared/bottomHeader";
 const Stack = createNativeStackNavigator();
 function Home(){
@@ -66,11 +65,7 @@ function App() {
           component={Home}
           options={{headerShown: false}}
         />
-          <Stack.Screen
-          name="Drink Screen"
-          component={ChrisOrderScreen2}
-          options={{headerShown: false}}
-        />
+
       </Stack.Navigator>
 
 

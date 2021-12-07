@@ -15,13 +15,29 @@ export default function ChrisOrderScreen({ navigation }) {
       
     return (
         <View style={globalStyles.container}>
+            <View style={styles.utilityContainer}>
+                <TouchableOpacity style={styles.utilityWrapper}>
+                   <Image
+                        style={styles.IconBox3} 
+                        source={require("../images/arrow.png")}
+                        />
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.utilityWrapper2}>
+                <Image
+                        style={styles.IconBox3} 
+                        source={require("../images/basket.png")}
+                        />
+
+                </TouchableOpacity>
+
+            </View>
             <Text style={styles.TitleFont}>order</Text>
             <Text style={styles.TitleDescription}>what would you like to order?</Text>
 
             <View style={styles.BottomWrapper}>
                 <View style={styles.IconWrapper1}>
                     <TouchableOpacity
-                    style={styles.UsedIconBox}
+                    style={styles.IconBox}
                     onPress={handleFood}
                     >
                         <Image
@@ -36,7 +52,7 @@ export default function ChrisOrderScreen({ navigation }) {
                     >
                         <Image
                         style={styles.IconBox2} 
-                        source={require("../images/drinks.png")}
+                        source={require("../images/drinskw.png")}
                         />
                     </TouchableOpacity>
 
@@ -46,37 +62,27 @@ export default function ChrisOrderScreen({ navigation }) {
                     >
                         <Image
                         style={styles.IconBox2} 
-                        source={require("../images/dots.png")}
+                        source={require("../images/candy.png")}
                         />
                     </TouchableOpacity>
-            
-                </View>
-                
-                <View style={styles.ContentWrappers}>
-
                 </View>
 
-                <TouchableOpacity
-                    style={styles.CartButton}
-                    onPress={handleFood}
-                    >
+
+                <View style ={styles.PictureWrap}>
                         <Image
-                        style={styles.IconBox2} 
-                        source={require("../images/cart.png")}
-                        />
-                </TouchableOpacity>
+                        style={styles.Picture}
+                        source={require("../images/foody.png")
+                    }/>
+                        <Text style={styles.PictureText}>Please</Text>
+                        <Text style={styles.PictureText2}>choose one of the options above</Text>
+                </View>
+                
+
                 
             </View>
 
 
 
-            <View style={styles.PictureWrap}>
-                <Image
-                        style={styles.Picture}
-                        source={require("../images/food.jpg")}
-                        />
-                <Text style={styles.PictureText}>foods</Text>
-            </View>
         </View>
     );
 
@@ -91,11 +97,20 @@ export const styles = StyleSheet.create({
         marginTop: "12%",
         marginHorizontal: "5%",
       },
+      
+      utilityContainer:{
+        marginTop:"10%",
+        width: "90%",
+        alignSelf: "center",
+        height: "4%",
+        flexDirection: "row",
+        justifyContent: 'space-between'
+      },
 
       TitleFont:{
-        fontSize: 36,
+        fontSize: 32,
         fontWeight: "bold", 
-        marginTop: "10%",
+        marginTop: "3%",
         marginHorizontal: "5%"
       },
 
@@ -107,18 +122,18 @@ export const styles = StyleSheet.create({
       },
 
       PictureWrap:{
-          height: "18%",
+          flex: 1,
           width: "90%",
-          marginTop: "28%",
+          marginTop: "3%",
+          margin: "15%",
           alignSelf: "center",
-          position: "absolute",
-          borderRadius: 10,
-          backgroundColor: "#ffffff",
+          borderRadius: 20,
+          backgroundColor: "#800000",
           shadowColor: '#000000',
           shadowOffset: { width: 0, height: 2 },
           shadowOpacity: 0.9,
           shadowRadius: 3,
-          elevation: 5,
+          elevation: 3,
       },
 
       Picture:{
@@ -134,41 +149,40 @@ export const styles = StyleSheet.create({
           position: "absolute",
           fontWeight: "bold",
           color: "#ffffff",
-          marginVertical: "32%",
+          marginVertical: "121%",
           marginLeft: "2%"    
       },
+      PictureText2:{
+        fontSize: 12,
+        position: "absolute",
+        fontWeight: "bold",
+        color: "#ffffff",
+        marginVertical: "129%",
+        marginLeft: "2%"    
+    },
+
 
       BottomWrapper:{
         flex: 1,
-        marginTop: "35%",
+        marginTop: "3%",
         backgroundColor: "#ffffff",
-        borderTopRightRadius: 10,
-        borderTopLeftRadius: 10,
+        borderTopRightRadius: 20,
+        borderTopLeftRadius: 20,
       },
 
       IconWrapper1:{
-          marginTop:"10%",
+          marginTop:"3%",
           width: "90%",
           alignSelf: "center",
           height: "8%",
           flexDirection: "row",
           justifyContent: "space-between"
       },
-      UsedIconBox:{
-        width: "30%",
-        backgroundColor: "#800000",
-        borderRadius: 10,
-        shadowColor: '#000000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.9,
-        shadowRadius: 3,
-        elevation: 3,
-        justifyContent: "center",
-    },
+
       IconBox:{
-          width: "30%",
-          backgroundColor: "#f2cd00",
-          borderRadius: 10,
+          width: "28%",
+          backgroundColor: "#800000",
+          borderRadius: 20,
           shadowColor: '#000000',
           shadowOffset: { width: 0, height: 2 },
           shadowOpacity: 0.9,
@@ -181,6 +195,28 @@ export const styles = StyleSheet.create({
           height: 25,
           alignSelf: "center",
       },
+
+      IconBox3:{
+        width: 30,
+        height: 30,
+        alignSelf: "center",
+    },
+
+      utilityWrapper:{
+        width: "10%",
+        height: "100%",
+        borderRadius: 10,
+        backgroundColor: "#ffffff",
+        justifyContent: "center",
+    },
+
+    utilityWrapper2:{
+        width: "12%",
+        height: "100%",
+        borderRadius: 10,
+        justifyContent: "center",
+    },
+
       ContentWrappers:{
           width: "90%",
           height: "60%",
