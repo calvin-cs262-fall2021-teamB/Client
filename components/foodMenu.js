@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Modal from "react-native-modal";
 import {
   View,
   StyleSheet,
@@ -7,7 +8,6 @@ import {
   Switch,
   SafeAreaView,
   TouchableOpacity,
-  Modal,
   Image,
 } from "react-native";
 
@@ -72,26 +72,39 @@ export default function FoodMenu({ navigation, setFoodData }) {
           {orderData
             .filter((item) => item.selected)
             .map((item) => (
-              <Text style={styles.selectedFood} key={item.id}>{item.itemname}</Text>
+              <Text style={styles.selectedFood} key={item.id}>
+                {item.itemname}
+              </Text>
             ))}
         </View>
       </View>
-      <Modal animationType="slide" transparent={true} visible={open === true}>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={open === true}
+        onRequestClose={() => {
+          Alert.alert("Menu has been closed.");
+          setOpen(!open);
+        }}
+      >
         <TouchableOpacity
           activeOpacity={1}
           onPressOut={closeList}
-          style={{ flex: 1 }}
+          style={styles.modalView}
         >
-          <View style={{ flex: 1, marginTop: 250 }}>
-            <View style={styles.listWrapper}>
-              <View style={styles.listContainer}>
-                <FlatList
-                  data={orderData}
-                  renderItem={renderItem}
-                  keyExtractor={({ id }, index) => id.toString()}
-                />
-              </View>
-            </View>
+          <Text style={styles.selectText}>Select Food Items</Text>
+          <View style={styles.menuContainer}>
+            <FlatList
+              data={orderData}
+              renderItem={renderItem}
+              keyExtractor={({ id }, index) => id.toString()}
+              // keyboardShouldPersistTaps="always"
+            />
+          </View>
+          <View style={styles.confirmWrapper}>
+            <TouchableOpacity style={styles.confirmButton}>
+              <Text>Confirm Items</Text>
+            </TouchableOpacity>
           </View>
         </TouchableOpacity>
       </Modal>
@@ -152,26 +165,36 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 
-  listWrapper: {
+  confirmButton: {
     flex: 1,
-    shadowColor: "#000000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.5,
-    elevation: 10,
-    shadowRadius: 5,
+    backgroundColor: "red",
+    borderRadius: 25,
+    justifyContent: "center",
+    alignItems: "center",
+    borderColor: "black",
+    borderWidth: 1,
   },
-  listContainer: {
+
+  confirmWrapper: {
+    height: 75,
+    bottom: "1%",
+    paddingTop: 5,
+    paddingBottom: 5,
+  },
+
+  menuContainer: {
     flex: 1,
     backgroundColor: "#FFD700",
-    borderTopLeftRadius: 15,
-    borderTopRightRadius: 15,
+    borderRadius: 25,
+    marginBottom: 17,
+    borderWidth: 1,
   },
 
   modalItem: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    padding: 20,
+    padding: 23.5,
     borderBottomWidth: 1,
     borderBottomColor: "#800000",
   },
@@ -180,12 +203,33 @@ const styles = StyleSheet.create({
     color: "black",
     fontSize: 16,
   },
+  modalView: {
+    flex: 1,
+    margin: "1%",
+    marginTop: "80%",
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: "4%",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  selectText: {
+    fontSize: 21,
+    fontWeight: "bold",
+    marginBottom: 10,
+  },
   selectedFood: {
-    fontSize: 15
+    fontSize: 15,
   },
   selectedItems: {
     fontSize: 17,
     fontWeight: "bold",
-    paddingTop: '1%'
+    paddingTop: "1%",
   },
 });
