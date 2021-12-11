@@ -19,8 +19,11 @@ export default function OrderOptionsScreen({ route, navigation }) {
   const [orderData, setData] = useState([]);
   const [myOrderData, setMyData] = useState([]);
   const [myIsLoading, setMyLoading] = useState(true);
+  const [UserData, setUserData] = useState([]);
+  const [UserFound, setUserFound] = useState(false);
 
   const getOrders = async () => {
+    console.log(route.params);
     try {
       const response = await fetch(
         "https://still-crag-08186.herokuapp.com/orders"
@@ -96,12 +99,48 @@ export default function OrderOptionsScreen({ route, navigation }) {
       {
         text: "OK",
         onPress: () => {
-          RCTNetworking.clearCookies(() => {});
+          RCTNetworking.clearCookies(() => { });
           setLoginSuccess(false);
           navigation.navigate("Login");
         },
       },
     ]);
+  const handleUserCheck = () => {
+    if (UserFound) {
+      Alert.alert(
+        "Confirm Your Identity!",
+        "ID: " + UserData.id + '\n' +
+        "Name: " + UserData.fname + UserData.lname + '\n' +
+        "Location: " + UserData.location,
+        [
+          {
+            text: "Cancel",
+            onPress: () => { navigation.navigate("Login"); }
+          },
+          {
+            text: "OK",
+            onPress: () => { handleNavigate(); }
+          }
+        ]
+      );
+    }
+  };
+
+  const getUserData = async () => {
+    try {
+      const response = await fetch(
+        "https://still-crag-08186.herokuapp.com/users/" + route.params
+      );
+      const json = await response.json();
+      setUserData(json);
+      setUserFound(true);
+    } catch (error) {
+      //console.error(error);
+      setUserFound(false);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   if (!loginSuccess) {
     return (
@@ -110,6 +149,18 @@ export default function OrderOptionsScreen({ route, navigation }) {
         loadingMessage="Requesting access token again"
         onSuccess={onLoginSuccess}
       />
+    );
+  }
+  while (!UserFound) {
+    getUserData();
+    console.log(UserFound);
+    return (
+      <View>
+        <Text>
+          Welcome New User
+        </Text>
+        <Text>Please fill out your user details</Text>
+      </View>
     );
   }
 

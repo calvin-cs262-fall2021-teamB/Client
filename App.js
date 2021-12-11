@@ -11,6 +11,7 @@ import MenuScreen from "./screens/menu";
 import CartScreen from "./screens/cart";
 import AvailableOrdersScreen from "./screens/availableOrders";
 import OrderDetailsScreen from "./screens/orderDetails";
+import ProfileScreen from "./screens/profile";
 const Stack = createNativeStackNavigator();
 
 function App() {
@@ -52,6 +53,11 @@ function App() {
         <Stack.Screen
           name="Order Details"
           component={OrderDetailsScreen}
+          options={({ navigation }) => ({})}
+        />
+        <Stack.Screen
+          name="Profile"
+          component={ProfileScreen}
           options={({ navigation }) => ({})}
         />
       </Stack.Navigator>
