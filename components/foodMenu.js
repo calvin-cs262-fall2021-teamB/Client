@@ -83,27 +83,24 @@ export default function FoodMenu({ navigation, setFoodData }) {
         transparent={true}
         visible={open === true}
         onRequestClose={() => {
-          Alert.alert("Menu has been closed.");
+          Alert.alert("Food Menu has been closed.");
           setOpen(!open);
         }}
       >
-        <TouchableOpacity
-          activeOpacity={1}
-          onPressOut={closeList}
-          style={styles.modalView}
-        >
+        <TouchableOpacity activeOpacity={1} style={styles.modalView}>
           <Text style={styles.selectText}>Select Food Items</Text>
           <View style={styles.menuContainer}>
             <FlatList
               data={orderData}
               renderItem={renderItem}
               keyExtractor={({ id }, index) => id.toString()}
-              // keyboardShouldPersistTaps="always"
+              keyboardShouldPersistTaps="always"
+              style={{ flex: 1 }}
             />
           </View>
           <View style={styles.confirmWrapper}>
-            <TouchableOpacity style={styles.confirmButton}>
-              <Text>Confirm Items</Text>
+            <TouchableOpacity style={styles.confirmButton} onPress={closeList}>
+              <Text style={styles.confirmText}>Confirm Items</Text>
             </TouchableOpacity>
           </View>
         </TouchableOpacity>
@@ -122,17 +119,22 @@ const ItemRenderer = ({
   index,
   name,
   description,
+  image,
   price,
   selected,
   onUpdateValue,
 }) => (
   <View style={styles.modalItem}>
+    <View style={styles.imageContainer}>
+      <Image style={styles.foodImage} source={{ uri: image }}></Image>
+    </View>
     <Text style={styles.modalTitle}>
       {name}: {price}
     </Text>
     <Switch
       value={selected}
       onValueChange={(value) => onUpdateValue(index, value)}
+      style={{ marginRight: 5 }}
     />
   </View>
 );
@@ -167,12 +169,18 @@ const styles = StyleSheet.create({
 
   confirmButton: {
     flex: 1,
-    backgroundColor: "red",
+    backgroundColor: "#800000",
     borderRadius: 25,
     justifyContent: "center",
     alignItems: "center",
     borderColor: "black",
     borderWidth: 1,
+  },
+
+  confirmText: {
+    color: "#FFD700",
+    fontWeight: "bold",
+    fontSize: 17,
   },
 
   confirmWrapper: {
@@ -182,26 +190,41 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
   },
 
+  foodImage: {
+    height: "100%",
+    width: "100%",
+  },
+
+  imageContainer: {
+    height: "99.9%",
+    width: "35%",
+    borderBottomLeftRadius: 25,
+    borderTopLeftRadius: 25,
+    borderRightWidth: 1,
+    marginLeft: -1,
+  },
+
   menuContainer: {
     flex: 1,
     backgroundColor: "#FFD700",
-    borderRadius: 25,
+    borderRadius: 0,
     marginBottom: 17,
     borderWidth: 1,
   },
 
   modalItem: {
+    height: 81,
+    width: "100%",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    padding: 23.5,
     borderBottomWidth: 1,
     borderBottomColor: "#800000",
   },
   modalTitle: {
     textTransform: "capitalize",
     color: "black",
-    fontSize: 16,
+    fontSize: 18,
   },
   modalView: {
     flex: 1,
@@ -209,13 +232,13 @@ const styles = StyleSheet.create({
     marginTop: "80%",
     backgroundColor: "white",
     borderRadius: 20,
-    padding: "4%",
+    padding: "3%",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2,
     },
-    shadowOpacity: 0.25,
+    shadowOpacity: 2,
     shadowRadius: 4,
     elevation: 5,
   },
