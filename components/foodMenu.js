@@ -60,9 +60,9 @@ export default function FoodMenu({ navigation, setFoodData }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.bevMenu}>
+      <View style={styles.foodMenu}>
         <TouchableOpacity onPress={openList}>
-          <View style={styles.bevButton}>
+          <View style={styles.foodButton}>
             <Text style={styles.buttonText}>Food Menu</Text>
           </View>
         </TouchableOpacity>
@@ -95,7 +95,6 @@ export default function FoodMenu({ navigation, setFoodData }) {
               renderItem={renderItem}
               keyExtractor={({ id }, index) => id.toString()}
               keyboardShouldPersistTaps="always"
-              style={{ flex: 1 }}
             />
           </View>
           <View style={styles.confirmWrapper}>
@@ -145,7 +144,7 @@ const styles = StyleSheet.create({
     height: "20%",
   },
 
-  bevButton: {
+  foodButton: {
     padding: 20,
     borderWidth: 2,
     borderRadius: 15,
@@ -155,7 +154,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 
-  bevMenu: {
+  foodMenu: {
     flex: 1,
     backgroundColor: "#E5E5E5",
     padding: 15,
@@ -213,7 +212,7 @@ const styles = StyleSheet.create({
   },
 
   modalItem: {
-    height: 81,
+    height: 83,
     width: "100%",
     flexDirection: "row",
     alignItems: "center",
@@ -228,7 +227,7 @@ const styles = StyleSheet.create({
   },
   modalView: {
     flex: 1,
-    margin: "1%",
+    margin: "-2%",
     marginTop: "80%",
     backgroundColor: "white",
     borderRadius: 20,
