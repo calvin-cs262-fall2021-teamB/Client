@@ -246,7 +246,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 10,
   },
-  selectedFood: {
+  selectedBeverage: {
     fontSize: 15,
   },
   selectedItems: {
