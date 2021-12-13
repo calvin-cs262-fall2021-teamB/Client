@@ -1,7 +1,7 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { View, Image } from "react-native";
-import LandingScreen from "../screens/orderfood";
+import LandingScreen from "../screens/landing";
 import AvailableOrdersScreen from "../screens/availableOrders";
 import ProfileScreen from "../screens/profile";
 

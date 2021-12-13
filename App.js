@@ -10,12 +10,13 @@ import Header from "./shared/header";
 import MenuScreen from "./screens/menu";
 import CartScreen from "./screens/cart";
 import AvailableOrdersScreen from "./screens/availableOrders";
-import OrderDetailsScreen from "./screens/orderDetails";
-import OrderDetails2Screen from "./screens/orderDetails2";
 import ProfileScreen from "./screens/profile";
 import DeliverOrderScreen from "./screens/deliverOrder";
-import LandingScreen from "./screens/orderfood";
 import Tabs from "./shared/bottomHeader";
+import MyOrderDetails from "./screens/myOrderDetails";
+import DeliveryDetails from "./screens/deliveryDetails";
+import LandingScreen from "./screens/landing";
+
 const Stack = createNativeStackNavigator();
 function Landing() {
   return <Tabs />;
@@ -58,12 +59,12 @@ function App() {
         />
         <Stack.Screen
           name="Order Details"
-          component={OrderDetailsScreen}
+          component={DeliveryDetails}
           options={({ navigation }) => ({})}
         />
         <Stack.Screen
           name="My Order Details"
-          component={OrderDetails2Screen}
+          component={MyOrderDetails}
           options={({ navigation }) => ({})}
         />
         <Stack.Screen
