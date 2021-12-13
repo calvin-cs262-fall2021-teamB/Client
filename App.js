@@ -80,7 +80,7 @@ function App() {
         <Stack.Screen
           name="Landing"
           component={LandingScreen}
-          options={({ navigation }) => ({headerShown: false})}
+          options={({ navigation }) => ({headerShown: true})}
         />
       </Stack.Navigator>
     </NavigationContainer>

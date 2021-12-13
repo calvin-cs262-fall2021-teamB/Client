@@ -2,7 +2,6 @@
 // import { TouchableOpacity, View, StyleSheet, Text, Image } from "react-native";
 // import { globalStyles } from "../styles/global";
 
-
 // export default function LandingScreen({ navigation, route }) {
 //   const handleCart = () => {
 //     navigation.navigate("Cart", {
@@ -29,6 +28,7 @@ import RCTNetworking from "react-native/Libraries/Network/RCTNetworking";
 import { globalStyles } from "../styles/global";
 import BeverageMenu from "../components/beverageMenu";
 import FoodMenu from "../components/foodMenu";
+import CartButton from "../components/cartButton";
 export default function LandingScreen({ route, navigation }) {
   const [isLoading, setLoading] = useState(true);
   const [orderData, setData] = useState([]);
@@ -274,28 +274,19 @@ export default function LandingScreen({ route, navigation }) {
   }
   return (
     <View style={globalStyles.container}>
-      <View style={styles.utilityContainer}>
-        <TouchableOpacity style={styles.utilityWrapper}>
-          <Image
-            style={styles.IconBox3}
-            source={require("../images/arrow.png")}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.utilityWrapper2}>
-          <Image
-            style={styles.IconBox3}
-            source={require("../images/basket.png")}
-          />
-        </TouchableOpacity>
-      </View>
-      <Text style={styles.TitleFont}>order</Text>
-      <Text style={styles.TitleDescription}>what would you like to order?</Text>
+      <Text style={styles.TitleFont}>Order</Text>
+      <Text style={styles.TitleDescription}>Create an Order</Text>
 
       <View style={styles.BottomWrapper}>
         <View style={styles.IconWrapper1}>
           <FoodMenu setFoodData={setFoodData} />
           <BeverageMenu setBeverageData={setBeverageData} />
-          <BeverageMenu setBeverageData={setBeverageData} />
+          <TouchableOpacity onPress={handleCart} style={styles.CartButton}>
+            <Image
+              style={styles.IconBox2}
+              source={require("../images/cart.png")}
+            />
+          </TouchableOpacity>
         </View>
 
         <View style={styles.PictureWrap}>
@@ -305,7 +296,7 @@ export default function LandingScreen({ route, navigation }) {
           />
           <Text style={styles.PictureText}>Please</Text>
           <Text style={styles.PictureText2}>
-            choose one of the options above
+            Choose one of the options above
           </Text>
         </View>
       </View>
@@ -322,7 +313,7 @@ export const styles = StyleSheet.create({
   },
 
   utilityContainer: {
-    marginTop: "10%",
+    marginTop: "0%",
     width: "90%",
     alignSelf: "center",
     height: "4%",
@@ -331,25 +322,22 @@ export const styles = StyleSheet.create({
   },
 
   TitleFont: {
-    fontSize: 32,
+    fontSize: 36,
     fontWeight: "bold",
     marginTop: "3%",
     marginHorizontal: "5%",
   },
 
   TitleDescription: {
-    fontSize: 12,
+    fontSize: 16,
     fontWeight: "bold",
-    marginTop: "-2%",
+    marginTop: "0%",
     marginHorizontal: "5%",
   },
 
   PictureWrap: {
     flex: 1,
-    width: "90%",
-    marginTop: "3%",
-    margin: "15%",
-    alignSelf: "center",
+    bottom: "38.5%",
     borderRadius: 20,
     backgroundColor: "#800000",
     shadowColor: "#000000",
@@ -360,7 +348,7 @@ export const styles = StyleSheet.create({
   },
 
   Picture: {
-    flex: 1,
+    height: "139%",
     width: "100%",
     borderRadius: 10,
     resizeMode: "stretch",
@@ -372,20 +360,21 @@ export const styles = StyleSheet.create({
     position: "absolute",
     fontWeight: "bold",
     color: "#ffffff",
-    marginVertical: "121%",
+    marginVertical: "0%",
     marginLeft: "2%",
   },
   PictureText2: {
-    fontSize: 12,
+    fontSize: 16,
     position: "absolute",
     fontWeight: "bold",
     color: "#ffffff",
-    marginVertical: "129%",
+    marginVertical: "7%",
     marginLeft: "2%",
   },
 
   BottomWrapper: {
     flex: 1,
+    flexDirection: "column",
     marginTop: "3%",
     backgroundColor: "#ffffff",
     borderTopRightRadius: 20,
@@ -393,16 +382,15 @@ export const styles = StyleSheet.create({
   },
 
   IconWrapper1: {
-    marginTop: "3%",
-    width: "90%",
+    flex: 1,
     alignSelf: "center",
-    height: "8%",
     flexDirection: "row",
-    justifyContent: "space-between",
+    marginTop: 7,
+    marginLeft: 15,
   },
 
   IconBox: {
-    width: "28%",
+    flex: 1,
     backgroundColor: "#800000",
     borderRadius: 20,
     shadowColor: "#000000",
@@ -410,11 +398,11 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.9,
     shadowRadius: 3,
     elevation: 3,
-    justifyContent: "center",
+    width: "95%",
   },
   IconBox2: {
-    width: 25,
-    height: 25,
+    width: 50,
+    height: 50,
     alignSelf: "center",
   },
 
@@ -446,12 +434,18 @@ export const styles = StyleSheet.create({
     marginTop: "3%",
   },
   CartButton: {
-    width: "30%",
-    height: "8%",
-    backgroundColor: "#800000",
-    alignSelf: "center",
-    marginTop: "3%",
-    borderRadius: 30,
+    backgroundColor: "red",
+    marginBottom: "71%",
+    flex: 1,
+    borderRadius: 20,
+    alignItems: "center",
     justifyContent: "center",
+    marginRight: 15,
+    backgroundColor: "#800000",
+    shadowColor: "#000000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.9,
+    shadowRadius: 3,
+    elevation: 3,
   },
 });

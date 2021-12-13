@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
   },
 
   IconBox: {
-    width: "28%",
+    flex: 1,
     backgroundColor: "#800000",
     borderRadius: 20,
     shadowColor: "#000000",
@@ -142,10 +142,11 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
     elevation: 3,
     justifyContent: "center",
+    width: '95%'
   },
   IconBox2: {
-    width: 25,
-    height: 25,
+    width: 50,
+    height: 50,
     alignSelf: "center",
   },
 
