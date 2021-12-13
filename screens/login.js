@@ -77,11 +77,15 @@ export default function HomeScreen({ navigation }) {
       <SafeAreaView style={loginStyles.safeContainer}>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={loginStyles.inner}>
+
+            <View style={loginStyles.titlebox}>
+              <Text style={loginStyles.titlefont}>Knight Dash</Text>
+              </View>
             <Image
               style={loginStyles.largeLogo}
-              source={require("../images/ylw_logo.png")}
+              source={require("../images/knightrush.png")}
             />
-            <Text style={loginStyles.login}>{"Login"}</Text>
+
             <TextInput style={loginStyles.loginMessage}
               placeholder='Enter your Calvin ID to Sign In'
               onChangeText={(text) => setUserID(text)}>
@@ -96,8 +100,13 @@ export default function HomeScreen({ navigation }) {
                 <Text style={loginStyles.text}>{"Sign in"}</Text>
               </View>
             </TouchableOpacity>
+            <Image
+              style={loginStyles.calvin}
+              source={require("../images/calvin-removebg-preview.png")}
+            />
             <View style={loginStyles.safeContainer} />
           </View>
+          
         </TouchableWithoutFeedback>
       </SafeAreaView>
     </KeyboardAvoidingView>
@@ -105,14 +114,31 @@ export default function HomeScreen({ navigation }) {
 }
 
 const loginStyles = StyleSheet.create({
+  calvin:{
+    height: '5%',
+    width: '30%',
+    marginTop: '5%',
+    alignSelf: 'center'
+  },
+  titlebox: {
+    marginTop: "8%",
+    height: "20%",
+    justifyContent: 'center',
+  },
+  titlefont:{
+    fontSize: 38,
+    fontWeight: "bold",
+    color: '#800000',
+    alignSelf: 'center'
+  },
   largeLogo: {
-    height: "40%",
-    width: "77%",
+    height: "50%",
+    width: "90%",
     alignSelf: "center",
-    marginTop: "25%",
-    borderRadius: 200,
-    borderWidth: 3,
-    borderColor: "#800000",
+    marginTop: "5%",
+    marginBottom: '3%'
+
+
   },
   loginWrapper: {
     justifyContent: "flex-end",
@@ -120,12 +146,7 @@ const loginStyles = StyleSheet.create({
   keyboardContainer: {
     justifyContent: "flex-end",
   },
-  login: {
-    marginTop: "15%",
-    marginBottom: "6%",
-    fontSize: 35,
-    color: "#333",
-  },
+
   subLogin: {
     marginLeft: 10,
     marginBottom: 10,
@@ -134,12 +155,14 @@ const loginStyles = StyleSheet.create({
   },
   loginMessage: {
     height: 40,
+    width: '80%',
+    borderRadius: 10,
+    alignSelf: 'center',
     marginHorizontal: 5,
-    marginBottom: 15,
+    marginBottom: '3%',
+    backgroundColor: '#ffffff',
     fontSize: 18,
     color: "#333",
-    borderColor: '#800000',
-    borderWidth: 1,
     padding: 10
   },
   text: {
@@ -152,12 +175,16 @@ const loginStyles = StyleSheet.create({
     elevation: 8,
     backgroundColor: "#800000",
     borderRadius: 10,
+    alignSelf: 'center',
+    justifyContent: 'center',
+    width: '40%',
+    height: '6%'
   },
   submitContainer: {
     flex: 0,
     padding: 10,
-    marginTop: "3%",
-    marginBottom: "3%",
+    marginTop: "5%",
+    marginBottom: "5%",
     justifyContent: "center",
   },
   safeContainer: {
@@ -167,5 +194,6 @@ const loginStyles = StyleSheet.create({
     padding: 10,
     flex: 1,
     justifyContent: "flex-end",
+    backgroundColor: "#f2cd00"
   },
 });

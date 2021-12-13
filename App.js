@@ -32,9 +32,7 @@ function App() {
         <Stack.Screen
           name="Login"
           component={HomeScreen}
-          options={({ navigation }) => ({
-            headerTitle: () => <Header navigation={navigation} />,
-          })}
+          options={{headerShown: false}}
         />
         <Stack.Screen
           name="OrderOptions"
