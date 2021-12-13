@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Text,
   FlatList,
+  Image,
   RefreshControl,
 } from "react-native";
 import { globalStyles } from "../styles/global";
@@ -61,7 +62,16 @@ export default function AvailableOrdersScreen({ route, navigation }) {
               <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
             }
             renderItem={({ item }) => (
-              <TouchableOpacity>
+              <TouchableOpacity
+                style={{
+                  backgroundColor: "white",
+                  width: "75%",
+                  height: "100%",
+                  alignSelf: "center",
+                  borderRadius: 15,
+                  borderWidth: 2,
+                }}
+              >
                 <Text
                   style={styles.availableOrder}
                   onPress={() =>
@@ -71,13 +81,46 @@ export default function AvailableOrdersScreen({ route, navigation }) {
                     })
                   }
                 >
-                  Order {item.id}, {item.location}
+                  Order {item.id} ({item.location})
                 </Text>
               </TouchableOpacity>
             )}
           />
         </View>
       )}
+      <View style={{ flexDirection: "row", bottom: "5%", height: "9%" }}>
+        <TouchableOpacity
+          style={styles.IconBox}
+          onPress={() =>
+            navigation.navigate("Order", route.params, {
+              UserFound: true,
+            })
+          }
+        >
+          <Image
+            style={styles.IconBox2}
+            source={require("../images/order.png")}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.IconBox}
+          onPress={() => handleViewOrders()}
+        >
+          <Image
+            style={styles.IconBox2}
+            source={require("../images/deliver.png")}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.IconBox}
+          onPress={() => handleProfile()}
+        >
+          <Image
+            style={styles.IconBox2}
+            source={require("../images/profile.png")}
+          />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -91,9 +134,11 @@ export const styles = StyleSheet.create({
   },
 
   itemsTitleWrapper: {
+    flex: 1,
     paddingHorizontal: "10%",
     paddingVertical: "10%",
     justifyContent: "center",
+    borderRadius: 15,
   },
   detailsText: {
     textAlign: "center",
@@ -105,9 +150,13 @@ export const styles = StyleSheet.create({
   availableOrder: {
     fontSize: 20,
     fontWeight: "bold",
-    paddingBottom: "5%",
-    marginLeft: "5%",
+    paddingBottom: "3%",
+    paddingTop: "3%",
+    marginBottom: 3,
     color: "#800000",
+    width: "100%",
+    textAlign: "center",
+    borderRadius: 15,
   },
   availableOrderList: {
     top: "1%",
@@ -131,5 +180,19 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     paddingVertical: "3%",
+  },
+  IconBox: {
+    flex: 1,
+    backgroundColor: "#800000",
+    justifyContent: "center",
+    alignItems: "center",
+    borderTopWidth: 2,
+    borderRightWidth: 2,
+    borderBottomWidth: 2,
+  },
+  IconBox2: {
+    width: 50,
+    height: 50,
+    alignSelf: "center",
   },
 });

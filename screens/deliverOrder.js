@@ -55,7 +55,7 @@ export default function DeliverOrderScreen({ route, navigation }) {
           {
             text: "OK",
             onPress: () => {
-              navigation.navigate("Landing", {
+              navigation.navigate("Order", {
                 UserFound: route.params.params.UserFound,
                 UserData: route.params.params.UserData,
               });

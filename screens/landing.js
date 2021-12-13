@@ -96,9 +96,9 @@ export default function LandingScreen({ route, navigation }) {
         "https://still-crag-08186.herokuapp.com/users/" + UserID
       );
       const json = await response.json();
-      navigation.navigate("Landing", { UserFound: true, UserData: json });
+      navigation.navigate("Order", { UserFound: true, UserData: json });
     } catch (error) {
-      navigation.navigate("Landing", {
+      navigation.navigate("Order", {
         UserFound: false,
         UserData: UserID,
       });
@@ -308,7 +308,7 @@ export default function LandingScreen({ route, navigation }) {
           <TouchableOpacity
             style={styles.IconBox}
             onPress={() =>
-              navigation.navigate("Landing", route.params, { UserFound: true })
+              navigation.navigate("Order", route.params, { UserFound: true })
             }
           >
             <Image
@@ -437,9 +437,9 @@ export const styles = StyleSheet.create({
     backgroundColor: "#f2cd00",
     justifyContent: "center",
     alignItems: "center",
-    borderTopWidth: 1,
-    borderRightWidth: 1,
-    borderBottomWidth: 1,
+    borderTopWidth: 2,
+    borderRightWidth: 2,
+    borderBottomWidth: 2,
   },
   IconBox2: {
     width: 50,

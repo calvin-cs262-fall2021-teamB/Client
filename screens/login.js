@@ -20,9 +20,9 @@ export default function HomeScreen({ navigation }) {
         "https://still-crag-08186.herokuapp.com/users/" + UserID
       );
       const json = await response.json();
-      navigation.navigate("Landing", { UserFound: true, UserData: json });
+      navigation.navigate("Order", { UserFound: true, UserData: json });
     } catch (error) {
-      navigation.navigate("Landing", { UserFound: false, UserData: UserID });
+      navigation.navigate("Order", { UserFound: false, UserData: UserID });
     }
   };
   const handleSubmitLogin = () => {

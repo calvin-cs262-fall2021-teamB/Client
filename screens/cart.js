@@ -100,7 +100,7 @@ export default function CartScreen({ navigation, route }) {
               {
                 text: "OK",
                 onPress: () => {
-                  navigation.navigate("Landing", {
+                  navigation.navigate("Order", {
                     UserFound: route.params.userDetails.UserFound,
                     UserData: route.params.userDetails.UserData,
                   });

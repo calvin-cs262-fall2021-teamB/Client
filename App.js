@@ -78,9 +78,9 @@ function App() {
           options={({ navigation }) => ({})}
         />
         <Stack.Screen
-          name="Landing"
+          name="Order"
           component={LandingScreen}
-          options={({ navigation }) => ({headerShown: true})}
+          options={({ navigation }) => ({ headerShown: true })}
         />
       </Stack.Navigator>
     </NavigationContainer>
