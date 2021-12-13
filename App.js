@@ -16,6 +16,7 @@ import Tabs from "./shared/bottomHeader";
 import MyOrderDetails from "./screens/myOrderDetails";
 import DeliveryDetails from "./screens/deliveryDetails";
 import LandingScreen from "./screens/landing";
+import LoginHelp from "./components/loginHelp";
 
 const Stack = createNativeStackNavigator();
 function Landing() {
@@ -80,7 +81,10 @@ function App() {
         <Stack.Screen
           name="Order"
           component={LandingScreen}
-          options={({ navigation }) => ({ headerShown: true })}
+          options={({ navigation }) => ({
+            headerShown: true,
+            headerRight: () => <LoginHelp />,
+          })}
         />
       </Stack.Navigator>
     </NavigationContainer>
