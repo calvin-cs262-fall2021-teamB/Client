@@ -10,7 +10,7 @@ export default function Header({ navigation }) {
         source={require("../images/calvin-removebg-preview.png")}
       />*/}
       <TouchableOpacity onPress={() => navigation.navigate('Help')}>
-        <Text style={headerStyles.helpButton}>?</Text>
+        <Text style={headerStyles.helpButton}>Help</Text>
       </TouchableOpacity>
     </View>
   );
@@ -25,6 +25,7 @@ const headerStyles = StyleSheet.create({
     left: "7%",
   },
   helpButton: {
-    textAlign: 'right',
+    fontWeight: 'bold',
+    fontSize: 20,
   },
 });
