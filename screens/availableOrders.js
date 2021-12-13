@@ -6,13 +6,24 @@ import {
   StyleSheet,
   Text,
   FlatList,
+  RefreshControl,
 } from "react-native";
 import { globalStyles } from "../styles/global";
-
 
 export default function AvailableOrdersScreen({ route, navigation }) {
   const [isLoading, setLoading] = useState(true);
   const [orderData, setData] = useState([]);
+
+  const wait = (timeout) => {
+    return new Promise((resolve) => setTimeout(resolve, timeout));
+  };
+
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    wait(2000).then(() => setRefreshing(false));
+  }, []);
 
   const getOrders = async () => {
     try {
@@ -46,11 +57,19 @@ export default function AvailableOrdersScreen({ route, navigation }) {
             style={styles.availableOrderList}
             data={orderData}
             keyExtractor={({ id }, index) => id.toString()}
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }
             renderItem={({ item }) => (
               <TouchableOpacity>
                 <Text
                   style={styles.availableOrder}
-                  onPress={() => navigation.navigate("Order Details", {item: item, params: route.params})}
+                  onPress={() =>
+                    navigation.navigate("Order Details", {
+                      item: item,
+                      params: route.params,
+                    })
+                  }
                 >
                   Order {item.id}, {item.location}
                 </Text>

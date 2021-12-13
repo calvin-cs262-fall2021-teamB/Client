@@ -1,10 +1,27 @@
 import React, { useState, useEffect } from "react";
-import { TouchableOpacity, View, StyleSheet, Text, Alert } from "react-native";
+import {
+  TouchableOpacity,
+  View,
+  StyleSheet,
+  Text,
+  Alert,
+  RefreshControl,
+} from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { globalStyles } from "../styles/global";
 
 export default function CartScreen({ navigation, route }) {
   const [myActiveOrderData, setmyActiveOrderData] = useState([]);
+  const wait = (timeout) => {
+    return new Promise((resolve) => setTimeout(resolve, timeout));
+  };
+
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    wait(2000).then(() => setRefreshing(false));
+  }, []);
 
   const orderPriceTotal = route.params.foodData.reduce(
     (totalPrice, item) => totalPrice + parseFloat(item.price.replace("$", "")),
@@ -58,6 +75,9 @@ export default function CartScreen({ navigation, route }) {
         <FlatList
           data={route.params.foodData}
           keyExtractor={({ id }, index) => id.toString()}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
           renderItem={({ item }) => (
             <View>
               <Text style={styles.item}>

@@ -19,6 +19,7 @@ import {
   TouchableOpacity,
   View,
   ActivityIndicator,
+  RefreshControl,
   TextInput,
   Image,
   Alert,
@@ -33,8 +34,6 @@ export default function LandingScreen({ route, navigation }) {
   const [orderData, setData] = useState([]);
   const [myOrderData, setMyData] = useState([]);
   const [myIsLoading, setMyLoading] = useState(true);
-
-  //profile
   const [UserID, setUserID] = useState([]);
   const [UserFname, setUserFname] = useState([]);
   const [UserLname, setUserLname] = useState([]);
@@ -47,7 +46,8 @@ export default function LandingScreen({ route, navigation }) {
   };
   const [foodData, setFoodData] = useState([]);
   const [beverageData, setBeverageData] = useState([]);
-  const [MyActiveOrders, setMyActiveOrderData] = useState([]); //my orders
+  const [MyActiveOrders, setMyActiveOrderData] = useState([]);
+
   const getOrders = async () => {
     console.log(route.params);
     try {
@@ -304,7 +304,9 @@ export default function LandingScreen({ route, navigation }) {
         <View style={{ flexDirection: "row", bottom: "5%", height: "10%" }}>
           <TouchableOpacity
             style={styles.IconBox}
-            onPress={() => navigation.navigate("Landing", { UserFound: true })}
+            onPress={() =>
+              navigation.navigate("Landing", route.params, { UserFound: true })
+            }
           >
             <Image
               style={styles.IconBox2}
