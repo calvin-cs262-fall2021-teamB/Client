@@ -28,7 +28,6 @@ import RCTNetworking from "react-native/Libraries/Network/RCTNetworking";
 import { globalStyles } from "../styles/global";
 import BeverageMenu from "../components/beverageMenu";
 import FoodMenu from "../components/foodMenu";
-import CartButton from "../components/cartButton";
 export default function LandingScreen({ route, navigation }) {
   const [isLoading, setLoading] = useState(true);
   const [orderData, setData] = useState([]);
@@ -299,6 +298,26 @@ export default function LandingScreen({ route, navigation }) {
             Choose one of the options above
           </Text>
         </View>
+        <View style={{ flexDirection: "row", bottom: "5%", height: "10%" }}>
+          <TouchableOpacity style={styles.IconBox}>
+            <Image
+              style={styles.IconBox2}
+              source={require("../images/order.png")}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.IconBox}>
+            <Image
+              style={styles.IconBox2}
+              source={require("../images/deliver.png")}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.IconBox}>
+            <Image
+              style={styles.IconBox2}
+              source={require("../images/profile.png")}
+            />
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -337,7 +356,7 @@ export const styles = StyleSheet.create({
 
   PictureWrap: {
     flex: 1,
-    bottom: "38.5%",
+    bottom: "33%",
     borderRadius: 20,
     backgroundColor: "#800000",
     shadowColor: "#000000",
@@ -348,7 +367,7 @@ export const styles = StyleSheet.create({
   },
 
   Picture: {
-    height: "139%",
+    height: "165%",
     width: "100%",
     borderRadius: 10,
     resizeMode: "stretch",
@@ -385,30 +404,22 @@ export const styles = StyleSheet.create({
     flex: 1,
     alignSelf: "center",
     flexDirection: "row",
-    marginTop: 7,
+    marginTop: 15,
     marginLeft: 15,
   },
 
   IconBox: {
     flex: 1,
-    backgroundColor: "#800000",
-    borderRadius: 20,
-    shadowColor: "#000000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.9,
-    shadowRadius: 3,
-    elevation: 3,
-    width: "95%",
+    backgroundColor: "#f2cd00",
+    justifyContent: "center",
+    alignItems: "center",
+    borderTopWidth: 1,
+    borderRightWidth: 1,
+    borderBottomWidth: 1,
   },
   IconBox2: {
     width: 50,
     height: 50,
-    alignSelf: "center",
-  },
-
-  IconBox3: {
-    width: 30,
-    height: 30,
     alignSelf: "center",
   },
 
@@ -435,7 +446,7 @@ export const styles = StyleSheet.create({
   },
   CartButton: {
     backgroundColor: "red",
-    marginBottom: "71%",
+    marginBottom: "63%",
     flex: 1,
     borderRadius: 20,
     alignItems: "center",
