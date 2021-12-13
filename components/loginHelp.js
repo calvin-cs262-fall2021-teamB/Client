@@ -33,11 +33,11 @@ export default function LoginHelp({ navigation }) {
           setOpen(!open);
         }}
       >
-        <Text>This is the Login Screen</Text>
-        <Text>Log in by pressing the maroon login button.</Text>
+        <Text>This is the Landing Screen</Text>
+        <Text>{'\n'}View the menu by clicking on the different images across the center of the page</Text>
+        <Text>{'\n'}Place your order by going to the cart</Text>
         <Text>
-          If you do not have an account, this will also guide you towards
-          creating one.
+        {'\n'}View your profile details and current active orders by visiting the profile page from the bottom right
         </Text>
         <TouchableOpacity onPress={closeList}>
           <Text>Close Me</Text>
