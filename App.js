@@ -79,8 +79,8 @@ function App() {
         />
         <Stack.Screen
           name="Landing"
-          component={LandingScreen}
-          options={{ headerShown: false }}
+          component={Landing}
+          options={({ navigation }) => ({headerShown: false})}
         />
       </Stack.Navigator>
     </NavigationContainer>

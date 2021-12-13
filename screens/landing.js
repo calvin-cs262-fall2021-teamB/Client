@@ -1,13 +1,9 @@
 // import React, { useState, useEffect } from "react";
 // import { TouchableOpacity, View, StyleSheet, Text, Image } from "react-native";
 // import { globalStyles } from "../styles/global";
-import BeverageMenu from "../components/beverageMenu";
-import FoodMenu from "../components/foodMenu";
+
 
 // export default function LandingScreen({ navigation, route }) {
-//   const [foodData, setFoodData] = useState([]);
-//   const [beverageData, setBeverageData] = useState([]);
-
 //   const handleCart = () => {
 //     navigation.navigate("Cart", {
 //       foodData: foodData.concat(beverageData),
@@ -31,7 +27,8 @@ import {
 import { AzureInstance, AzureLoginView } from "auth4061";
 import RCTNetworking from "react-native/Libraries/Network/RCTNetworking";
 import { globalStyles } from "../styles/global";
-
+import BeverageMenu from "../components/beverageMenu";
+import FoodMenu from "../components/foodMenu";
 export default function LandingScreen({ route, navigation }) {
   const [isLoading, setLoading] = useState(true);
   const [orderData, setData] = useState([]);
@@ -49,6 +46,8 @@ export default function LandingScreen({ route, navigation }) {
       userDetails: route.params,
     });
   };
+  const [foodData, setFoodData] = useState([]);
+  const [beverageData, setBeverageData] = useState([]);
   const [MyActiveOrders, setMyActiveOrderData] = useState([]); //my orders
   const getOrders = async () => {
     console.log(route.params);
@@ -98,9 +97,9 @@ export default function LandingScreen({ route, navigation }) {
         "https://still-crag-08186.herokuapp.com/users/" + UserID
       );
       const json = await response.json();
-      navigation.navigate("OrderOptions", { UserFound: true, UserData: json });
+      navigation.navigate("Landing", { UserFound: true, UserData: json });
     } catch (error) {
-      navigation.navigate("OrderOptions", {
+      navigation.navigate("Landing", {
         UserFound: false,
         UserData: UserID,
       });
