@@ -14,10 +14,17 @@ import {
 } from "react-native";
 
 export default function HomeScreen({ navigation }) {
-  const handleNavigate = () => {
-    navigation.navigate("OrderOptions", UserID);
+  const handleNavigate = async () => {
+    try {
+      const response = await fetch(
+        "https://still-crag-08186.herokuapp.com/users/" + UserID
+      );
+      const json = await response.json();
+      navigation.navigate("OrderOptions", {UserFound: true, UserData: json});
+    } catch (error) {
+      navigation.navigate("OrderOptions", {UserFound: false, UserData: UserID});
+    }
   };
-
   const handleSubmitLogin = () => {
     if (UserID.length === 7 && !isNaN(UserID)) {
       Alert.alert(

@@ -8,13 +8,15 @@ import {
     TouchableOpacity,
     View,
     ActivityIndicator,
+    Alert,
 } from "react-native";
 import { AzureInstance, AzureLoginView } from "auth4061";
 import RCTNetworking from "react-native/Libraries/Network/RCTNetworking";
-import { Alert } from "react-native";
 import { globalStyles } from "../styles/global";
 
 export default function ProfileScreen({ route, navigation }) {
+    const [loginSuccess, setLoginSuccess] = useState(false);
+    const [azureLoginObject, setAzureLoginObject] = useState({});
     const signOut = () =>
     Alert.alert("Sign Out", "Are you sure you want to sign out?", [
       {
@@ -34,7 +36,10 @@ export default function ProfileScreen({ route, navigation }) {
     return (
         <View style={globalStyles.container}>
             <Text>
-                {route.params}
+                {'User ID:' + route.params.UserData.id}
+                {'\nFirst Name:' + route.params.UserData.fname}
+                {'\nLast Name:' + route.params.UserData.lname}
+                {'\nLocation:' + route.params.UserData.location}
             </Text>
 
             {/* Sign Out */}

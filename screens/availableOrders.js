@@ -10,7 +10,7 @@ import {
 import { globalStyles } from "../styles/global";
 
 
-export default function AvailableOrdersScreen({ navigation }) {
+export default function AvailableOrdersScreen({ route, navigation }) {
   const [isLoading, setLoading] = useState(true);
   const [orderData, setData] = useState([]);
 
@@ -50,7 +50,7 @@ export default function AvailableOrdersScreen({ navigation }) {
               <TouchableOpacity>
                 <Text
                   style={styles.availableOrder}
-                  onPress={() => navigation.navigate("Order Details", item)}
+                  onPress={() => navigation.navigate("Order Details", {item: item, params: route.params})}
                 >
                   Order {item.id}, {item.location}
                 </Text>

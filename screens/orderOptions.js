@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   View,
   ActivityIndicator,
+  TextInput
 } from "react-native";
 import { AzureInstance, AzureLoginView } from "auth4061";
 import RCTNetworking from "react-native/Libraries/Network/RCTNetworking";
@@ -19,9 +20,11 @@ export default function OrderOptionsScreen({ route, navigation }) {
   const [orderData, setData] = useState([]);
   const [myOrderData, setMyData] = useState([]);
   const [myIsLoading, setMyLoading] = useState(true);
-  const [UserData, setUserData] = useState([]);
-  const [UserFound, setUserFound] = useState(false);
-
+  const [UserID, setUserID] = useState([]);
+  const [UserFname, setUserFname] = useState([]);
+  const [UserLname, setUserLname] = useState([]);
+  const [UserLocation, setUserLocation] = useState([]);
+  const [MyActiveOrders, setMyActiveOrderData] = useState([]);
   const getOrders = async () => {
     console.log(route.params);
     try {
@@ -36,35 +39,132 @@ export default function OrderOptionsScreen({ route, navigation }) {
       setLoading(false);
     }
   };
-  const getMyOrders = async () => {
+  const getMyActiveOrders = async () => {
     try {
       const response = await fetch(
-        "https://still-crag-08186.herokuapp.com/myOrders"
+        "https://still-crag-08186.herokuapp.com/myActiveOrders/" + route.params.UserData.id
       );
       const json = await response.json();
-      setMyData(json);
+      setMyActiveOrderData(json);
     } catch (error) {
-      console.error(error);
+      console.log("no active orders yet");
     } finally {
       setMyLoading(false);
     }
   };
+  const getMyOrders = async () => {
+    try {
+      const response = await fetch(
+        "https://still-crag-08186.herokuapp.com/myOrders/" + route.params.UserData.id
+      );
+      const json = await response.json();
+      setMyData(json);
+    } catch (error) {
+      console.log("no active orders yet");
+    } finally {
+      setMyLoading(false);
+    }
+  };
+  const handleNavigate = async () => {
+    try {
+      const response = await fetch(
+        "https://still-crag-08186.herokuapp.com/users/" + UserID
+      );
+      const json = await response.json();
+      navigation.navigate("OrderOptions", { UserFound: true, UserData: json });
+    } catch (error) {
+      navigation.navigate("OrderOptions", { UserFound: false, UserData: UserID });
+    }
+  };
+  const handleCreateUser = async () => {
+    console.log(UserID);
+    try {
+      const response = await fetch('https://still-crag-08186.herokuapp.com/users', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          ID: parseInt(UserID),
+          fname: UserFname.toString(),
+          lname: UserLname.toString(),
+          location: UserLocation.toString(),
+        })
+      });
+      Alert.alert(
+        "Success!",
+        "Welcome to KnightDash",
+        [
+          {
+            text: "OK",
+            onPress: () => { handleNavigate(); }
+          }
+        ]
+      );
+    }
+    catch (error) {
+      console.error(error);
+    }
+  }
   useEffect(() => {
     getOrders();
   }, []);
-  useEffect(() => {
-    getMyOrders();
-  }, []);
-  const handleCreateOrder = () => {
-    navigation.navigate("Menu");
-  };
 
-  const handleViewOrders = () => {
-    navigation.navigate("AvailableOrders");
+  //update upon first time visited
+  useEffect(() => {
+    if (route.params.UserFound) {
+      getMyOrders();
+      getMyActiveOrders();
+    }
+    else {
+      setUserID(route.params.UserData)
+    }
+  }, []);
+  const handleCreateOrder = async () => {
+    if (myOrderData.length < 1) {
+      try {
+        const response = await fetch('https://still-crag-08186.herokuapp.com/order', {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            userID: parseInt(route.params.UserData.id),
+            diningHallId: 1,
+            status: 'active'
+          })
+        });
+        navigation.navigate("Menu", route.params);
+      }
+      catch (error) {
+        console.error(error);
+      }
+    }
+    else {
+      Alert.alert(
+        "Oops!",
+        "You may only have one active order at a time.",
+        [
+          {
+            text: "OK",
+          }
+        ]
+      );
+    }
   };
-  // const handleOrderDetails = () => {
-  //     navigation.navigate("Order Details", route.params);
-  // };
+  const handleProfile = () => {
+    navigation.navigate("Profile", route.params);
+  }
+  const handleReloadPage = () => {
+    getOrders();
+    getMyOrders();
+    getMyActiveOrders();
+  }
+  const handleViewOrders = () => {
+    navigation.navigate("AvailableOrders", route.params);
+  };
 
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [azureLoginObject, setAzureLoginObject] = useState({});
@@ -105,42 +205,6 @@ export default function OrderOptionsScreen({ route, navigation }) {
         },
       },
     ]);
-  const handleUserCheck = () => {
-    if (UserFound) {
-      Alert.alert(
-        "Confirm Your Identity!",
-        "ID: " + UserData.id + '\n' +
-        "Name: " + UserData.fname + UserData.lname + '\n' +
-        "Location: " + UserData.location,
-        [
-          {
-            text: "Cancel",
-            onPress: () => { navigation.navigate("Login"); }
-          },
-          {
-            text: "OK",
-            onPress: () => { handleNavigate(); }
-          }
-        ]
-      );
-    }
-  };
-
-  const getUserData = async () => {
-    try {
-      const response = await fetch(
-        "https://still-crag-08186.herokuapp.com/users/" + route.params
-      );
-      const json = await response.json();
-      setUserData(json);
-      setUserFound(true);
-    } catch (error) {
-      //console.error(error);
-      setUserFound(false);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   if (!loginSuccess) {
     return (
@@ -151,32 +215,60 @@ export default function OrderOptionsScreen({ route, navigation }) {
       />
     );
   }
-  while (!UserFound) {
-    getUserData();
-    console.log(UserFound);
+  while (!route.params.UserFound) {
+    console.log(route.params);
     return (
-      <View>
+      <View style={globalStyles.container}>
         <Text>
           Welcome New User
         </Text>
         <Text>Please fill out your user details</Text>
+        <TextInput style={styles.loginMessage}
+          placeholder='Enter your first name'
+          onChangeText={(text) => setUserFname(text)}>
+        </TextInput>
+        <TextInput style={styles.loginMessage}
+          placeholder='Enter your last name'
+          onChangeText={(text) => setUserLname(text)}>
+        </TextInput>
+        <TextInput style={styles.loginMessage}
+          placeholder='Enter your location'
+          onChangeText={(text) => setUserLocation(text)}>
+        </TextInput>
+        <TouchableOpacity
+          onPress={() => handleCreateUser()}
+          style={styles.buttonContainer}
+        >
+          <View style={styles.submitContainer}>
+            <Text style={styles.text}>{"Create User"}</Text>
+          </View>
+        </TouchableOpacity>
       </View>
     );
   }
-
-  const { userPrincipalName, givenName } = azureLoginObject;
-
   return (
     <View style={globalStyles.container}>
       <View style={styles.OrdersWrapper}>
         {/* My Orders */}
         <View style={globalStyles.orderLists}>
-          <Text style={globalStyles.sectionTitle}>My Active Orders</Text>
+          <Text style={globalStyles.sectionTitle}>My Orders</Text>
           <TouchableOpacity
             style={styles.createOrderIcon}
             onPress={() => handleCreateOrder()}
           >
             <Text style={styles.createOrderPlus}>+</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.createOrderIcon}
+            onPress={() => handleReloadPage()}
+          >
+            <Text style={styles.createOrderPlus}>r</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.createOrderIcon}
+            onPress={() => handleProfile()}
+          >
+            <Text style={styles.createOrderPlus}>p</Text>
           </TouchableOpacity>
         </View>
         <FlatList
@@ -187,9 +279,9 @@ export default function OrderOptionsScreen({ route, navigation }) {
             <TouchableOpacity>
               <Text
                 style={styles.availableOrder}
-                onPress={() => navigation.navigate("Order Details", item)}
+                onPress={() => navigation.navigate("My Order Details", item)}
               >
-                Order {item.id}, {item.location}
+                Order {item.id}, {item.status}
               </Text>
             </TouchableOpacity>
           )}
@@ -214,7 +306,7 @@ export default function OrderOptionsScreen({ route, navigation }) {
             <TouchableOpacity>
               <Text
                 style={styles.availableOrder}
-                onPress={() => navigation.navigate("Order Details", item)}
+                onPress={() => navigation.navigate("Order Details", {item: item, params: route.params})}
               >
                 Order {item.id}, {item.location}
               </Text>
@@ -317,5 +409,33 @@ const styles = StyleSheet.create({
   },
   myOrderList: {
     top: "-4%",
+  },
+  loginMessage: {
+    height: 40,
+    marginHorizontal: 5,
+    marginBottom: 15,
+    fontSize: 18,
+    color: "#333",
+    borderColor: '#800000',
+    borderWidth: 1,
+    padding: 10
+  },
+  text: {
+    fontSize: 18,
+    alignSelf: "center",
+    fontWeight: "bold",
+    color: "white",
+  },
+  buttonContainer: {
+    elevation: 8,
+    backgroundColor: "#800000",
+    borderRadius: 10,
+  },
+  submitContainer: {
+    flex: 0,
+    padding: 10,
+    marginTop: "3%",
+    marginBottom: "3%",
+    justifyContent: "center",
   },
 });

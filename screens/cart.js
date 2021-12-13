@@ -4,11 +4,23 @@ import { FlatList } from "react-native-gesture-handler";
 import { globalStyles } from "../styles/global";
 
 export default function CartScreen({ navigation, route }) {
+  const [myActiveOrderData, setmyActiveOrderData] = useState([]);
 
-  const orderPriceTotal = route.params.reduce((totalPrice, item) => totalPrice + parseFloat(item.price.replace('$', '')), 0);
-
+  const orderPriceTotal = route.params.foodData.reduce((totalPrice, item) => totalPrice + parseFloat(item.price.replace('$', '')), 0);
+  const getMyActiveOrders = async () => {
+    console.log(route.params)
+    try {
+      const response = await fetch(
+        "https://still-crag-08186.herokuapp.com/myActiveOrders/" + route.params.userDetails.UserData.id
+      );
+      const json = await response.json();
+      setmyActiveOrderData(json);
+    } catch (error) {
+      console.error("no active orders yet");
+    } 
+  };
   const handlePlaceOrder = async () => {
-    await Promise.all(route.params.map(async (item) => {
+    await Promise.all(route.params.foodData.map(async (item) => {
       try {
         const response = await fetch('https://still-crag-08186.herokuapp.com/orderItem', {
           method: 'POST',
@@ -17,7 +29,7 @@ export default function CartScreen({ navigation, route }) {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            orderID: 1,
+            orderID: parseInt(myActiveOrderData.id),
             foodDrinkItemID: item.id,
           })
         });
@@ -27,14 +39,16 @@ export default function CartScreen({ navigation, route }) {
       }
     }))
   };
-
+  useEffect(() => {
+    getMyActiveOrders();
+  }, []);
   return (
     <View style={styles.container}>
       <View style={styles.itemsTitleWrapper}>
         {/*List Contents of Order */}
         <Text style={styles.reviewTitle}>Review Order</Text>
         <FlatList
-          data={route.params}
+          data={route.params.foodData}
           keyExtractor={({ id }, index) => id.toString()}
           renderItem={({ item }) => (
             <View>
@@ -60,7 +74,7 @@ export default function CartScreen({ navigation, route }) {
               [
                 {
                   text: "OK",
-                  onPress: () => { navigation.navigate('OrderOptions'); }
+                  onPress: () => { navigation.navigate("OrderOptions", {UserFound: route.params.userDetails.UserFound, UserData: route.params.userDetails.UserData}); }
                 }
               ]
             );

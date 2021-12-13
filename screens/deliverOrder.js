@@ -13,7 +13,7 @@ import {
 import { globalStyles } from "../styles/global";
 import { useSafeAreaFrame } from "react-native-safe-area-context";
 
-export default function OrderDetailsScreen({ route, navigation }) {
+export default function DeliverOrderScreen({ route, navigation }) {
   const [isLoading, setLoading] = useState(true);
   const [myOrderData, setMyData] = useState([]);
   const getOrderItems = async () => {
@@ -32,7 +32,7 @@ export default function OrderDetailsScreen({ route, navigation }) {
   };
   const handleDeliverOrder = async () => {
     try {
-      const response = await fetch('https://still-crag-08186.herokuapp.com/order/' + route.params.id, {
+      const response = await fetch('https://still-crag-08186.herokuapp.com/order/' + route.params.item.id, {
         method: 'PUT',
         headers: {
           Accept: 'application/json',
@@ -41,16 +41,17 @@ export default function OrderDetailsScreen({ route, navigation }) {
         body: JSON.stringify({
           userID: route.params.item.id,
           diningHallId: 1,
-          status: 'in-transit'
+          status: 'completed'
         })
       });
+      console.log(route.params);
       Alert.alert(
         "Thank you!",
         "Please deliver the order as soon as possible.",
         [
           {
             text: "OK",
-            onPress: () => { navigation.navigate("Deliver Order", route.params) }
+            onPress: () => { navigation.navigate("OrderOptions", { UserFound: route.params.params.UserFound, UserData: route.params.params.UserData }); }
           }
         ]
       );
@@ -72,10 +73,10 @@ export default function OrderDetailsScreen({ route, navigation }) {
           {/* <Text style={styles.title}>Order ID: {route.params.item.id}</Text> */}
           <Text style={styles.title}>Name: {route.params.item.fname} {route.params.item.lname}</Text>
           <Text style={styles.title}>Location: {route.params.item.location}</Text>
-          <Text style={styles.title}>Order Status: {route.params.item.status}</Text>
+          <Text style={styles.title}>Order Status: {'In-transit'}</Text>
           <FlatList
             flexDirection={"row"}
-            ListHeaderComponent={<Text style={styles.headerTitle}>Items to Pick Up</Text>}
+            ListHeaderComponent={<Text style={styles.headerTitle}>Items to Deliver</Text>}
             ListFooterComponent={<Text style={{ backgroundColor: '#E5E5E5' }}></Text>}
             style={styles.availableOrderList}
             data={myOrderData}
@@ -106,7 +107,7 @@ export default function OrderDetailsScreen({ route, navigation }) {
       {/*Deliver Button */}
       {/* <View style={styles.dashWrapper}> */}
       <TouchableOpacity style={styles.input} onPress={() => handleDeliverOrder()}>
-        <Text style={styles.detailsText}>Accept Order</Text>
+        <Text style={styles.detailsText}>Completed</Text>
       </TouchableOpacity>
       {/* </View> */}
     </View>
