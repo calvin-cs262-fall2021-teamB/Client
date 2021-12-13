@@ -169,16 +169,3 @@ const loginStyles = StyleSheet.create({
     justifyContent: "flex-end",
   },
 });
-//<View style={styles.container}>
-//       <Text>Get ready to login to Azure</Text>
-//       <View style={styles.button}>
-//         <Button
-//           onPress={() => navigation.navigate("SignIn")}
-//           title="Sign In"
-//           style={styles.title}
-//           color={buttonColour}
-//           accessibilityLabel="Learn more about this purple button"
-//         />
-//       </View>
-//       <StatusBar style="auto" />
-//     </View>
