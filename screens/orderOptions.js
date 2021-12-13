@@ -20,11 +20,14 @@ export default function OrderOptionsScreen({ route, navigation }) {
   const [orderData, setData] = useState([]);
   const [myOrderData, setMyData] = useState([]);
   const [myIsLoading, setMyLoading] = useState(true);
+
+  //profile
   const [UserID, setUserID] = useState([]);
   const [UserFname, setUserFname] = useState([]);
   const [UserLname, setUserLname] = useState([]);
   const [UserLocation, setUserLocation] = useState([]);
-  const [MyActiveOrders, setMyActiveOrderData] = useState([]);
+
+  const [MyActiveOrders, setMyActiveOrderData] = useState([]); //my orders
   const getOrders = async () => {
     console.log(route.params);
     try {
