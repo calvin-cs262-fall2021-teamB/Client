@@ -242,31 +242,34 @@ export default function LandingScreen({ route, navigation }) {
     console.log(route.params);
     return (
       <View style={globalStyles.container}>
-        <Text>Welcome New User</Text>
-        <Text>Please fill out your user details</Text>
-        <TextInput
-          style={styles.loginMessage}
-          placeholder="Enter your first name"
-          onChangeText={(text) => setUserFname(text)}
-        ></TextInput>
-        <TextInput
-          style={styles.loginMessage}
-          placeholder="Enter your last name"
-          onChangeText={(text) => setUserLname(text)}
-        ></TextInput>
-        <TextInput
-          style={styles.loginMessage}
-          placeholder="Enter your location"
-          onChangeText={(text) => setUserLocation(text)}
-        ></TextInput>
-        <TouchableOpacity
-          onPress={() => handleCreateUser()}
-          style={styles.buttonContainer}
-        >
-          <View style={styles.submitContainer}>
-            <Text style={styles.text}>{"Create User"}</Text>
-          </View>
-        </TouchableOpacity>
+        <View style={styles.centeredView}>
+          <Text style={{ fontSize: 30 }}>Welcome!</Text>
+          <Text style={{ fontSize: 22 }}>Please Provide Your User Details</Text>
+          <TextInput
+            style={styles.loginMessage}
+            placeholder="Enter First Name"
+            placeholderTextColor={"#800000"}
+            onChangeText={(text) => setUserFname(text)}
+          ></TextInput>
+          <TextInput
+            style={styles.loginMessage}
+            placeholder="Enter Last Name"
+            placeholderTextColor={"#800000"}
+            onChangeText={(text) => setUserLname(text)}
+          ></TextInput>
+          <TextInput
+            style={styles.loginMessage}
+            placeholder="Enter Location"
+            placeholderTextColor={"#800000"}
+            onChangeText={(text) => setUserLocation(text)}
+          ></TextInput>
+          <TouchableOpacity
+            onPress={() => handleCreateUser()}
+            style={styles.buttonContainer}
+          >
+            <Text style={styles.createText}>{"Create User"}</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
@@ -343,6 +346,13 @@ export const styles = StyleSheet.create({
     width: "90%",
     marginTop: "12%",
     marginHorizontal: "5%",
+  },
+
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: "-20%",
   },
 
   utilityContainer: {
@@ -472,5 +482,26 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.9,
     shadowRadius: 3,
     elevation: 3,
+  },
+  loginMessage: {
+    fontSize: 16,
+    borderWidth: 2,
+    margin: 4,
+    padding: 8,
+    width: "60%",
+    textAlign: "center",
+    backgroundColor: "white",
+  },
+  buttonContainer: {
+    borderWidth: 2,
+    margin: 10,
+    padding: 14,
+    borderRadius: 15,
+    backgroundColor: "#800000",
+  },
+  createText: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "white",
   },
 });
