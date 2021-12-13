@@ -33,15 +33,33 @@ export default function LoginHelp({ navigation }) {
           setOpen(!open);
         }}
       >
-        <Text>This is the Landing Screen</Text>
-        <Text>{'\n'}View the menu by clicking on the different images across the center of the page</Text>
-        <Text>{'\n'}Place your order by going to the cart</Text>
-        <Text>
-        {'\n'}View your profile details and current active orders by visiting the profile page from the bottom right
-        </Text>
-        <TouchableOpacity onPress={closeList}>
-          <Text>Close Me</Text>
-        </TouchableOpacity>
+        <View style={styles.modalView}>
+          <Text style={{ fontSize: 24 }}>This is the Order Screen</Text>
+          <Text style={{ fontSize: 21 }}>
+            {"\n"}View the menu by clicking on the different images across the
+            center of the page.
+          </Text>
+          <Text style={{ fontSize: 21 }}>
+            {"\n"}Place your order by clicking on the cart button.
+          </Text>
+          <Text style={{ fontSize: 21 }}>
+            {"\n"}View your profile details and current active orders by
+            visiting the profile page from the bottom right.
+          </Text>
+          <TouchableOpacity style={styles.closeModal} onPress={closeList}>
+            <Text
+              style={{
+                fontWeight: "bold",
+                color: "white",
+                textAlign: "center",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              Close Help
+            </Text>
+          </TouchableOpacity>
+        </View>
       </Modal>
     </SafeAreaView>
   );
@@ -91,6 +109,18 @@ const styles = StyleSheet.create({
     color: "#FFD700",
     fontWeight: "bold",
     fontSize: 17,
+  },
+
+  closeModal: {
+    borderWidth: 2,
+    justifyContent: "center",
+    alignItems: "center",
+    width: "40%",
+    backgroundColor: "#800000",
+    alignSelf: "center",
+    borderRadius: 15,
+    marginTop: 10,
+    marginBottom: 10,
   },
 
   confirmWrapper: {
