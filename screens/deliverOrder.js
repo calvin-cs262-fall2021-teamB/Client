@@ -49,8 +49,8 @@ export default function DeliverOrderScreen({ route, navigation }) {
       );
       console.log(route.params);
       Alert.alert(
-        "Thank you!",
-        "Please deliver the order as soon as possible.",
+        "Congratuations!",
+        "Thanks for delivering an order.",
         [
           {
             text: "OK",

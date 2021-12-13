@@ -88,7 +88,7 @@ export default function CartScreen({ navigation, route }) {
         />
       </View>
       <View>
-        <Text>Total Price: ${parseFloat(orderPriceTotal).toFixed(2)}</Text>
+        <Text  style={styles.reviewTitle2}>Total Price: ${parseFloat(orderPriceTotal).toFixed(2)}</Text>
       </View>
       {/*Deliver Button */}
       <View style={styles.dashWrapper}>
@@ -150,6 +150,13 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 35,
     paddingBottom: 10,
+  },
+  reviewTitle2: {
+    fontWeight: "bold",
+    fontSize: 25,
+    paddingBottom: 10,
+    marginLeft: '5%',
+    marginBottom: '3%'
   },
   placeOrder: {
     backgroundColor: "#800000",
