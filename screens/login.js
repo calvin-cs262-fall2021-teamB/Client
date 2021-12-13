@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import {
+  Alert,
+  TextInput,
   StyleSheet,
   TouchableWithoutFeedback,
   Keyboard,
@@ -12,9 +14,61 @@ import {
 } from "react-native";
 
 export default function HomeScreen({ navigation }) {
-  const handleSubmitLogin = () => {
-    navigation.navigate("Food Screen");
+  const handleNavigate = async () => {
+    try {
+      const response = await fetch(
+        "https://still-crag-08186.herokuapp.com/users/" + UserID
+      );
+      const json = await response.json();
+      navigation.navigate("OrderOptions", {UserFound: true, UserData: json});
+    } catch (error) {
+      navigation.navigate("OrderOptions", {UserFound: false, UserData: UserID});
+    }
   };
+  const handleSubmitLogin = () => {
+    if (UserID.length === 7 && !isNaN(UserID)) {
+      Alert.alert(
+        "Confirm Your Entry!",
+        "ID: " + UserID,
+        [
+          {
+            text: "Cancel",
+            onPress: () => { navigation.navigate("Login"); }
+          },
+          {
+            text: "OK",
+            onPress: () => { handleNavigate(); }
+          }
+        ]
+      );
+    }
+    else if (UserID.length === 0) {
+      Alert.alert(
+        "Oops!",
+        "Please enter your Calvin ID in the box above.",
+        [
+          {
+            text: "OK",
+            onPress: () => { navigation.navigate('Login'); }
+          }
+        ]
+      );
+    }
+    else {
+      Alert.alert(
+        "Oops!",
+        "Your Calvin ID is a 7 digit number. Please try again.",
+        [
+          {
+            text: "OK",
+            onPress: () => { navigation.navigate('Login'); }
+          }
+        ]
+      );
+    }
+  };
+  const [UserID, setUserID] = useState([]);
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : null}
@@ -28,9 +82,10 @@ export default function HomeScreen({ navigation }) {
               source={require("../images/ylw_logo.png")}
             />
             <Text style={loginStyles.login}>{"Login"}</Text>
-            <Text style={loginStyles.loginMessage}>
-              {"Please sign in with your Calvin email"}
-            </Text>
+            <TextInput style={loginStyles.loginMessage}
+              placeholder='Enter your Calvin ID to Sign In'
+              onChangeText={(text) => setUserID(text)}>
+            </TextInput>
             <View style={{ margin: 7 }} />
             {/* <TouchableOpacity onPress={() => handleSubmitLogin()} style={loginStyles.buttonContainer}> */}
             <TouchableOpacity
@@ -66,8 +121,8 @@ const loginStyles = StyleSheet.create({
     justifyContent: "flex-end",
   },
   login: {
-    marginTop: "20%",
-    marginBottom: "3%",
+    marginTop: "15%",
+    marginBottom: "6%",
     fontSize: 35,
     color: "#333",
   },
@@ -78,10 +133,14 @@ const loginStyles = StyleSheet.create({
     color: "#333",
   },
   loginMessage: {
-    marginLeft: 10,
+    height: 40,
+    marginHorizontal: 5,
     marginBottom: 15,
     fontSize: 18,
     color: "#333",
+    borderColor: '#800000',
+    borderWidth: 1,
+    padding: 10
   },
   text: {
     fontSize: 18,
@@ -110,16 +169,3 @@ const loginStyles = StyleSheet.create({
     justifyContent: "flex-end",
   },
 });
-//<View style={styles.container}>
-//       <Text>Get ready to login to Azure</Text>
-//       <View style={styles.button}>
-//         <Button
-//           onPress={() => navigation.navigate("SignIn")}
-//           title="Sign In"
-//           style={styles.title}
-//           color={buttonColour}
-//           accessibilityLabel="Learn more about this purple button"
-//         />
-//       </View>
-//       <StatusBar style="auto" />
-//     </View>

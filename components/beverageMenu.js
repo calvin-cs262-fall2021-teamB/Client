@@ -39,7 +39,6 @@ export default function BeverageMenu({ navigation, setBeverageData }) {
     setOpen(false);
     const orderArray = orderData.filter((item) => item.selected);
     setBeverageData(orderArray);
-    console.log(orderArray);
   };
   const onUpdateValue = (index, value) => {
     orderData[index].selected = value;
@@ -79,22 +78,29 @@ export default function BeverageMenu({ navigation, setBeverageData }) {
             ))}
         </View>
       </View>
-      <Modal animationType="slide" transparent={true} visible={open === true}>
-        <TouchableOpacity
-          activeOpacity={1}
-          onPressOut={closeList}
-          style={{ flex: 1 }}
-        >
-          <View style={{ flex: 1, marginTop: 250 }}>
-            <View style={styles.listWrapper}>
-              <View style={styles.listContainer}>
-                <FlatList
-                  data={orderData}
-                  renderItem={renderItem}
-                  keyExtractor={({ id }, index) => id.toString()}
-                />
-              </View>
-            </View>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={open === true}
+        onRequestClose={() => {
+          Alert.alert("Food Menu has been closed.");
+          setOpen(!open);
+        }}
+      >
+        <TouchableOpacity activeOpacity={1} style={styles.modalView}>
+          <Text style={styles.selectText}>Select Drink Items</Text>
+          <View style={styles.menuContainer}>
+            <FlatList
+              data={orderData}
+              renderItem={renderItem}
+              keyExtractor={({ id }, index) => id.toString()}
+              keyboardShouldPersistTaps="always"
+            />
+          </View>
+          <View style={styles.confirmWrapper}>
+            <TouchableOpacity style={styles.confirmButton} onPress={closeList}>
+              <Text style={styles.confirmText}>Confirm Items</Text>
+            </TouchableOpacity>
           </View>
         </TouchableOpacity>
       </Modal>
@@ -112,17 +118,22 @@ const ItemRenderer = ({
   index,
   name,
   description,
+  image,
   price,
   selected,
   onUpdateValue,
 }) => (
   <View style={styles.modalItem}>
+    <View style={styles.imageContainer}>
+      <Image style={styles.bevImage} source={{ uri: image }}></Image>
+    </View>
     <Text style={styles.modalTitle}>
-      {name} - {description}: {price}
+      {name} ({description}): {price}
     </Text>
     <Switch
       value={selected}
       onValueChange={(value) => onUpdateValue(index, value)}
+      style={{ marginRight: 5 }}
     />
   </View>
 );
@@ -130,6 +141,7 @@ const ItemRenderer = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    height: "20%",
   },
 
   bevButton: {
@@ -140,7 +152,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#800000",
     justifyContent: "center",
     alignItems: "center",
-    width: "100%",
   },
 
   bevMenu: {
@@ -155,35 +166,87 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 
-  listWrapper: {
+  confirmButton: {
     flex: 1,
-    shadowColor: "#000000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.5,
-    elevation: 10,
-    shadowRadius: 5,
+    backgroundColor: "#800000",
+    borderRadius: 25,
+    justifyContent: "center",
+    alignItems: "center",
+    borderColor: "black",
+    borderWidth: 1,
   },
-  listContainer: {
+
+  confirmText: {
+    color: "#FFD700",
+    fontWeight: "bold",
+    fontSize: 17,
+  },
+
+  confirmWrapper: {
+    height: 75,
+    bottom: "1%",
+    paddingTop: 5,
+    paddingBottom: 5,
+  },
+
+  bevImage: {
+    height: "100%",
+    width: "100%",
+  },
+
+  imageContainer: {
+    height: "100%",
+    width: "20%",
+    borderBottomLeftRadius: 25,
+    borderTopLeftRadius: 25,
+    borderRightWidth: 1,
+    marginLeft: -1,
+  },
+
+  menuContainer: {
     flex: 1,
     backgroundColor: "#FFD700",
-    borderTopLeftRadius: 15,
-    borderTopRightRadius: 15,
+    borderRadius: 0,
+    marginBottom: 17,
+    borderWidth: 1,
   },
 
   modalItem: {
+    height: 80,
+    width: "100%",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    padding: 20,
     borderBottomWidth: 1,
     borderBottomColor: "#800000",
   },
   modalTitle: {
     textTransform: "capitalize",
     color: "black",
-    fontSize: 16,
+    fontSize: 17,
   },
-  selectedBeverages: {
+  modalView: {
+    flex: 1,
+    margin: "3%",
+    marginTop: "80%",
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: "3%",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 2,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  selectText: {
+    fontSize: 21,
+    fontWeight: "bold",
+    marginBottom: 10,
+  },
+  selectedBeverage: {
     fontSize: 15,
   },
   selectedItems: {
