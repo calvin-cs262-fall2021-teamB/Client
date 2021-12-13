@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   View,
   ActivityIndicator,
-  TextInput
+  TextInput,
 } from "react-native";
 import { AzureInstance, AzureLoginView } from "auth4061";
 import RCTNetworking from "react-native/Libraries/Network/RCTNetworking";
@@ -42,7 +42,8 @@ export default function OrderOptionsScreen({ route, navigation }) {
   const getMyActiveOrders = async () => {
     try {
       const response = await fetch(
-        "https://still-crag-08186.herokuapp.com/myActiveOrders/" + route.params.UserData.id
+        "https://still-crag-08186.herokuapp.com/myActiveOrders/" +
+          route.params.UserData.id
       );
       const json = await response.json();
       setMyActiveOrderData(json);
@@ -55,7 +56,8 @@ export default function OrderOptionsScreen({ route, navigation }) {
   const getMyOrders = async () => {
     try {
       const response = await fetch(
-        "https://still-crag-08186.herokuapp.com/myOrders/" + route.params.UserData.id
+        "https://still-crag-08186.herokuapp.com/myOrders/" +
+          route.params.UserData.id
       );
       const json = await response.json();
       setMyData(json);
@@ -73,40 +75,43 @@ export default function OrderOptionsScreen({ route, navigation }) {
       const json = await response.json();
       navigation.navigate("OrderOptions", { UserFound: true, UserData: json });
     } catch (error) {
-      navigation.navigate("OrderOptions", { UserFound: false, UserData: UserID });
+      navigation.navigate("OrderOptions", {
+        UserFound: false,
+        UserData: UserID,
+      });
     }
   };
   const handleCreateUser = async () => {
     console.log(UserID);
     try {
-      const response = await fetch('https://still-crag-08186.herokuapp.com/users', {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          ID: parseInt(UserID),
-          fname: UserFname.toString(),
-          lname: UserLname.toString(),
-          location: UserLocation.toString(),
-        })
-      });
-      Alert.alert(
-        "Success!",
-        "Welcome to KnightDash",
-        [
-          {
-            text: "OK",
-            onPress: () => { handleNavigate(); }
-          }
-        ]
+      const response = await fetch(
+        "https://still-crag-08186.herokuapp.com/users",
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            ID: parseInt(UserID),
+            fname: UserFname.toString(),
+            lname: UserLname.toString(),
+            location: UserLocation.toString(),
+          }),
+        }
       );
-    }
-    catch (error) {
+      Alert.alert("Success!", "Welcome to KnightDash", [
+        {
+          text: "OK",
+          onPress: () => {
+            handleNavigate();
+          },
+        },
+      ]);
+    } catch (error) {
       console.error(error);
     }
-  }
+  };
   useEffect(() => {
     getOrders();
   }, []);
@@ -116,52 +121,48 @@ export default function OrderOptionsScreen({ route, navigation }) {
     if (route.params.UserFound) {
       getMyOrders();
       getMyActiveOrders();
-    }
-    else {
-      setUserID(route.params.UserData)
+    } else {
+      setUserID(route.params.UserData);
     }
   }, []);
   const handleCreateOrder = async () => {
     if (myOrderData.length < 1) {
       try {
-        const response = await fetch('https://still-crag-08186.herokuapp.com/order', {
-          method: 'POST',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            userID: parseInt(route.params.UserData.id),
-            diningHallId: 1,
-            status: 'active'
-          })
-        });
-        navigation.navigate("Menu", route.params);
-      }
-      catch (error) {
+        const response = await fetch(
+          "https://still-crag-08186.herokuapp.com/order",
+          {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              userID: parseInt(route.params.UserData.id),
+              diningHallId: 1,
+              status: "active",
+            }),
+          }
+        );
+        navigation.navigate("Main", route.params);
+      } catch (error) {
         console.error(error);
       }
-    }
-    else {
-      Alert.alert(
-        "Oops!",
-        "You may only have one active order at a time.",
-        [
-          {
-            text: "OK",
-          }
-        ]
-      );
+    } else {
+      Alert.alert("Oops!", "You may only have one active order at a time.", [
+        {
+          text: "OK",
+        },
+      ]);
     }
   };
   const handleProfile = () => {
     navigation.navigate("Profile", route.params);
-  }
+  };
   const handleReloadPage = () => {
     getOrders();
     getMyOrders();
     getMyActiveOrders();
-  }
+  };
   const handleViewOrders = () => {
     navigation.navigate("AvailableOrders", route.params);
   };
@@ -199,7 +200,7 @@ export default function OrderOptionsScreen({ route, navigation }) {
       {
         text: "OK",
         onPress: () => {
-          RCTNetworking.clearCookies(() => { });
+          RCTNetworking.clearCookies(() => {});
           setLoginSuccess(false);
           navigation.navigate("Login");
         },
@@ -219,22 +220,23 @@ export default function OrderOptionsScreen({ route, navigation }) {
     console.log(route.params);
     return (
       <View style={globalStyles.container}>
-        <Text>
-          Welcome New User
-        </Text>
+        <Text>Welcome New User</Text>
         <Text>Please fill out your user details</Text>
-        <TextInput style={styles.loginMessage}
-          placeholder='Enter your first name'
-          onChangeText={(text) => setUserFname(text)}>
-        </TextInput>
-        <TextInput style={styles.loginMessage}
-          placeholder='Enter your last name'
-          onChangeText={(text) => setUserLname(text)}>
-        </TextInput>
-        <TextInput style={styles.loginMessage}
-          placeholder='Enter your location'
-          onChangeText={(text) => setUserLocation(text)}>
-        </TextInput>
+        <TextInput
+          style={styles.loginMessage}
+          placeholder="Enter your first name"
+          onChangeText={(text) => setUserFname(text)}
+        ></TextInput>
+        <TextInput
+          style={styles.loginMessage}
+          placeholder="Enter your last name"
+          onChangeText={(text) => setUserLname(text)}
+        ></TextInput>
+        <TextInput
+          style={styles.loginMessage}
+          placeholder="Enter your location"
+          onChangeText={(text) => setUserLocation(text)}
+        ></TextInput>
         <TouchableOpacity
           onPress={() => handleCreateUser()}
           style={styles.buttonContainer}
@@ -306,7 +308,12 @@ export default function OrderOptionsScreen({ route, navigation }) {
             <TouchableOpacity>
               <Text
                 style={styles.availableOrder}
-                onPress={() => navigation.navigate("Order Details", {item: item, params: route.params})}
+                onPress={() =>
+                  navigation.navigate("Order Details", {
+                    item: item,
+                    params: route.params,
+                  })
+                }
               >
                 Order {item.id}, {item.location}
               </Text>
@@ -416,9 +423,9 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     fontSize: 18,
     color: "#333",
-    borderColor: '#800000',
+    borderColor: "#800000",
     borderWidth: 1,
-    padding: 10
+    padding: 10,
   },
   text: {
     fontSize: 18,

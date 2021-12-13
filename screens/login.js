@@ -20,49 +20,47 @@ export default function HomeScreen({ navigation }) {
         "https://still-crag-08186.herokuapp.com/users/" + UserID
       );
       const json = await response.json();
-      navigation.navigate("OrderOptions", {UserFound: true, UserData: json});
+      navigation.navigate("Landing", { UserFound: true, UserData: json });
     } catch (error) {
-      navigation.navigate("OrderOptions", {UserFound: false, UserData: UserID});
+      navigation.navigate("Landing", { UserFound: false, UserData: UserID });
     }
   };
   const handleSubmitLogin = () => {
     if (UserID.length === 7 && !isNaN(UserID)) {
-      Alert.alert(
-        "Confirm Your Entry!",
-        "ID: " + UserID,
-        [
-          {
-            text: "Cancel",
-            onPress: () => { navigation.navigate("Login"); }
+      Alert.alert("Confirm Your Entry!", "ID: " + UserID, [
+        {
+          text: "Cancel",
+          onPress: () => {
+            navigation.navigate("Login");
           },
-          {
-            text: "OK",
-            onPress: () => { handleNavigate(); }
-          }
-        ]
-      );
-    }
-    else if (UserID.length === 0) {
-      Alert.alert(
-        "Oops!",
-        "Please enter your Calvin ID in the box above.",
-        [
-          {
-            text: "OK",
-            onPress: () => { navigation.navigate('Login'); }
-          }
-        ]
-      );
-    }
-    else {
+        },
+        {
+          text: "OK",
+          onPress: () => {
+            handleNavigate();
+          },
+        },
+      ]);
+    } else if (UserID.length === 0) {
+      Alert.alert("Oops!", "Please enter your Calvin ID in the box above.", [
+        {
+          text: "OK",
+          onPress: () => {
+            navigation.navigate("Login");
+          },
+        },
+      ]);
+    } else {
       Alert.alert(
         "Oops!",
         "Your Calvin ID is a 7 digit number. Please try again.",
         [
           {
             text: "OK",
-            onPress: () => { navigation.navigate('Login'); }
-          }
+            onPress: () => {
+              navigation.navigate("Login");
+            },
+          },
         ]
       );
     }
@@ -82,10 +80,11 @@ export default function HomeScreen({ navigation }) {
               source={require("../images/ylw_logo.png")}
             />
             <Text style={loginStyles.login}>{"Login"}</Text>
-            <TextInput style={loginStyles.loginMessage}
-              placeholder='Enter your Calvin ID to Sign In'
-              onChangeText={(text) => setUserID(text)}>
-            </TextInput>
+            <TextInput
+              style={loginStyles.loginMessage}
+              placeholder="Enter your Calvin ID to Sign In"
+              onChangeText={(text) => setUserID(text)}
+            ></TextInput>
             <View style={{ margin: 7 }} />
             {/* <TouchableOpacity onPress={() => handleSubmitLogin()} style={loginStyles.buttonContainer}> */}
             <TouchableOpacity
@@ -138,9 +137,9 @@ const loginStyles = StyleSheet.create({
     marginBottom: 15,
     fontSize: 18,
     color: "#333",
-    borderColor: '#800000',
+    borderColor: "#800000",
     borderWidth: 1,
-    padding: 10
+    padding: 10,
   },
   text: {
     fontSize: 18,

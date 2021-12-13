@@ -14,11 +14,11 @@ import OrderDetailsScreen from "./screens/orderDetails";
 import OrderDetails2Screen from "./screens/orderDetails2";
 import ProfileScreen from "./screens/profile";
 import DeliverOrderScreen from "./screens/deliverOrder";
+import LandingScreen from "./screens/orderfood";
+import Tabs from "./shared/bottomHeader";
 const Stack = createNativeStackNavigator();
-function Home(){
-  return(  <Tabs/>
-    )
-
+function Landing() {
+  return <Tabs />;
 }
 function App() {
   return (
@@ -76,11 +76,13 @@ function App() {
           component={ProfileScreen}
           options={({ navigation }) => ({})}
         />
+        <Stack.Screen
+          name="Landing"
+          component={Landing}
+          options={{ headerShown: false }}
+        />
       </Stack.Navigator>
-
-
     </NavigationContainer>
-    
   );
 }
 export default App;

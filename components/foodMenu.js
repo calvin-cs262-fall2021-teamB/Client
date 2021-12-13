@@ -60,24 +60,12 @@ export default function FoodMenu({ navigation, setFoodData }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.foodMenu}>
-        <TouchableOpacity onPress={openList}>
-          <View style={styles.foodButton}>
-            <Text style={styles.buttonText}>Food Menu</Text>
-          </View>
-        </TouchableOpacity>
-        <View>
-          <Text style={styles.selectedItems}>Selected Foods</Text>
-          {/* Displays Selected Items */}
-          {orderData
-            .filter((item) => item.selected)
-            .map((item) => (
-              <Text style={styles.selectedFood} key={item.id}>
-                {item.itemname}
-              </Text>
-            ))}
-        </View>
-      </View>
+      <TouchableOpacity style={styles.IconBox} onPress={openList}>
+        <Image
+          style={styles.IconBox2}
+          source={require("../images/foodw.png")}
+        />
+      </TouchableOpacity>
       <Modal
         animationType="slide"
         transparent={true}
@@ -107,12 +95,6 @@ export default function FoodMenu({ navigation, setFoodData }) {
     </SafeAreaView>
   );
 }
-
-// click plus
-// select food-drink items from modals
-//   - each item is either selected or not selected
-// review order button displays only selected items
-// button to create/place the order
 
 const ItemRenderer = ({
   index,
@@ -144,20 +126,21 @@ const styles = StyleSheet.create({
     height: "20%",
   },
 
-  foodButton: {
-    padding: 20,
-    borderWidth: 2,
-    borderRadius: 15,
-    borderColor: "#000",
+  IconBox: {
+    width: "28%",
     backgroundColor: "#800000",
+    borderRadius: 20,
+    shadowColor: "#000000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.9,
+    shadowRadius: 3,
+    elevation: 3,
     justifyContent: "center",
-    alignItems: "center",
   },
-
-  foodMenu: {
-    flex: 1,
-    backgroundColor: "#E5E5E5",
-    padding: 15,
+  IconBox2: {
+    width: 25,
+    height: 25,
+    alignSelf: "center",
   },
 
   buttonText: {
