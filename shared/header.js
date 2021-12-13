@@ -1,16 +1,17 @@
 import React from "react";
 import { StyleSheet, View, Image, Text, TouchableOpacity } from "react-native";
+import { ScreenStackHeaderRightView } from "react-native-screens";
 
 export default function Header({ navigation }) {
   return (
     <View>
-      <Image
+      {/*<Image
         style={headerStyles.headerImage}
         source={require("../images/calvin-removebg-preview.png")}
-      />
+      />*/}
       <TouchableOpacity onPress={() => navigation.navigate('Help')}>
-                <Text style={headerStyles.helpButton}>?</Text>
-            </TouchableOpacity>
+        <Text style={headerStyles.helpButton}>?</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -24,6 +25,6 @@ const headerStyles = StyleSheet.create({
     left: "7%",
   },
   helpButton: {
-
-  }
+    textAlign: 'right',
+  },
 });

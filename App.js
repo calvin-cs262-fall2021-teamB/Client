@@ -13,6 +13,13 @@ import AvailableOrdersScreen from "./screens/availableOrders";
 import OrderDetailsScreen from "./screens/orderDetails";
 import ProfileScreen from "./screens/profile";
 import HelpScreen from "./screens/help";
+import loginHelp from "./screens/loginHelp";
+import newOrderHelp from "./screens/newOrderHelp";
+import addItemsHelp from "./screens/addItemsHelp";
+import selectOrderHelp from "./screens/selectOrderHelp";
+import signOutHelp from "./screens/signOutHelp";
+import refreshPageHelp from "./screens/refreshPageHelp";
+import viewProfileHelp from "./screens/viewProfileHelp";
 const Stack = createNativeStackNavigator();
 
 function App() {
@@ -28,42 +35,89 @@ function App() {
           name="Login"
           component={HomeScreen}
           options={({ navigation }) => ({
-            headerTitle: () => <Header navigation={navigation} />,
+            headerRight: () => <Header navigation={navigation} />,
           })}
         />
         <Stack.Screen
           name="OrderOptions"
           component={OrderOptionsScreen}
-          options={({ navigation }) => ({})}
+          options={({ navigation }) => ({ 
+            headerRight: () => <Header navigation={navigation} />,
+          })}
         />
         <Stack.Screen
           name="Menu"
           component={MenuScreen}
-          options={({ navigation }) => ({})}
+          options={({ navigation }) => ({ 
+            headerRight: () => <Header navigation={navigation} />,
+          })}
         />
         <Stack.Screen
           name="Cart"
           component={CartScreen}
-          options={({ navigation }) => ({})}
+          options={({ navigation }) => ({
+            headerRight: () => <Header navigation={navigation} />,
+        })}
         />
         <Stack.Screen
           name="AvailableOrders"
           component={AvailableOrdersScreen}
-          options={({ navigation }) => ({})}
+          options={({ navigation }) => ({
+            headerRight: () => <Header navigation={navigation} />,
+          })}
         />
         <Stack.Screen
           name="Order Details"
           component={OrderDetailsScreen}
-          options={({ navigation }) => ({})}
+          options={({ navigation }) => ({
+            headerRight: () => <Header navigation={navigation} />,
+        })}
         />
         <Stack.Screen
           name="Profile"
           component={ProfileScreen}
-          options={({ navigation }) => ({})}
+          options={({ navigation }) => ({
+            headerRight: () => <Header navigation={navigation} />,
+        })}
         />
         <Stack.Screen
           name="Help"
           component={HelpScreen}
+          options={({ navigation }) => ({})}
+        />
+        <Stack.Screen
+          name="Login Help"
+          component={loginHelp}
+          options={({ navigation }) => ({})}
+        />
+        <Stack.Screen
+          name="New Order Help"
+          component={newOrderHelp}
+          options={({ navigation }) => ({})}
+        />
+        <Stack.Screen
+          name="Add Items Help"
+          component={addItemsHelp}
+          options={({ navigation }) => ({})}
+        />
+        <Stack.Screen
+          name="Select Order Help"
+          component={selectOrderHelp}
+          options={({ navigation }) => ({})}
+        />
+        <Stack.Screen
+          name="Sign Out Help"
+          component={signOutHelp}
+          options={({ navigation }) => ({})}
+        />
+        <Stack.Screen
+          name="Refresh Page Help"
+          component={refreshPageHelp}
+          options={({ navigation }) => ({})}
+        />
+        <Stack.Screen
+          name="View Profile Help"
+          component={viewProfileHelp}
           options={({ navigation }) => ({})}
         />
       </Stack.Navigator>
