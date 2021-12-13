@@ -166,7 +166,6 @@ export default function LandingScreen({ route, navigation }) {
             }),
           }
         );
-        navigation.navigate("Main", route.params);
       } catch (error) {
         console.error(error);
       }
@@ -280,7 +279,11 @@ export default function LandingScreen({ route, navigation }) {
         <View style={styles.IconWrapper1}>
           <FoodMenu setFoodData={setFoodData} />
           <BeverageMenu setBeverageData={setBeverageData} />
-          <TouchableOpacity onPress={handleCart} style={styles.CartButton}>
+          <TouchableOpacity
+            onPressIn={() => handleCreateOrder()}
+            onPressOut={() => handleCart()}
+            style={styles.CartButton}
+          >
             <Image
               style={styles.IconBox2}
               source={require("../images/cart.png")}
@@ -299,19 +302,28 @@ export default function LandingScreen({ route, navigation }) {
           </Text>
         </View>
         <View style={{ flexDirection: "row", bottom: "5%", height: "10%" }}>
-          <TouchableOpacity style={styles.IconBox}>
+          <TouchableOpacity
+            style={styles.IconBox}
+            onPress={() => navigation.navigate("Landing", { UserFound: true })}
+          >
             <Image
               style={styles.IconBox2}
               source={require("../images/order.png")}
             />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.IconBox}>
+          <TouchableOpacity
+            style={styles.IconBox}
+            onPress={() => handleViewOrders()}
+          >
             <Image
               style={styles.IconBox2}
               source={require("../images/deliver.png")}
             />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.IconBox}>
+          <TouchableOpacity
+            style={styles.IconBox}
+            onPress={() => handleProfile()}
+          >
             <Image
               style={styles.IconBox2}
               source={require("../images/profile.png")}

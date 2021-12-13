@@ -6,38 +6,46 @@ import { globalStyles } from "../styles/global";
 export default function CartScreen({ navigation, route }) {
   const [myActiveOrderData, setmyActiveOrderData] = useState([]);
 
-  const orderPriceTotal = route.params.foodData.reduce((totalPrice, item) => totalPrice + parseFloat(item.price.replace('$', '')), 0);
+  const orderPriceTotal = route.params.foodData.reduce(
+    (totalPrice, item) => totalPrice + parseFloat(item.price.replace("$", "")),
+    0
+  );
   const getMyActiveOrders = async () => {
-    console.log(route.params)
+    console.log(route.params);
     try {
       const response = await fetch(
-        "https://still-crag-08186.herokuapp.com/myActiveOrders/" + route.params.userDetails.UserData.id
+        "https://still-crag-08186.herokuapp.com/myActiveOrders/" +
+          route.params.userDetails.UserData.id
       );
       const json = await response.json();
       setmyActiveOrderData(json);
     } catch (error) {
       console.error("no active orders yet");
-    } 
+    }
   };
   const handlePlaceOrder = async () => {
-    await Promise.all(route.params.foodData.map(async (item) => {
-      try {
-        const response = await fetch('https://still-crag-08186.herokuapp.com/orderItem', {
-          method: 'POST',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            orderID: parseInt(myActiveOrderData.id),
-            foodDrinkItemID: item.id,
-          })
-        });
-      }
-      catch (error) {
-        console.error(error);
-      }
-    }))
+    await Promise.all(
+      route.params.foodData.map(async (item) => {
+        try {
+          const response = await fetch(
+            "https://still-crag-08186.herokuapp.com/orderItem",
+            {
+              method: "POST",
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                orderID: parseInt(myActiveOrderData.id),
+                foodDrinkItemID: item.id,
+              }),
+            }
+          );
+        } catch (error) {
+          console.error(error);
+        }
+      })
+    );
   };
   useEffect(() => {
     getMyActiveOrders();
@@ -52,15 +60,15 @@ export default function CartScreen({ navigation, route }) {
           keyExtractor={({ id }, index) => id.toString()}
           renderItem={({ item }) => (
             <View>
-              <Text style={styles.item}>{item.itemname} {item.id}</Text>
+              <Text style={styles.item}>
+                {item.itemname} {item.id}
+              </Text>
             </View>
           )}
         />
       </View>
       <View>
-        <Text>
-          Total Price: ${parseFloat(orderPriceTotal).toFixed(2)}
-        </Text>
+        <Text>Total Price: ${parseFloat(orderPriceTotal).toFixed(2)}</Text>
       </View>
       {/*Deliver Button */}
       <View style={styles.dashWrapper}>
@@ -68,18 +76,18 @@ export default function CartScreen({ navigation, route }) {
           style={styles.placeOrder}
           onPress={() => {
             handlePlaceOrder();
-            Alert.alert(
-              "Congratulations!",
-              "Thanks for placing your order.",
-              [
-                {
-                  text: "OK",
-                  onPress: () => { navigation.navigate("OrderOptions", {UserFound: route.params.userDetails.UserFound, UserData: route.params.userDetails.UserData}); }
-                }
-              ]
-            );
-          }
-          }
+            Alert.alert("Congratulations!", "Thanks for placing your order.", [
+              {
+                text: "OK",
+                onPress: () => {
+                  navigation.navigate("Landing", {
+                    UserFound: route.params.userDetails.UserFound,
+                    UserData: route.params.userDetails.UserData,
+                  });
+                },
+              },
+            ]);
+          }}
         >
           <Text style={styles.detailsText}>Place Order</Text>
         </TouchableOpacity>
