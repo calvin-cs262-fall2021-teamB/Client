@@ -7,6 +7,7 @@ import {
   View,
   ActivityIndicator,
   Alert,
+  FlatList,
 } from "react-native";
 import { AzureInstance, AzureLoginView } from "auth4061";
 import RCTNetworking from "react-native/Libraries/Network/RCTNetworking";
@@ -15,7 +16,19 @@ import { globalStyles } from "../styles/global";
 export default function ProfileScreen({ route, navigation }) {
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [azureLoginObject, setAzureLoginObject] = useState({});
-
+  const [myOrderData, setMyData] = useState([]);
+  const getMyOrders = async () => {
+    try {
+      const response = await fetch(
+        "https://still-crag-08186.herokuapp.com/myOrders/" +
+          route.params.UserData.id
+      );
+      const json = await response.json();
+      setMyData(json);
+    } catch (error) {
+      console.log("no active orders yet");
+    } 
+  };
   const handleViewOrders = () => {
     navigation.navigate("AvailableOrders", route.params);
   };
@@ -40,6 +53,10 @@ export default function ProfileScreen({ route, navigation }) {
         },
       },
     ]);
+    useEffect(() => {
+        getMyOrders();
+      }, []);
+
   return (
     <View style={styles.profileContainer}>
       <View style={{ flex: 1, marginTop: "10%", marginLeft: 10 }}>
@@ -50,6 +67,25 @@ export default function ProfileScreen({ route, navigation }) {
           {"\nLast Name: " + route.params.UserData.lname}
           {"\nLocation: " + route.params.UserData.location}
         </Text>
+        {/* My Orders */}
+        <View style={globalStyles.orderLists}>
+          <Text style={globalStyles.sectionTitle}>My Orders</Text>
+        </View>
+        <FlatList
+          style={styles.myOrderList}
+          data={myOrderData}
+          keyExtractor={({ id }, index) => id.toString()}
+          renderItem={({ item }) => (
+            <TouchableOpacity>
+              <Text
+                style={styles.availableOrder}
+                onPress={() => navigation.navigate("My Order Details", item)}
+              >
+                Order {item.id}, {item.status}
+              </Text>
+            </TouchableOpacity>
+          )}
+        />
       </View>
 
       {/* Sign Out */}
@@ -179,6 +215,7 @@ const styles = StyleSheet.create({
     paddingBottom: "5%",
     marginLeft: "5%",
     color: "#800000",
+    marginVertical: '2%'
   },
   availableOrderList: {
     top: "-7%",
