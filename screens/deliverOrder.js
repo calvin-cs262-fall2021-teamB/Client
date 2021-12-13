@@ -85,6 +85,7 @@ export default function DeliverOrderScreen({ route, navigation }) {
             Location: {route.params.item.location}
           </Text>
           <Text style={styles.title}>Order Status: {"In-transit"}</Text>
+          <Text style={styles.title}>Order Total:</Text>
           <FlatList
             flexDirection={"row"}
             ListHeaderComponent={

@@ -15,6 +15,15 @@ import { globalStyles } from "../styles/global";
 export default function ProfileScreen({ route, navigation }) {
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [azureLoginObject, setAzureLoginObject] = useState({});
+
+  const handleViewOrders = () => {
+    navigation.navigate("AvailableOrders", route.params);
+  };
+
+  const handleProfile = () => {
+    navigation.navigate("Profile", route.params);
+  };
+
   const signOut = () =>
     Alert.alert("Sign Out", "Are you sure you want to sign out?", [
       {

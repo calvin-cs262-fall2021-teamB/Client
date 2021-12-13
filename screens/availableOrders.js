@@ -15,6 +15,14 @@ export default function AvailableOrdersScreen({ route, navigation }) {
   const [isLoading, setLoading] = useState(true);
   const [orderData, setData] = useState([]);
 
+  const handleViewOrders = () => {
+    navigation.navigate("AvailableOrders", route.params);
+  };
+
+  const handleProfile = () => {
+    navigation.navigate("Profile", route.params);
+  };
+
   const wait = (timeout) => {
     return new Promise((resolve) => setTimeout(resolve, timeout));
   };
@@ -66,21 +74,20 @@ export default function AvailableOrdersScreen({ route, navigation }) {
                 style={{
                   backgroundColor: "white",
                   width: "75%",
-                  height: "100%",
                   alignSelf: "center",
+                  justifyContent: "center",
                   borderRadius: 15,
                   borderWidth: 2,
+                  marginBottom: 5
                 }}
+                onPress={() =>
+                  navigation.navigate("Order Details", {
+                    item: item,
+                    params: route.params,
+                  })
+                }
               >
-                <Text
-                  style={styles.availableOrder}
-                  onPress={() =>
-                    navigation.navigate("Order Details", {
-                      item: item,
-                      params: route.params,
-                    })
-                  }
-                >
+                <Text style={styles.availableOrder}>
                   Order {item.id} ({item.location})
                 </Text>
               </TouchableOpacity>
