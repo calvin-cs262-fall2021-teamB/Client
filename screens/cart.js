@@ -37,7 +37,7 @@ export default function CartScreen({ navigation, route }) {
       const json = await response.json();
       setmyActiveOrderData(json);
     } catch (error) {
-      console.error("no active orders yet");
+      console.log("no active orders yet");
     }
   };
   const handlePlaceOrder = async () => {

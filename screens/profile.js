@@ -69,7 +69,7 @@ export default function ProfileScreen({ route, navigation }) {
         </Text>
         {/* My Orders */}
         <View style={globalStyles.orderLists}>
-          <Text style={globalStyles.sectionTitle}>My Orders</Text>
+          <Text style={styles.sectionTitle}>My Orders</Text>
         </View>
         <FlatList
           style={styles.myOrderList}
@@ -137,16 +137,18 @@ export default function ProfileScreen({ route, navigation }) {
 const styles = StyleSheet.create({
   profileContainer: {
     display: "flex",
-    flex: 1,
+    //flex: 1,
     flexDirection: "column",
     backgroundColor: "#f2cd00",
+    height: '100%'
   },
   signOutContainer: {
-    flex: 1,
+    //flex: 1,
     alignItems: "center",
     justifyContent: "center",
     padding: 15,
-    top: "14%",
+    top: "0%",
+    marginBottom: '5%'
   },
   signOutButton: {
     backgroundColor: "#800000",
@@ -215,7 +217,7 @@ const styles = StyleSheet.create({
     paddingBottom: "5%",
     marginLeft: "5%",
     color: "#800000",
-    marginVertical: '2%'
+    marginVertical: '0%'
   },
   availableOrderList: {
     top: "-7%",
@@ -244,5 +246,10 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     alignSelf: "center",
+  },
+  sectionTitle: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: '6%'
   },
 });
