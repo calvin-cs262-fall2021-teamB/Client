@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Image } from "react-native";
+import { StyleSheet, View, Image, Text, TouchableOpacity } from "react-native";
 
 export default function Header({ navigation }) {
   return (
@@ -8,6 +8,9 @@ export default function Header({ navigation }) {
         style={headerStyles.headerImage}
         source={require("../images/calvin-removebg-preview.png")}
       />
+      <TouchableOpacity onPress={() => navigation.navigate('Help')}>
+                <Text style={headerStyles.helpButton}>?</Text>
+            </TouchableOpacity>
     </View>
   );
 }
@@ -20,4 +23,7 @@ const headerStyles = StyleSheet.create({
     bottom: "15%",
     left: "7%",
   },
+  helpButton: {
+
+  }
 });

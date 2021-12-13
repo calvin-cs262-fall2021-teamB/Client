@@ -12,6 +12,7 @@ import CartScreen from "./screens/cart";
 import AvailableOrdersScreen from "./screens/availableOrders";
 import OrderDetailsScreen from "./screens/orderDetails";
 import ProfileScreen from "./screens/profile";
+import HelpScreen from "./screens/help";
 const Stack = createNativeStackNavigator();
 
 function App() {
@@ -58,6 +59,11 @@ function App() {
         <Stack.Screen
           name="Profile"
           component={ProfileScreen}
+          options={({ navigation }) => ({})}
+        />
+        <Stack.Screen
+          name="Help"
+          component={HelpScreen}
           options={({ navigation }) => ({})}
         />
       </Stack.Navigator>
