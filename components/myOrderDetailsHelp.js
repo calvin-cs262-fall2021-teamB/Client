@@ -9,7 +9,7 @@ import {
   Image,
 } from "react-native";
 
-export default function DeliverHelp({ navigation }) {
+export default function MyDetailsHelp({ navigation }) {
   const [open, setOpen] = React.useState(false);
 
   const openList = () => setOpen(true);
@@ -28,7 +28,7 @@ export default function DeliverHelp({ navigation }) {
           alignItems: "center",
         }}
       >
-        <Text style={styles.headerTitle}>Delivery</Text>
+        <Text style={styles.headerTitle}>My Order Details</Text>
         <TouchableOpacity style={styles.helpIcon} onPress={openList}>
           <Text style={styles.question}>?</Text>
         </TouchableOpacity>
@@ -44,21 +44,16 @@ export default function DeliverHelp({ navigation }) {
       >
         <View style={styles.modalView}>
           <Text style={{ fontSize: 24, fontWeight: "bold" }}>
-            Help: Delivery
+            Help: My Order Details
           </Text>
           <Text style={{ fontSize: 18 }}>
-            {"\n"}Here, you can view the details for the order you just accepted
-            to deliver.
+            {"\n"}Here, you can view the details of your order.
           </Text>
           <Text style={{ fontSize: 18 }}>
-            {"\n"}The customer's information is near the top of the screen.
+            {"\n"}Your information is near the top of the screen.
           </Text>
           <Text style={{ fontSize: 18 }}>
             {"\n"}Scroll to see all items in the order.
-          </Text>
-          <Text style={{ fontSize: 18 }}>
-            {"\n"}To complete the order, press the "Completed" button near the
-            bottom of the screen.
           </Text>
           <Text style={{ fontSize: 18 }}>
             {"\n"}To go back, click the back arrow in the upper left hand corner
@@ -67,6 +62,8 @@ export default function DeliverHelp({ navigation }) {
           <Text style={{ fontSize: 18 }}>
             {"\n"}To close this help popup, click the "Close Help" button below.
           </Text>
+          <Text style={{ fontSize: 18 }}>{"\n"}</Text>
+          <Text style={{ fontSize: 18 }}>{"\n"}</Text>
           <TouchableOpacity style={styles.closeModal} onPress={closeList}>
             <Text
               style={{
@@ -235,6 +232,6 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 20,
     fontWeight: "bold",
-    marginLeft: "-105%",
+    marginLeft: "-133%",
   },
 });

@@ -47,7 +47,6 @@ export default function MyOrderDetails({ route, navigation }) {
           </Text>
           <Text style={styles.title}>Location: {route.params.location}</Text>
           <Text style={styles.title}>Order Status: {route.params.status}</Text>
-          <Text style={styles.title}>Order Total: </Text>
           <FlatList
             flexDirection={"row"}
             ListHeaderComponent={
@@ -209,8 +208,6 @@ export const styles = StyleSheet.create({
     alignSelf: "flex-end",
     marginHorizontal: "8%",
     alignItems: "center",
-    // paddingVertical: 15,
-    // paddingHorizontal: 15,
     backgroundColor: "#800000",
     borderRadius: 10,
     borderColor: "#C0C0C0",

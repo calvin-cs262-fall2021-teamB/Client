@@ -9,7 +9,7 @@ import {
   Image,
 } from "react-native";
 
-export default function LoginHelp({ navigation }) {
+export default function OrderDetailsHelp({ navigation }) {
   const [open, setOpen] = React.useState(false);
 
   const openList = () => setOpen(true);
@@ -19,7 +19,16 @@ export default function LoginHelp({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={{ marginLeft: "75%", marginTop: "-2%" }}>
+      <View
+        style={{
+          marginLeft: "65%",
+          marginTop: "-2%",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <Text style={styles.headerTitle}>Profile</Text>
         <TouchableOpacity style={styles.helpIcon} onPress={openList}>
           <Text style={styles.question}>?</Text>
         </TouchableOpacity>
@@ -34,17 +43,30 @@ export default function LoginHelp({ navigation }) {
         }}
       >
         <View style={styles.modalView}>
-          <Text style={{ fontSize: 24 }}>This is the Order Screen</Text>
-          <Text style={{ fontSize: 21 }}>
-            {"\n"}View the menu by clicking on the different images across the
-            center of the page.
+          <Text style={{ fontSize: 24, fontWeight: "bold" }}>
+            Help: Profile
           </Text>
-          <Text style={{ fontSize: 21 }}>
-            {"\n"}Place your order by clicking on the cart button.
+          <Text style={{ fontSize: 18 }}>
+            {"\n"}Here, you can view your profile information.
           </Text>
-          <Text style={{ fontSize: 21 }}>
-            {"\n"}View your profile details and current active orders by
-            visiting the profile page from the bottom right.
+          <Text style={{ fontSize: 18 }}>
+            {"\n"}View your active orders below your profile information.
+          </Text>
+          <Text style={{ fontSize: 18 }}>
+            {"\n"}To sign out, click the "Sign Out" button near the bottom of
+            the screen.
+          </Text>
+          <Text style={{ fontSize: 18 }}>
+            {"\n"}To create orders, press the left button on the tab bar near
+            the bottom of the page.
+          </Text>
+          <Text style={{ fontSize: 18 }}>
+            {"\n"}To deliver orders, press the middle button on the tab bar near
+            the bottom of the page.
+          </Text>
+          <Text style={{ fontSize: 18 }}>
+            {"\n"}To close this help popup, click the "Close Help" button below.
+            {"\n"}
           </Text>
           <TouchableOpacity style={styles.closeModal} onPress={closeList}>
             <Text
@@ -54,6 +76,7 @@ export default function LoginHelp({ navigation }) {
                 textAlign: "center",
                 justifyContent: "center",
                 alignItems: "center",
+                fontSize: 18,
               }}
             >
               Close Help
@@ -119,8 +142,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#800000",
     alignSelf: "center",
     borderRadius: 15,
-    marginTop: 10,
-    marginBottom: 10,
+    marginTop: "10%",
+    padding: 15,
   },
 
   confirmWrapper: {
@@ -203,11 +226,16 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     alignItems: "center",
     justifyContent: "center",
-    marginLeft: "5%",
+    marginRight: "50%",
     marginTop: "-3%",
   },
   question: {
     fontWeight: "bold",
     fontSize: 20,
+  },
+  headerTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginLeft: "-102%",
   },
 });

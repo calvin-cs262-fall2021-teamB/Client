@@ -27,7 +27,7 @@ export default function ProfileScreen({ route, navigation }) {
       setMyData(json);
     } catch (error) {
       console.log("no active orders yet");
-    } 
+    }
   };
   const handleViewOrders = () => {
     navigation.navigate("AvailableOrders", route.params);
@@ -53,9 +53,9 @@ export default function ProfileScreen({ route, navigation }) {
         },
       },
     ]);
-    useEffect(() => {
-        getMyOrders();
-      }, []);
+  useEffect(() => {
+    getMyOrders();
+  }, []);
 
   return (
     <View style={styles.profileContainer}>
@@ -69,14 +69,14 @@ export default function ProfileScreen({ route, navigation }) {
         </Text>
         {/* My Orders */}
         <View style={globalStyles.orderLists}>
-          <Text style={styles.sectionTitle}>My Orders</Text>
+          <Text style={styles.sectionTitle}>{"\n"}My Orders</Text>
         </View>
         <FlatList
           style={styles.myOrderList}
           data={myOrderData}
           keyExtractor={({ id }, index) => id.toString()}
           renderItem={({ item }) => (
-            <TouchableOpacity>
+            <TouchableOpacity style={styles.myOrders}>
               <Text
                 style={styles.availableOrder}
                 onPress={() => navigation.navigate("My Order Details", item)}
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     //flex: 1,
     flexDirection: "column",
     backgroundColor: "#f2cd00",
-    height: '100%'
+    height: "100%",
   },
   signOutContainer: {
     //flex: 1,
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 15,
     top: "0%",
-    marginBottom: '5%'
+    marginBottom: "6%",
   },
   signOutButton: {
     backgroundColor: "#800000",
@@ -214,10 +214,12 @@ const styles = StyleSheet.create({
   availableOrder: {
     fontSize: 20,
     fontWeight: "bold",
-    paddingBottom: "5%",
-    marginLeft: "5%",
+    padding: "2%",
     color: "#800000",
-    marginVertical: '0%'
+    marginVertical: "0%",
+    textAlign: "center",
+    justifyContent: "center",
+    alignSelf: "center",
   },
   availableOrderList: {
     top: "-7%",
@@ -250,6 +252,17 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 24,
     fontWeight: "bold",
-    marginBottom: '6%'
+    marginBottom: "6%",
+  },
+  myOrders: {
+    backgroundColor: "white",
+    width: "60%",
+    alignSelf: "center",
+    borderRadius: 15,
+    borderWidth: 2,
+    marginTop: 5,
+    padding: 3,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

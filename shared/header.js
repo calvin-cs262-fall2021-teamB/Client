@@ -8,9 +8,6 @@ export default function Header({ navigation }) {
         style={headerStyles.headerImage}
         source={require("../images/calvin-removebg-preview.png")}
       />
-      {/* <TouchableOpacity style={headerStyles.helpIcon}>
-        <Text style={headerStyles.question}>?</Text>
-      </TouchableOpacity> */}
     </View>
   );
 }
