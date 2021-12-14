@@ -10,15 +10,23 @@ import Header from "./shared/header";
 import MenuScreen from "./screens/menu";
 import CartScreen from "./screens/cart";
 import AvailableOrdersScreen from "./screens/availableOrders";
-import OrderDetailsScreen from "./screens/orderDetails";
-import OrderDetails2Screen from "./screens/orderDetails2";
 import ProfileScreen from "./screens/profile";
 import DeliverOrderScreen from "./screens/deliverOrder";
-const Stack = createNativeStackNavigator();
-function Home(){
-  return(  <Tabs/>
-    )
+import Tabs from "./shared/bottomHeader";
+import MyOrderDetails from "./screens/myOrderDetails";
+import DeliveryDetails from "./screens/deliveryDetails";
+import LandingScreen from "./screens/landing";
+import OrderHelp from "./components/orderHelp";
+import AllOrdersHelp from "./components/allOrdersHelp";
+import DeliverHelp from "./components/deliverOrderHelp";
+import OrderDetailsHelp from "./components/orderDetailsHelp";
+import ProfileHelp from "./components/profileHelp";
+import MyOrderDetailsHelp from "./components/myOrderDetailsHelp";
+import CartHelp from "./components/cartHelp";
 
+const Stack = createNativeStackNavigator();
+function Landing() {
+  return <Tabs />;
 }
 function App() {
   return (
@@ -37,50 +45,64 @@ function App() {
           })}
         />
         <Stack.Screen
-          name="OrderOptions"
-          component={OrderOptionsScreen}
-          options={({ navigation }) => ({})}
-        />
-        <Stack.Screen
-          name="Menu"
-          component={MenuScreen}
-          options={({ navigation }) => ({})}
-        />
-        <Stack.Screen
           name="Cart"
           component={CartScreen}
-          options={({ navigation }) => ({})}
+          options={({ navigation }) => ({
+            headerRight: () => <CartHelp />,
+            headerTitle: "Cart",
+          })}
         />
         <Stack.Screen
           name="AvailableOrders"
           component={AvailableOrdersScreen}
-          options={({ navigation }) => ({})}
+          // navigationOptions={title: 'sign in'}
+          options={({ navigation }) => ({
+            headerRight: () => <AllOrdersHelp />,
+            headerTitle: "Available Orders",
+          })}
         />
         <Stack.Screen
           name="Order Details"
-          component={OrderDetailsScreen}
-          options={({ navigation }) => ({})}
+          component={DeliveryDetails}
+          options={({ navigation }) => ({
+            headerRight: () => <OrderDetailsHelp />,
+            headerTitle: "Order Details",
+          })}
         />
         <Stack.Screen
           name="My Order Details"
-          component={OrderDetails2Screen}
-          options={({ navigation }) => ({})}
+          component={MyOrderDetails}
+          options={({ navigation }) => ({
+            headerRight: () => <MyOrderDetailsHelp />,
+            headerTitle: "Review Order",
+          })}
         />
         <Stack.Screen
           name="Deliver Order"
           component={DeliverOrderScreen}
-          options={({ navigation }) => ({})}
+          options={({ navigation }) => ({
+            headerRight: () => <DeliverHelp />,
+            headerTitle: "Deliver",
+          })}
         />
         <Stack.Screen
           name="Profile"
           component={ProfileScreen}
-          options={({ navigation }) => ({})}
+          options={({ navigation }) => ({
+            headerRight: () => <ProfileHelp />,
+            headerTitle: "Profile",
+          })}
+        />
+        <Stack.Screen
+          name="Order"
+          component={LandingScreen}
+          options={({ navigation }) => ({
+            headerRight: () => <OrderHelp />,
+            headerTitle: "Order",
+          })}
         />
       </Stack.Navigator>
-
-
     </NavigationContainer>
-    
   );
 }
 export default App;

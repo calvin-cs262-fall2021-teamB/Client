@@ -4,121 +4,86 @@ import {
   View,
   StyleSheet,
   Text,
-  FlatList,
-  Switch,
   SafeAreaView,
   TouchableOpacity,
   Image,
 } from "react-native";
 
-export default function FoodMenu({ navigation, setFoodData }) {
+export default function AllOrdersHelp({ navigation }) {
   const [open, setOpen] = React.useState(false);
-  const [orderData, setData] = React.useState([]);
-  const [isLoading, setLoading] = useState(true);
-
-  const getOrders = async () => {
-    try {
-      const response = await fetch(
-        "https://still-crag-08186.herokuapp.com/foods"
-      );
-      const json = await response.json();
-      setData(json);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    getOrders();
-  }, []);
 
   const openList = () => setOpen(true);
   const closeList = () => {
     setOpen(false);
-    const orderArray = orderData.filter((item) => item.selected);
-    setFoodData(orderArray);
   };
-  const onUpdateValue = (index, value) => {
-    orderData[index].selected = value;
-    return setData([...orderData]);
-  };
-
-  const renderItem = ({ item, index }) => (
-    <ItemRenderer
-      key={index}
-      index={index}
-      selected={item.selected}
-      name={item.itemname}
-      image={item.image}
-      price={item.price}
-      description={item.description}
-      onUpdateValue={onUpdateValue}
-    />
-  );
 
   return (
     <SafeAreaView style={styles.container}>
-      <TouchableOpacity style={styles.IconBox} onPress={openList}>
-        <Image
-          style={styles.IconBox2}
-          source={require("../images/foodw.png")}
-        />
-      </TouchableOpacity>
+      <View
+        style={{
+          marginLeft: "65%",
+          marginTop: "-2%",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <Text style={styles.headerTitle}>Available Orders</Text>
+        <TouchableOpacity style={styles.helpIcon} onPress={openList}>
+          <Text style={styles.question}>?</Text>
+        </TouchableOpacity>
+      </View>
       <Modal
         animationType="slide"
         transparent={true}
         visible={open === true}
         onRequestClose={() => {
-          Alert.alert("Food Menu has been closed.");
+          Alert.alert("Help popup has been closed.");
           setOpen(!open);
         }}
       >
-        <TouchableOpacity activeOpacity={1} style={styles.modalView}>
-          <Text style={styles.selectText}>Select Food Items</Text>
-          <View style={styles.menuContainer}>
-            <FlatList
-              data={orderData}
-              renderItem={renderItem}
-              keyExtractor={({ id }, index) => id.toString()}
-              keyboardShouldPersistTaps="always"
-            />
-          </View>
-          <View style={styles.confirmWrapper}>
-            <TouchableOpacity style={styles.confirmButton} onPress={closeList}>
-              <Text style={styles.confirmText}>Confirm Items</Text>
-            </TouchableOpacity>
-          </View>
-        </TouchableOpacity>
+        <View style={styles.modalView}>
+          <Text style={{ fontSize: 24, fontWeight: "bold" }}>
+            Help: Available Orders
+          </Text>
+          <Text style={{ fontSize: 18 }}>
+            {"\n"}Here, you can view all orders available for delivery.
+          </Text>
+          <Text style={{ fontSize: 18 }}>
+            {"\n"}Click on an order to view its details.
+          </Text>
+          <Text style={{ fontSize: 18 }}>
+            {"\n"}To create orders, press the left button on the tab bar near
+            the bottom of the page.
+          </Text>
+          <Text style={{ fontSize: 18 }}>
+            {"\n"}To view your profile, press the right button on the tab bar
+            near the bottom of the page.
+          </Text>
+          <Text style={{ fontSize: 18 }}>
+            {"\n"}To close this help popup, click the "Close Help" button below.
+          </Text>
+          <Text style={{ fontSize: 18 }}>{"\n"}</Text>
+          <Text style={{ fontSize: 18 }}>{"\n"}</Text>
+          <TouchableOpacity style={styles.closeModal} onPress={closeList}>
+            <Text
+              style={{
+                fontWeight: "bold",
+                color: "white",
+                textAlign: "center",
+                justifyContent: "center",
+                alignItems: "center",
+                fontSize: 18,
+              }}
+            >
+              Close Help
+            </Text>
+          </TouchableOpacity>
+        </View>
       </Modal>
     </SafeAreaView>
   );
 }
-
-const ItemRenderer = ({
-  index,
-  name,
-  description,
-  image,
-  price,
-  selected,
-  onUpdateValue,
-}) => (
-  <View style={styles.modalItem}>
-    <View style={styles.imageContainer}>
-      <Image style={styles.foodImage} source={{ uri: image }}></Image>
-    </View>
-    <Text style={styles.modalTitle}>
-      {name}: {price}
-    </Text>
-    <Switch
-      value={selected}
-      onValueChange={(value) => onUpdateValue(index, value)}
-      style={{ marginRight: 5 }}
-    />
-  </View>
-);
 
 const styles = StyleSheet.create({
   container: {
@@ -164,6 +129,18 @@ const styles = StyleSheet.create({
     color: "#FFD700",
     fontWeight: "bold",
     fontSize: 17,
+  },
+
+  closeModal: {
+    borderWidth: 2,
+    justifyContent: "center",
+    alignItems: "center",
+    width: "40%",
+    backgroundColor: "#800000",
+    alignSelf: "center",
+    borderRadius: 15,
+    marginTop: "10%",
+    padding: 15,
   },
 
   confirmWrapper: {
@@ -237,5 +214,25 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontWeight: "bold",
     paddingTop: "1%",
+  },
+  helpIcon: {
+    borderStyle: "solid",
+    borderRadius: 15,
+    height: 30,
+    width: 30,
+    borderWidth: 2,
+    alignItems: "center",
+    justifyContent: "center",
+    marginRight: "50%",
+    marginTop: "-3%",
+  },
+  question: {
+    fontWeight: "bold",
+    fontSize: 20,
+  },
+  headerTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginLeft: "-132%",
   },
 });

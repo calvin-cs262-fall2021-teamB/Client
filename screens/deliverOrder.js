@@ -32,34 +32,41 @@ export default function DeliverOrderScreen({ route, navigation }) {
   };
   const handleDeliverOrder = async () => {
     try {
-      const response = await fetch('https://still-crag-08186.herokuapp.com/order/' + route.params.item.id, {
-        method: 'PUT',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          userID: route.params.item.id,
-          diningHallId: 1,
-          status: 'completed'
-        })
-      });
+      const response = await fetch(
+        "https://still-crag-08186.herokuapp.com/order/" + route.params.item.id,
+        {
+          method: "PUT",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userID: route.params.item.id,
+            diningHallId: 1,
+            status: "completed",
+          }),
+        }
+      );
       console.log(route.params);
       Alert.alert(
-        "Thank you!",
-        "Please deliver the order as soon as possible.",
+        "Congratuations!",
+        "Thanks for delivering an order.",
         [
           {
             text: "OK",
-            onPress: () => { navigation.navigate("OrderOptions", { UserFound: route.params.params.UserFound, UserData: route.params.params.UserData }); }
-          }
+            onPress: () => {
+              navigation.navigate("Order", {
+                UserFound: route.params.params.UserFound,
+                UserData: route.params.params.UserData,
+              });
+            },
+          },
         ]
       );
-    }
-    catch (error) {
+    } catch (error) {
       console.error(error);
     }
-  }
+  };
   useEffect(() => {
     getOrderItems();
   }, []);
@@ -71,21 +78,28 @@ export default function DeliverOrderScreen({ route, navigation }) {
       ) : (
         <View style={styles.container}>
           {/* <Text style={styles.title}>Order ID: {route.params.item.id}</Text> */}
-          <Text style={styles.title}>Name: {route.params.item.fname} {route.params.item.lname}</Text>
-          <Text style={styles.title}>Location: {route.params.item.location}</Text>
-          <Text style={styles.title}>Order Status: {'In-transit'}</Text>
+          <Text style={styles.title}>
+            Name: {route.params.item.fname} {route.params.item.lname}
+          </Text>
+          <Text style={styles.title}>
+            Location: {route.params.item.location}
+          </Text>
+          <Text style={styles.title}>Order Status: {"In-transit"}</Text>
+          <Text style={styles.title}>Order Total:</Text>
           <FlatList
             flexDirection={"row"}
-            ListHeaderComponent={<Text style={styles.headerTitle}>Items to Deliver</Text>}
-            ListFooterComponent={<Text style={{ backgroundColor: '#E5E5E5' }}></Text>}
+            ListHeaderComponent={
+              <Text style={styles.headerTitle}>Items to Deliver</Text>
+            }
+            ListFooterComponent={
+              <Text style={{ backgroundColor: "#E5E5E5" }}></Text>
+            }
             style={styles.availableOrderList}
             data={myOrderData}
             keyExtractor={({ id }, index) => id.toString()}
             renderItem={({ item }) => (
               <View style={globalStyles.container}>
-                <View
-                  style={styles.contentWrapper}
-                >
+                <View style={styles.contentWrapper}>
                   {/* will add item to 'cart' */}
                   <View style={{ flexDirection: "row" }}>
                     <Image
@@ -94,8 +108,12 @@ export default function DeliverOrderScreen({ route, navigation }) {
                     />
                     <View style={styles.menuContent}>
                       <View style={{ flexDirection: "column" }}>
-                        <Text style={styles.contentTextTitle}>{item.itemname} {item.description}</Text>
-                        <Text style={styles.contentTextTitle2}>{item.price}</Text>
+                        <Text style={styles.contentTextTitle}>
+                          {item.itemname} {item.description}
+                        </Text>
+                        <Text style={styles.contentTextTitle2}>
+                          {item.price}
+                        </Text>
                       </View>
                     </View>
                   </View>
@@ -103,15 +121,19 @@ export default function DeliverOrderScreen({ route, navigation }) {
               </View>
             )}
           />
-        </View>)}
+        </View>
+      )}
       {/*Deliver Button */}
       {/* <View style={styles.dashWrapper}> */}
-      <TouchableOpacity style={styles.input} onPress={() => handleDeliverOrder()}>
+      <TouchableOpacity
+        style={styles.input}
+        onPress={() => handleDeliverOrder()}
+      >
         <Text style={styles.detailsText}>Completed</Text>
       </TouchableOpacity>
       {/* </View> */}
     </View>
-  )
+  );
 }
 export const styles = StyleSheet.create({
   container: {
@@ -119,7 +141,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     backgroundColor: "#E5E5E5",
-    margin: '4%'
+    margin: "4%",
   },
   addWrapper2: {
     marginTop: "5%",
@@ -130,9 +152,9 @@ export const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    fontWeight: 'bold',
-    color: '#333',
-    marginBottom: '2%'
+    fontWeight: "bold",
+    color: "#333",
+    marginBottom: "2%",
   },
   contentWrapper: {
     marginLeft: "1.5%",
@@ -193,7 +215,7 @@ export const styles = StyleSheet.create({
   },
   absIcon: {
     marginTop: 1,
-    marginLeft: '16%',
+    marginLeft: "16%",
     width: 35,
     height: 35,
     borderRadius: 35 / 2,
@@ -226,7 +248,7 @@ export const styles = StyleSheet.create({
   input: {
     justifyContent: "center",
     alignSelf: "flex-end",
-    marginHorizontal: '8%',
+    marginHorizontal: "8%",
     alignItems: "center",
     // paddingVertical: 15,
     // paddingHorizontal: 15,
@@ -260,11 +282,11 @@ export const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    color: '#333',
-    backgroundColor: '#FFFFFF',
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "#333",
+    backgroundColor: "#FFFFFF",
     borderRadius: 5,
-    padding: 1
+    padding: 1,
   },
 });

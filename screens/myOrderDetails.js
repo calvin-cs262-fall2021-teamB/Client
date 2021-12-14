@@ -13,7 +13,7 @@ import {
 import { globalStyles } from "../styles/global";
 import { useSafeAreaFrame } from "react-native-safe-area-context";
 
-export default function OrderDetails2Screen({ route, navigation }) {
+export default function MyOrderDetails({ route, navigation }) {
   const [isLoading, setLoading] = useState(true);
   const [myOrderData, setMyData] = useState([]);
   const getOrderItems = async () => {
@@ -30,7 +30,7 @@ export default function OrderDetails2Screen({ route, navigation }) {
       setLoading(false);
     }
   };
-  
+
   useEffect(() => {
     getOrderItems();
   }, []);
@@ -42,21 +42,25 @@ export default function OrderDetails2Screen({ route, navigation }) {
       ) : (
         <View style={styles.container}>
           {/* <Text style={styles.title}>Order ID: {route.params.id}</Text> */}
-          <Text style={styles.title}>Name: {route.params.fname} {route.params.lname}</Text>
+          <Text style={styles.title}>
+            Name: {route.params.fname} {route.params.lname}
+          </Text>
           <Text style={styles.title}>Location: {route.params.location}</Text>
           <Text style={styles.title}>Order Status: {route.params.status}</Text>
           <FlatList
             flexDirection={"row"}
-            ListHeaderComponent={<Text style={styles.headerTitle}>Ordered Items</Text>}
-            ListFooterComponent={<Text style={{ backgroundColor: '#E5E5E5' }}></Text>}
+            ListHeaderComponent={
+              <Text style={styles.headerTitle}>Ordered Items</Text>
+            }
+            ListFooterComponent={
+              <Text style={{ backgroundColor: "#E5E5E5" }}></Text>
+            }
             style={styles.availableOrderList}
             data={myOrderData}
             keyExtractor={({ id }, index) => id.toString()}
             renderItem={({ item }) => (
               <View style={globalStyles.container}>
-                <View
-                  style={styles.contentWrapper}
-                >
+                <View style={styles.contentWrapper}>
                   {/* will add item to 'cart' */}
                   <View style={{ flexDirection: "row" }}>
                     <Image
@@ -65,8 +69,12 @@ export default function OrderDetails2Screen({ route, navigation }) {
                     />
                     <View style={styles.menuContent}>
                       <View style={{ flexDirection: "column" }}>
-                        <Text style={styles.contentTextTitle}>{item.itemname} {item.description}</Text>
-                        <Text style={styles.contentTextTitle2}>{item.price}</Text>
+                        <Text style={styles.contentTextTitle}>
+                          {item.itemname} {item.description}
+                        </Text>
+                        <Text style={styles.contentTextTitle2}>
+                          {item.price}
+                        </Text>
                       </View>
                     </View>
                   </View>
@@ -74,7 +82,8 @@ export default function OrderDetails2Screen({ route, navigation }) {
               </View>
             )}
           />
-        </View>)}
+        </View>
+      )}
       {/*Deliver Button */}
       {/* <View style={styles.dashWrapper}> */}
       {/* <TouchableOpacity style={styles.input} onPress={handleDeliverOrder()}>
@@ -82,7 +91,7 @@ export default function OrderDetails2Screen({ route, navigation }) {
       </TouchableOpacity> */}
       {/* </View> */}
     </View>
-  )
+  );
 }
 export const styles = StyleSheet.create({
   container: {
@@ -90,7 +99,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     backgroundColor: "#E5E5E5",
-    margin: '4%'
+    margin: "4%",
   },
   addWrapper2: {
     marginTop: "5%",
@@ -101,9 +110,9 @@ export const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    fontWeight: 'bold',
-    color: '#333',
-    marginBottom: '2%'
+    fontWeight: "bold",
+    color: "#333",
+    marginBottom: "2%",
   },
   contentWrapper: {
     marginLeft: "1.5%",
@@ -164,7 +173,7 @@ export const styles = StyleSheet.create({
   },
   absIcon: {
     marginTop: 1,
-    marginLeft: '16%',
+    marginLeft: "16%",
     width: 35,
     height: 35,
     borderRadius: 35 / 2,
@@ -197,10 +206,8 @@ export const styles = StyleSheet.create({
   input: {
     justifyContent: "center",
     alignSelf: "flex-end",
-    marginHorizontal: '8%',
+    marginHorizontal: "8%",
     alignItems: "center",
-    // paddingVertical: 15,
-    // paddingHorizontal: 15,
     backgroundColor: "#800000",
     borderRadius: 10,
     borderColor: "#C0C0C0",
@@ -231,11 +238,11 @@ export const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    color: '#333',
-    backgroundColor: '#FFFFFF',
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "#333",
+    backgroundColor: "#FFFFFF",
     borderRadius: 5,
-    padding: 1
+    padding: 1,
   },
 });

@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Image } from "react-native";
+import { StyleSheet, View, Image, TouchableOpacity, Text } from "react-native";
 
 export default function Header({ navigation }) {
   return (
@@ -16,8 +16,23 @@ const headerStyles = StyleSheet.create({
   headerImage: {
     height: 60,
     width: 140,
-    top: '2%',
-    bottom: "15%",
+    bottom: "20%",
     left: "7%",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  helpIcon: {
+    borderStyle: "solid",
+    borderRadius: 15,
+    height: 30,
+    width: 30,
+    borderWidth: 2,
+    alignItems: "center",
+    justifyContent: "center",
+    marginLeft: "200%",
+  },
+  question: {
+    fontWeight: "bold",
+    fontSize: 20,
   },
 });

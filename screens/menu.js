@@ -17,9 +17,11 @@ export default function MenuScreen({ navigation, route }) {
   const [beverageData, setBeverageData] = useState([]);
 
   const handleCart = () => {
-    navigation.navigate("Cart", {foodData: foodData.concat(beverageData), userDetails: route.params})
+    navigation.navigate("Cart", {
+      foodData: foodData.concat(beverageData),
+      userDetails: route.params,
+    });
   };
-
 
   return (
     <View style={styles.viewStyles}>
